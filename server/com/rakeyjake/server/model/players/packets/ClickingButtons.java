@@ -700,11 +700,11 @@ public class ClickingButtons implements PacketType {
 					public void stop() {
 					}
 				}, 1);
-				
-				//are these needed? idk i'll leave them.
+
+				// are these needed? idk i'll leave them.
 				c.duelDelay = System.currentTimeMillis();
 				o1.duelDelay = System.currentTimeMillis();
-				
+
 			} else {
 				c.getPA().sendFrame126("Waiting for other player...", 6571);
 				o1.getPA().sendFrame126("Other player has accepted", 6571);
@@ -1338,6 +1338,19 @@ public class ClickingButtons implements PacketType {
 			// c.setSidebarInterface(6, c.playerMagicBook == 0 ? 1151 :
 			// c.playerMagicBook == 1 ? 12855 : 1151);
 			break;
+
+			//COMMAND CENTRE STUFF
+			
+		case 28165:
+			c.getPA().sendFrame126("Utopia 317 Information", 8144); //Title of the quest thingy
+			c.getPA().sendFrame126("Welcome to Utopia, enjoy your stay.", 8145); 
+			c.getPA().sendFrame126("If you have any problems, please contact an admin.", 8147); //Line 1, to get to line 2 is 8148 etc
+			c.getPA().sendFrame126("The command centre is here to help you,", 8149); //Line 1, to get to line 2 is 8148 etc
+			c.getPA().sendFrame126("it should answer any questions that you have.", 8150); //Line 1, to get to line 2 is 8148 etc
+			c.getPA().sendFrame126("All the best from the Utopia Dev Team, 2014", 8153); //Line 1, to get to line 2 is 8148 etc
+			c.getPA().showInterface(8134);
+			break;
+
 		}
 		if (c.isAutoButton(actionButtonId))
 			c.assignAutocast(actionButtonId);

@@ -171,6 +171,7 @@ public class Client extends Player {
 	}
 
 	public void initialize() {
+		clearPlayersInterface();
 		synchronized (this) {
 			Server.panel.addEntity(playerName);
 			outStream.createFrame(249);
@@ -943,5 +944,12 @@ public class Client extends Player {
 		}
 
 	}
+	
+	public void clearPlayersInterface() {
+	      for (int i = 8147; i < 8348; i++) {
+	            getPA().sendFrame126("",i);
+	      }
+	};
+	
 
 }
