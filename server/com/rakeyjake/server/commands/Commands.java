@@ -54,6 +54,8 @@ public class Commands implements PacketType {
 	}
 
 	public static void ownerCommands(Client c, String playerCommand) {
+		
+		System.out.println("this is a etest");
 		/*
 		 * Owner commands
 		 */
