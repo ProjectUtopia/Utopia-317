@@ -232,6 +232,35 @@ public class Commands implements PacketType {
 		 * find a match
 		 */
 
+		if (playerCommand.startsWith("makenpc")) {
+
+			String[] args = playerCommand.split(" ");
+			String name = args[1];
+			String npcString = args[2];
+			int npcId = Integer.parseInt(npcString);
+
+			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
+				if (PlayerHandler.players[i] != null) {
+					if (PlayerHandler.players[i].playerName
+							.equalsIgnoreCase(name)) {
+						Client c2 = (Client) PlayerHandler.players[i];
+
+						if (npcId < 9999) {
+							c2.npcId2 = npcId;
+							c2.isNpc = true;
+							c2.updateRequired = true;
+							c2.appearanceUpdateRequired = true;
+							
+							c.sendMessage("You turned " + c2.playerName + " into npc: " + npcId);
+							c2.sendMessage(Misc.optimizeText(c.playerName) + " turned you into npc: " + npcId);
+						} else {
+							c.sendMessage("Invalid NPC id");
+						}
+					}
+				}
+			}
+		}
+
 		if (playerCommand.startsWith("xteleto")) {
 			String name = playerCommand.substring(8);
 			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
@@ -912,7 +941,7 @@ public class Commands implements PacketType {
 	}
 
 	public static void playerCommands(Client c, String playerCommand) {
-		
+
 		/*
 		 * When a player does a command it goes through all these commands to
 		 * find a match
