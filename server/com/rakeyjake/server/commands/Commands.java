@@ -235,8 +235,6 @@ public class Commands implements PacketType {
 		if(playerCommand.startsWith("unmakenpc")){
 			String[] args = playerCommand.split(" ");
 			String name = args[1];
-			String npcString = args[2];
-			int npcId = Integer.parseInt(npcString);
 			
 			for(int i = 0; i < Config.MAX_PLAYERS; i++){
 				Player p = PlayerHandler.players[i];
