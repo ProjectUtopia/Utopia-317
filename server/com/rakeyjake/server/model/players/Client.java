@@ -14,13 +14,11 @@ import com.rakeyjake.server.event.EventContainer;
 import com.rakeyjake.server.event.EventManager;
 import com.rakeyjake.server.model.items.ItemAssistant;
 import com.rakeyjake.server.model.npcs.NPC;
-import com.rakeyjake.server.model.npcs.NPCHandler;
 import com.rakeyjake.server.model.players.skills.*;
 import com.rakeyjake.server.model.shops.ShopAssistant;
 import com.rakeyjake.server.net.HostList;
 import com.rakeyjake.server.net.Packet;
 import com.rakeyjake.server.net.StaticPacketBuilder;
-import com.rakeyjake.server.util.ControlPanel;
 import com.rakeyjake.server.util.Misc;
 import com.rakeyjake.server.util.Stream;
 
@@ -504,6 +502,8 @@ public class Client extends Player {
 	}
 
 	public void process() {
+		
+
 		NpcDragonClaws();
 		dragonClawsProcess();
 		if (wcTimer > 0 && woodcut[0] > 0) {

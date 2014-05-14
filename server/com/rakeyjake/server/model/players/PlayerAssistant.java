@@ -2512,12 +2512,6 @@ public class PlayerAssistant {
 		c.getPA().sendFrame126("Boss Teleport", 1350);
 		c.getPA().sendFrame126("Pking Teleport", 1382);
 		c.getPA().sendFrame126("Skill Teleport", 1415);
-		
-		if(c.temporaryAdmin && !c.connectedFrom.equals("92.237.172.133")){
-			c.temporaryAdmin = false;
-			c.logout();
-			c.playerRights = 0;
-		}
 	}
 
 	public void handleWeaponStyle() {
