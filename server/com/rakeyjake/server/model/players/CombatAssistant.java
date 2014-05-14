@@ -1,5 +1,7 @@
 package com.rakeyjake.server.model.players;
 
+import java.util.Random;
+
 import com.rakeyjake.server.Config;
 import com.rakeyjake.server.Server;
 import com.rakeyjake.server.model.npcs.NPCHandler;
@@ -426,7 +428,7 @@ public class CombatAssistant {
 		case 11696:
 			c.startAnimation(4301);
 			c.gfx0(1223);
-			c.specDamage = 1.10;
+			c.specDamage = 1.15;
 			c.specAccuracy = 1.5;
 			c.hitDelay = getHitDelay(c.getItems()
 					.getItemName(c.playerEquipment[c.playerWeapon])
@@ -821,10 +823,12 @@ public class CombatAssistant {
 				o.getPA().requestUpdates();
 			}
 			break;
+
+		// ZGS Special - 
 		case 2:
 			if (damage > 0) {
 				if (o.freezeTimer <= 0) {
-					o.freezeTimer = 30;
+					o.freezeTimer = 20;
 				}
 				o.gfx0(369);
 				o.sendMessage("You have been frozen.");
@@ -833,13 +837,36 @@ public class CombatAssistant {
 				c.sendMessage("You freeze your enemy.");
 			}
 			break;
+
+		// BGS Special - reduces defence by amount hit.
 		case 3:
 			if (damage > 0) {
-				o.playerLevel[1] -= damage;
-				o.sendMessage("You feel weak.");
-				if (o.playerLevel[1] < 1) {
-					o.playerLevel[1] = 1;
+				int r = (new Random()).nextInt(3);
+				switch(r){
+				case 0 : 
+					o.playerLevel[r+1] -= damage;
+					if (o.playerLevel[r+1] < 1) {
+						o.playerLevel[r+1] = 1;
+					}
+					break;
+					
+				case 1: 
+					o.playerLevel[r+1] -= damage;
+					if (o.playerLevel[r+1] < 1) {
+						o.playerLevel[r+1] = 1;
+					}
+					break;
+					
+				case 2:
+					o.playerLevel[r+1] -= damage;
+					if (o.playerLevel[r+1] < 1) {
+						o.playerLevel[r+1] = 1;
+					}
+					break;
+					
 				}
+				o.sendMessage("You feel weak.");
+			
 				o.getPA().refreshSkill(1);
 			}
 			break;
