@@ -27,6 +27,7 @@ import com.rakeyjakey.client.animation.Animable_Sub3;
 import com.rakeyjakey.client.animation.Animable_Sub4;
 import com.rakeyjakey.client.animation.Animable_Sub5;
 import com.rakeyjakey.client.animation.Animation;
+import com.rakeyjakey.client.frame.Jframe;
 import com.rakeyjakey.client.model.Model;
 import com.rakeyjakey.client.model.ModelDecompressor;
 import com.rakeyjakey.client.npc.NPC;
@@ -36,6 +37,7 @@ import com.rakeyjakey.client.object.Object3;
 import com.rakeyjakey.client.object.Object5;
 import com.rakeyjakey.client.object.ObjectDef;
 import com.rakeyjakey.client.object.ObjectManager;
+import com.rakeyjakey.client.settings.Settings;
 import com.rakeyjakey.client.sign.signlink;
 
 public class Client extends RSApplet {
@@ -44,7 +46,6 @@ public class Client extends RSApplet {
 	public static int spellID = 0;
 	public static boolean newDamage = false;
 	public boolean noClip = false;
-	public static final double clientVersion = 1.0;
 
 	private static String intToKOrMilLongName(int i) {
 		String s = String.valueOf(i);
@@ -2782,7 +2783,7 @@ public class Client extends RSApplet {
 	public static void main(String args[]) {
 
 		try {
-			System.out.println("Utopia Client - v" + clientVersion);
+			System.out.println("Utopia Client - v" + Settings.VERSION_NUMBER);
 			System.out.println("Connecting to: " + server + " on port " + port
 					+ ".");
 
@@ -12705,8 +12706,8 @@ public class Client extends RSApplet {
 	private static int anInt1288;
 	private int anInt1289;
 	public static int anInt1290;
-	public static String server = "rakeyjake.no-ip.org";
-	public static int port = 43594;
+	public static String server = Settings.SERVER_IP;
+	public static int port = Settings.PORT_NUMBER;
 	public int drawCount;
 	public int fullscreenInterfaceID;
 	public int anInt1044;// 377
