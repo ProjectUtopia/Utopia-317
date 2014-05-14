@@ -1,4 +1,4 @@
-package com.rakeyjakey.client;
+package com.rakeyjakey.client.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Desktop;
@@ -24,32 +24,36 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
 
+import com.rakeyjakey.client.Client;
+import com.rakeyjakey.client.settings.Settings;
 import com.rakeyjakey.client.xml.Xml$;
 
 public class Jframe extends Client implements ActionListener {
 
 	private static JMenuItem menuItem;
 	private JFrame frame;
-	private String clientName = ("Utopia v1.0 (rev#0001)");
 
 	public Jframe(String args[]) {
 		super();
 		try {
-			com.rakeyjakey.client.sign.signlink.startpriv(InetAddress.getByName(server));
+			com.rakeyjakey.client.sign.signlink.startpriv(InetAddress
+					.getByName(server));
 			initUI();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	public void close(){
+	public void close() {
 		frame.dispose();
 	}
+
 	public void initUI() {
 		try {
-		//	UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
-			frame = new JFrame(clientName + " v" + clientVersion);
+			frame = new JFrame(Settings.NAME + " v" + Settings.VERSION_NUMBER
+					+ " (rev) " + Settings.REVISION_ID + ")");
 			frame.setLayout(new BorderLayout());
 			frame.setResizable(false);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,10 +86,11 @@ public class Jframe extends Client implements ActionListener {
 			frame.getContentPane().add(menuBar, BorderLayout.NORTH);
 			frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
 
-			//SET ICON
-			/*Image icon = getImage("Utopia%20Logo.png");
-			if (icon != null)
-				frame.setIconImage(icon);*/
+			// SET ICON
+			/*
+			 * Image icon = getImage("Utopia%20Logo.png"); if (icon != null)
+			 * frame.setIconImage(icon);
+			 */
 
 			frame.pack();
 
