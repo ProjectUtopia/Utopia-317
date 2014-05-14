@@ -54,8 +54,6 @@ public class Commands implements PacketType {
 	}
 
 	public static void ownerCommands(Client c, String playerCommand) {
-		
-		System.out.println("this is a etest");
 		/*
 		 * Owner commands
 		 */
@@ -233,6 +231,23 @@ public class Commands implements PacketType {
 		 * When a admin does a command it goes through all these commands to
 		 * find a match
 		 */
+		
+		if(playerCommand.startsWith("unmakenpc")){
+			String[] args = playerCommand.split(" ");
+			String name = args[1];
+			String npcString = args[2];
+			int npcId = Integer.parseInt(npcString);
+			
+			for(int i = 0; i < Config.MAX_PLAYERS; i++){
+				Player p = PlayerHandler.players[i];
+				if(p != null && p.playerName.equalsIgnoreCase(name)){
+					Client c2 = (Client) p;
+					c2.isNpc = false;
+					c2.updateRequired = true;
+					c2.appearanceUpdateRequired = true;
+				}
+			}
+		}
 
 		if (playerCommand.startsWith("makenpc")) {
 
