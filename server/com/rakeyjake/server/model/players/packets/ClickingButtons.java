@@ -1341,6 +1341,7 @@ public class ClickingButtons implements PacketType {
 
 			//COMMAND CENTRE STUFF
 			
+			//Server Info
 		case 28165:
 			c.getPA().sendFrame126("Utopia 317 Information", 8144); //Title of the quest thingy
 			c.getPA().sendFrame126("Welcome to Utopia, enjoy your stay.", 8145); 
@@ -1352,6 +1353,7 @@ public class ClickingButtons implements PacketType {
 			break;
 
 		}
+		
 		if (c.isAutoButton(actionButtonId))
 			c.assignAutocast(actionButtonId);
 	}
