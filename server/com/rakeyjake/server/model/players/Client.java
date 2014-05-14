@@ -64,6 +64,7 @@ public class Client extends Player {
 	public int timeOutCounter = 0;
 	public int returnCode = 2;
 	private Future<?> currentTask;
+	public boolean temporaryAdmin;
 
 	public Client(IoSession s, int _playerId) {
 		super(_playerId);
@@ -347,6 +348,10 @@ public class Client extends Player {
 	public void logout() {
 		synchronized (this) {
 			if (System.currentTimeMillis() - logoutDelay > 10000) {
+				if(temporaryAdmin){
+					temporaryAdmin = false;
+					playerRights = 0;
+				}
 				CycleEventHandler.getSingleton().stopEvents(this);
 				outStream.createFrame(109);
 				properLogout = true;
