@@ -47,7 +47,7 @@ public class Jframe extends Client implements ActionListener {
 	}
 	public void initUI() {
 		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+		//	UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 			frame = new JFrame(clientName + " v" + clientVersion);
 			frame.setLayout(new BorderLayout());

@@ -949,18 +949,12 @@ public class NPCHandler {
 					if (Misc.random2(2) <= 3) { // gotta sort out a better
 												// timing method
 						npcs[i].updateRequired = true;
-						npcs[i].forceChat("Lick my balls i'm so sexyyy lick my anus it's so wet!!!!!"); // text they will say
+						npcs[i].forceChat(""); // text they will say
 					}
 				}
 
-				if (npcs[i].npcType == -1) { // npc name
-					if (Misc.random2(2) <= 3) { // gotta sort out a better
-												// timing method
-						npcs[i].updateRequired = true;
-						npcs[i].forceChat("flobflob"); // text they will say
-					}
-				}
 				// [END]
+				
 				if (npcs[i].spawnedBy > 0) { // delete summons npc
 					if (PlayerHandler.players[npcs[i].spawnedBy] == null
 							|| PlayerHandler.players[npcs[i].spawnedBy].heightLevel != npcs[i].heightLevel

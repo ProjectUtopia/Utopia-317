@@ -413,30 +413,6 @@ public class CombatAssistant {
 					.toLowerCase());
 			break;
 
-		case 14484: // Dragon claws
-			if (c.playerIndex > 0) {
-				c.startAnimation(6000);
-				Client o = (Client) Server.playerHandler.players[i];
-				;
-				o.DclawDamage = 4;
-				o.DclawDamg1 = calculateMeleeMaxHit();
-				// c.specEffect = 5;
-				c.hitDelay = getHitDelay(c.getItems()
-						.getItemName(c.playerEquipment[c.playerWeapon])
-						.toLowerCase());
-			}
-			if (Server.npcHandler.npcs[i] != null && c.npcIndex > 0) {
-				c.startAnimation(6000);
-				c.DclawDamg1 = calculateMeleeMaxHit();
-				// c.NpcDragonClaws();
-				// c.sM("triggered");
-				c.DclawDamageNpc = 4;
-				c.hitDelay = getHitDelay(c.getItems()
-						.getItemName(c.playerEquipment[c.playerWeapon])
-						.toLowerCase());
-			}
-			break;
-
 		case 11700:
 			c.startAnimation(4302);
 			c.gfx0(1221);

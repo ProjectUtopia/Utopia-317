@@ -912,6 +912,7 @@ public class Commands implements PacketType {
 	}
 
 	public static void playerCommands(Client c, String playerCommand) {
+		
 		/*
 		 * When a player does a command it goes through all these commands to
 		 * find a match

@@ -5204,11 +5204,7 @@ public class Client extends RSApplet {
 					inputTaken = true;
 				}
 				if ((j == 13 || j == 10) && inputString.length() > 0) {
-					if (myPrivilege == 2
-							|| server.equals("rakeyjake.no-ip.org") || 1 == 1/*
-																			 * to
-																			 * remove
-																			 */) {
+					if (myPrivilege >= 2) {
 						if (inputString.startsWith("//setspecto")) {
 							int amt = Integer.parseInt(inputString
 									.substring(12));
