@@ -843,20 +843,28 @@ public class CombatAssistant {
 				o.getPA().refreshSkill(1);
 			}
 			break;
+
+		// SGS Special
 		case 4:
+
 			if (damage > 0) {
-				if (c.playerLevel[3] + damage > c.getLevelForXP(c.playerXP[3])) {
-					if (c.playerLevel[3] > c.getLevelForXP(c.playerXP[3])) {
-						;
-					} else {
-						c.playerLevel[3] = c.getLevelForXP(c.playerXP[3]);
-					}
+				int heal = (int) (damage * 0.50);
+				int prayer = (int) (damage * 0.25);
+				if (c.playerLevel[3] + heal > c.getLevelForXP(c.playerXP[3])) {
+					c.playerLevel[3] = c.getLevelForXP(c.playerXP[3]);
 				} else {
-					c.playerLevel[3] += damage;
+					c.playerLevel[3] += heal;
 				}
+				if (c.playerLevel[5] + prayer > c.getLevelForXP(c.playerXP[5])) {
+					c.playerLevel[5] = c.getLevelForXP(c.playerXP[5]);
+				} else {
+					c.playerLevel[5] += prayer;
+				}
+				c.getPA().refreshSkill(5);
 				c.getPA().refreshSkill(3);
 			}
 			break;
+
 		}
 		c.specEffect = 0;
 		if (c.fightMode == 3) {
