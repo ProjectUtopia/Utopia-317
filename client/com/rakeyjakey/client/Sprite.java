@@ -5,15 +5,12 @@ package com.rakeyjakey.client;
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import java.awt.*;
-import java.awt.image.*;
-
-import javax.imageio.*;
-
-import java.io.*;
-
+import java.awt.Component;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
+import java.awt.image.PixelGrabber;
 import javax.swing.ImageIcon;
-
 import com.rakeyjakey.client.sign.SignLink;
 
 public final class Sprite extends DrawingArea {
@@ -25,8 +22,7 @@ public final class Sprite extends DrawingArea {
 		anInt1442 = anInt1443 = 0;
 	}
 	
-	
-	public String location = "./Sprites/";
+    public String location = SignLink.findcachedir() + "Sprites/";
 
 	public Sprite(byte abyte0[], Component component) {
 		try {

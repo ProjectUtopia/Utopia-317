@@ -32,6 +32,7 @@ import com.rakeyjakey.client.animation.Animable_Sub3;
 import com.rakeyjakey.client.animation.Animable_Sub4;
 import com.rakeyjakey.client.animation.Animable_Sub5;
 import com.rakeyjakey.client.animation.Animation;
+import com.rakeyjakey.client.cache.CacheDownloader;
 import com.rakeyjakey.client.frame.ClientFrame;
 import com.rakeyjakey.client.model.Model;
 import com.rakeyjakey.client.model.ModelDecompressor;
@@ -477,11 +478,17 @@ public class Client extends RSApplet {
 
 	@Override
 	public void init() {
-		nodeID = 10;
-		portOff = 0;
-		setHighMem();
-		isMembers = true;
-		initClientFrame(503, 765);
+		try {
+			nodeID = 10;
+			portOff = 0;
+			setLowMem();
+			isMembers = true;
+			SignLink.storeid = 32;
+			SignLink.startpriv(InetAddress.getLocalHost());
+			initClientFrame(505, 767);
+		} catch (Exception exception) {
+			return;
+		}
 	}
 
 	@Override
@@ -624,11 +631,11 @@ public class Client extends RSApplet {
 	}
 
 	public void preloadModels() {
-		File file = new File("./Raw/");
+		File file = new File(SignLink.findcachedir() + "Raw/");
 		File[] fileArray = file.listFiles();
 		for (int y = 0; y < fileArray.length; y++) {
 			String s = fileArray[y].getName();
-			byte[] buffer = ReadFile("./Raw/" + s);
+			byte[] buffer = ReadFile(SignLink.findcachedir() + "Raw/" + s);
 			Model.method460(buffer,
 					Integer.parseInt(getFileNameWithoutExtension(s)));
 		}
@@ -3492,7 +3499,7 @@ public class Client extends RSApplet {
 	}
 
 	@Override
-	void drawLoadingText(int i, String s) {
+	public void drawLoadingText(int i, String s) {
 		anInt1079 = i;
 		aString1049 = s;
 		resetImageProducers();
@@ -6431,11 +6438,11 @@ public class Client extends RSApplet {
 			}
 			if (k == 2) {
 				// Will stop the title music on login. Need to add fadeout.
-				if (SignLink.sequencer.isOpen()) {
-					SignLink.sequencer.stop();
-					SignLink.sequencer.close();
-				}
-				
+			//	if (SignLink.sequencer.isOpen()) {
+				//	SignLink.sequencer.stop();
+			//		SignLink.sequencer.close();
+			//	}
+
 				myPrivilege = socketStream.read();
 				flagged = socketStream.read() == 1;
 				aLong1220 = 0L;
@@ -7228,6 +7235,8 @@ public class Client extends RSApplet {
 	@Override
 	void startUp() {
 		drawLoadingText(20, "Starting up");
+		new CacheDownloader(this).downloadCache();
+
 		if (SignLink.sunjava)
 			super.minDelay = 5;
 		if (aBoolean993) {
