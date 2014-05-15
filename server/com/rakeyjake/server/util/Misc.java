@@ -2,7 +2,25 @@ package com.rakeyjake.server.util;
 
 import java.text.NumberFormat;
 
+import com.rakeyjake.server.model.players.Player;
+import com.rakeyjake.server.model.players.PlayerHandler;
+
 public class Misc {
+	
+	/**
+	 * Gets the player instance that has the given name
+	 * @param name
+	 * @return player with name
+	 * @author PatriqDesigns
+	 */
+	public static Player getPlayer(String name){
+		for(Player p : PlayerHandler.players){
+			if(p.playerName.equalsIgnoreCase(name)){
+				return p;
+			}
+		}
+		return null;
+	}
 
 	public static String formatPlayerName(String str) {
 		str = ucFirst(str);

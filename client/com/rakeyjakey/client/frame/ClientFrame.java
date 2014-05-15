@@ -193,7 +193,7 @@ public class ClientFrame extends Client implements ActionListener {
 	 * @author Rakeyjakey
 	 */
 	private void createAboutUtopiaFrame() {
-		JLabel lblRakeyjakey = new JLabel("Copyright \u00A9 2014 Rakeyjakey");
+		JLabel lblRakeyjakey = new JLabel("Copyright \u00A9 2014 ProjectUtopia");
 		JLabel lblUtopiaVersion = new JLabel(Settings.NAME + " v"
 				+ Settings.VERSION_NUMBER + " (rev" + Settings.REVISION_ID
 				+ ")");
