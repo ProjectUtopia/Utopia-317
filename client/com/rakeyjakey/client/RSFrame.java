@@ -7,7 +7,7 @@ final class RSFrame extends Frame {
 
 	public RSFrame(RSApplet RSApplet_, int i, int j) {
 		rsApplet = RSApplet_;
-		setTitle("Trace's Client by Galkon");
+		setTitle("");
 		setResizable(false);
 		setVisible(true);
 		toFront();

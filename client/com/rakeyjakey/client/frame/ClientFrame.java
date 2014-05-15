@@ -50,7 +50,7 @@ public class ClientFrame extends Client implements ActionListener {
 	public void initUI() {
 		try {
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
-			frame = new JFrame(Settings.NAME + " v" + Settings.VERSION_NUMBER
+			frame = new JFrame(Settings.SERVER_NAME + " v" + Settings.VERSION_NUMBER
 					+ " (rev" + Settings.REVISION_ID + ")");
 			frame.setLayout(new BorderLayout());
 			frame.setResizable(false);
@@ -194,7 +194,7 @@ public class ClientFrame extends Client implements ActionListener {
 	 */
 	private void createAboutUtopiaFrame() {
 		JLabel lblRakeyjakey = new JLabel("Copyright \u00A9 2014 ProjectUtopia");
-		JLabel lblUtopiaVersion = new JLabel(Settings.NAME + " v"
+		JLabel lblUtopiaVersion = new JLabel(Settings.SERVER_NAME + " v"
 				+ Settings.VERSION_NUMBER + " (rev" + Settings.REVISION_ID
 				+ ")");
 		JFrame frame = new JFrame("About Utopia");

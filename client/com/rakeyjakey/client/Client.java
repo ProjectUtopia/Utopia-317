@@ -3512,8 +3512,8 @@ public class Client extends RSApplet {
 		char c1 = '\310';
 		byte byte1 = 20;
 		chatTextDrawingArea.drawText(0xffffff,
-				"Project Utopia is loading - please wait...", c1 / 2 - 26 - byte1,
-				c / 2);
+				"Project Utopia is loading - please wait...", c1 / 2 - 26
+						- byte1, c / 2);
 		int j = c1 / 2 - 18 - byte1;
 		DrawingArea.fillPixels(c / 2 - 152, 304, 34, 0x8c1111, j);
 		DrawingArea.fillPixels(c / 2 - 151, 302, 32, 0, j + 1);
@@ -4935,7 +4935,7 @@ public class Client extends RSApplet {
 							else
 								menuActionName[menuActionRow] = "Examine @lre@"
 										+ itemDef.name;
-							
+
 							menuActionID[menuActionRow] = 1448;
 							menuActionCmd1[menuActionRow] = item.ID;
 							menuActionCmd2[menuActionRow] = i1;
@@ -7726,8 +7726,8 @@ public class Client extends RSApplet {
 			g.setColor(Color.yellow);
 			int k = 35;
 			g.drawString(
-					"Sorry, an error has occured whilst loading ProjectUtopia", 30,
-					k);
+					"Sorry, an error has occured whilst loading ProjectUtopia",
+					30, k);
 			k += 50;
 			g.setColor(Color.white);
 			g.drawString("To fix this try the following (in order):", 30, k);
@@ -7755,7 +7755,8 @@ public class Client extends RSApplet {
 			g.setFont(new Font("Helvetica", 1, 20));
 			g.setColor(Color.white);
 			g.drawString("Error - unable to load game!", 50, 50);
-			g.drawString("To play ProjectUtopia make sure you play from", 50, 100);
+			g.drawString("To play ProjectUtopia make sure you play from", 50,
+					100);
 			g.drawString("http://www.projectutopia.com", 50, 150);
 		}
 		if (rsAlreadyLoaded) {
@@ -10056,6 +10057,7 @@ public class Client extends RSApplet {
 	}
 
 	private void drawLoginScreen(boolean flag) {
+
 		resetImageProducers();
 		aRSImageProducer_1109.initDrawingArea();
 		aBackground_966.drawBackground(0, 0);
