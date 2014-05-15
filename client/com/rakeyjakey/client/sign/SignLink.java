@@ -9,7 +9,7 @@ import java.applet.Applet;
 import java.io.*;
 import java.net.*;
 
-public final class signlink
+public final class SignLink
     implements Runnable
 {
 
@@ -31,7 +31,7 @@ public final class signlink
         savereq = null;
         urlreq = null;
         socketip = inetaddress;
-        Thread thread = new Thread(new signlink());
+        Thread thread = new Thread(new SignLink());
         thread.setDaemon(true);
         thread.start();
         while(!active)
@@ -296,7 +296,7 @@ public final class signlink
         System.out.println("Error: " + s);
     }
 
-    private signlink()
+    private SignLink()
     {
     }
 

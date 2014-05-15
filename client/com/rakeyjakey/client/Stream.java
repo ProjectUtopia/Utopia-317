@@ -7,7 +7,9 @@ package com.rakeyjakey.client;
 
 import java.math.BigInteger;
 
-import com.rakeyjakey.client.sign.signlink;
+import com.rakeyjakey.client.nodes.NodeList;
+import com.rakeyjakey.client.nodes.NodeSub;
+import com.rakeyjakey.client.sign.SignLink;
 
 public final class Stream extends NodeSub {
 
@@ -87,7 +89,7 @@ public final class Stream extends NodeSub {
 			buffer[currentOffset++] = (byte)(int)(l >> 8);
 			buffer[currentOffset++] = (byte)(int)l;
 		} catch(RuntimeException runtimeexception) {
-			signlink.reporterror("14395, " + 5 + ", " + l + ", " + runtimeexception.toString());
+			SignLink.reporterror("14395, " + 5 + ", " + l + ", " + runtimeexception.toString());
 			throw new RuntimeException();
 		}
 	}

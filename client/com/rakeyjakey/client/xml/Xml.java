@@ -8,7 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import javax.swing.*;
 
-public class Xml$
+public class Xml
     implements ActionListener, KeyListener
 {
 
@@ -21,10 +21,10 @@ public class Xml$
 
     public static void main(String args[])
     {
-        new Xml$("jgmstoned_cache_32/all_IDs/Objects.xml");
+        new Xml("jgmstoned_cache_32/all_IDs/Objects.xml");
     }
 
-    public Xml$(URL xmlURL)
+    public Xml(URL xmlURL)
     {
         itemName = new String[10000];
         itemID = new String[10000];
@@ -42,7 +42,7 @@ public class Xml$
         initUI();
     }
 
-    public Xml$(String fileName)
+    public Xml(String fileName)
     {
         itemName = new String[10000];
         itemID = new String[10000];

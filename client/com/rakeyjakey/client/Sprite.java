@@ -14,7 +14,7 @@ import java.io.*;
 
 import javax.swing.ImageIcon;
 
-import com.rakeyjakey.client.sign.signlink;
+import com.rakeyjakey.client.sign.SignLink;
 
 public final class Sprite extends DrawingArea {
 

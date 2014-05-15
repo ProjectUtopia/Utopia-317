@@ -10,7 +10,9 @@ import java.net.Socket;
 import java.util.zip.CRC32;
 import java.util.zip.GZIPInputStream;
 
-import com.rakeyjakey.client.sign.signlink;
+import com.rakeyjakey.client.nodes.NodeList;
+import com.rakeyjakey.client.nodes.NodeSubList;
+import com.rakeyjakey.client.sign.SignLink;
 
 public final class OnDemandFetcher extends OnDemandFetcherParent
 	implements Runnable
@@ -52,7 +54,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
 				loopCycle = 0;
 				if(l1 == 0)
 				{
-				signlink.reporterror("Rej: " + l + "," + j1);
+				SignLink.reporterror("Rej: " + l + "," + j1);
 				current.buffer = null;
 				if(current.incomplete)
 					synchronized(aClass19_1358)
@@ -402,7 +404,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
 	}
 	catch(Exception exception)
 	{
-	    signlink.reporterror("od_ex " + exception.getMessage());
+	    SignLink.reporterror("od_ex " + exception.getMessage());
 	}
     }
 

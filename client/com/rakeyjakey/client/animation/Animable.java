@@ -1,8 +1,8 @@
 package com.rakeyjakey.client.animation;
 
 import com.rakeyjakey.client.Class33;
-import com.rakeyjakey.client.NodeSub;
 import com.rakeyjakey.client.model.Model;
+import com.rakeyjakey.client.nodes.NodeSub;
 
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html

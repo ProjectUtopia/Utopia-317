@@ -5,7 +5,7 @@ package com.rakeyjakey.client;
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import com.rakeyjakey.client.sign.signlink;
+import com.rakeyjakey.client.sign.SignLink;
 
 final class Class40
 {

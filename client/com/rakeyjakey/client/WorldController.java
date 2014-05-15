@@ -2,6 +2,7 @@ package com.rakeyjakey.client;
 
 import com.rakeyjakey.client.animation.Animable;
 import com.rakeyjakey.client.model.Model;
+import com.rakeyjakey.client.nodes.NodeList;
 import com.rakeyjakey.client.object.Object1;
 import com.rakeyjakey.client.object.Object2;
 import com.rakeyjakey.client.object.Object3;

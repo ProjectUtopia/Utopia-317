@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import com.rakeyjakey.client.animation.Animation;
 import com.rakeyjakey.client.model.Model;
+import com.rakeyjakey.client.nodes.MRUNodes;
 
 public final class SpotAnim {
 	public static int length;

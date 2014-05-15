@@ -1,11 +1,11 @@
-package com.rakeyjakey.client;
+package com.rakeyjakey.client.nodes;
 
 
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-final class NodeSubList {
+public final class NodeSubList {
 
     public NodeSubList()
     {

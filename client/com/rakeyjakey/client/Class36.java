@@ -4,7 +4,7 @@ package com.rakeyjakey.client;
 import com.rakeyjakey.client.animation.Animation;
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
-import com.rakeyjakey.client.sign.signlink;
+import com.rakeyjakey.client.sign.SignLink;
 
 public final class Class36 {
 

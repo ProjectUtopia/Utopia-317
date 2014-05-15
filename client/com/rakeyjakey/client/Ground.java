@@ -1,5 +1,6 @@
 package com.rakeyjakey.client;
 
+import com.rakeyjakey.client.nodes.Node;
 import com.rakeyjakey.client.object.Object1;
 import com.rakeyjakey.client.object.Object2;
 import com.rakeyjakey.client.object.Object3;

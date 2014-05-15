@@ -26,7 +26,7 @@ import javax.swing.UIManager;
 
 import com.rakeyjakey.client.Client;
 import com.rakeyjakey.client.settings.Settings;
-import com.rakeyjakey.client.xml.Xml$;
+import com.rakeyjakey.client.xml.Xml;
 
 public class Jframe extends Client implements ActionListener {
 
@@ -36,7 +36,7 @@ public class Jframe extends Client implements ActionListener {
 	public Jframe(String args[]) {
 		super();
 		try {
-			com.rakeyjakey.client.sign.signlink.startpriv(InetAddress
+			com.rakeyjakey.client.sign.SignLink.startpriv(InetAddress
 					.getByName(server));
 			initUI();
 		} catch (Exception ex) {
@@ -53,7 +53,7 @@ public class Jframe extends Client implements ActionListener {
 			// UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 			frame = new JFrame(Settings.NAME + " v" + Settings.VERSION_NUMBER
-					+ " (rev) " + Settings.REVISION_ID + ")");
+					+ " (rev" + Settings.REVISION_ID + ")");
 			frame.setLayout(new BorderLayout());
 			frame.setResizable(false);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,11 +86,9 @@ public class Jframe extends Client implements ActionListener {
 			frame.getContentPane().add(menuBar, BorderLayout.NORTH);
 			frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
 
-			// SET ICON
-			/*
-			 * Image icon = getImage("Utopia%20Logo.png"); if (icon != null)
-			 * frame.setIconImage(icon);
-			 */
+			Image icon = getImage("L2bSkVW.png");
+			if (icon != null)
+				frame.setIconImage(icon);
 
 			frame.pack();
 
@@ -103,8 +101,7 @@ public class Jframe extends Client implements ActionListener {
 		}
 	}
 
-	private Image getImage(String name) {
-		String url = "file:///C:/Users/Jake/Dropbox/" + name;
+	private Image getImage(String url) {
 		try {
 			File f = new File("./Cache/" + name);
 			if (f.exists())
@@ -180,36 +177,36 @@ public class Jframe extends Client implements ActionListener {
 					// .append("Files/all_IDs/Items.xml")
 					// .toString());
 					// } else {
-					new Xml$("cache/all_IDs/Items.xml");
+					new Xml("cache/all_IDs/Items.xml");
 					// }
 				}
 
 				if (cmd.equalsIgnoreCase("NPC IDs")) {
 					if (isApplet) {
 
-						new Xml$((new StringBuilder()).append(findcachedir())
+						new Xml((new StringBuilder()).append(findcachedir())
 								.append("Files/all_IDs/NPCs.xml").toString());
 					} else {
-						new Xml$("cache/all_IDs/NPCs.xml");
+						new Xml("cache/all_IDs/NPCs.xml");
 					}
 				}
 				if (cmd.equalsIgnoreCase("New Item IDs")) {
 					if (isApplet) {
 
-						new Xml$((new StringBuilder()).append(findcachedir())
+						new Xml((new StringBuilder()).append(findcachedir())
 								.append("Files/all_IDs/NewItems.xml")
 								.toString());
 					} else {
-						new Xml$("cache/all_IDs/NewItems.xml");
+						new Xml("cache/all_IDs/NewItems.xml");
 					}
 				}
 				if (cmd.equalsIgnoreCase("Object IDs")) {
 					if (isApplet) {
 
-						new Xml$((new StringBuilder()).append(findcachedir())
+						new Xml((new StringBuilder()).append(findcachedir())
 								.append("Files/all_IDs/Objects.xml").toString());
 					} else {
-						new Xml$("cache/all_IDs/Objects.xml");
+						new Xml("cache/all_IDs/Objects.xml");
 					}
 				}
 			}

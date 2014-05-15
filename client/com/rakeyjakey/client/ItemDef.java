@@ -4,6 +4,7 @@ package com.rakeyjakey.client;
 import java.io.*;
 
 import com.rakeyjakey.client.model.Model;
+import com.rakeyjakey.client.nodes.MRUNodes;
 
 public final class ItemDef {
 

@@ -1,11 +1,11 @@
-package com.rakeyjakey.client;
+package com.rakeyjakey.client.nodes;
 
 
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import com.rakeyjakey.client.sign.signlink;
+import com.rakeyjakey.client.sign.SignLink;
 
 public final class MRUNodes {
 
@@ -53,7 +53,7 @@ public final class MRUNodes {
         }
         catch(RuntimeException runtimeexception)
         {
-            signlink.reporterror("47547, " + nodeSub + ", " + l + ", " + (byte)2 + ", " + runtimeexception.toString());
+            SignLink.reporterror("47547, " + nodeSub + ", " + l + ", " + (byte)2 + ", " + runtimeexception.toString());
         }
         throw new RuntimeException();
     }

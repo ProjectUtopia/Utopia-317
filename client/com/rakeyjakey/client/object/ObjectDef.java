@@ -1,12 +1,12 @@
 package com.rakeyjakey.client.object;
 import com.rakeyjakey.client.Class36;
 import com.rakeyjakey.client.Client;
-import com.rakeyjakey.client.MRUNodes;
 import com.rakeyjakey.client.OnDemandFetcher;
 import com.rakeyjakey.client.Stream;
 import com.rakeyjakey.client.StreamLoader;
 import com.rakeyjakey.client.VarBit;
 import com.rakeyjakey.client.model.Model;
+import com.rakeyjakey.client.nodes.MRUNodes;
 
 
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.

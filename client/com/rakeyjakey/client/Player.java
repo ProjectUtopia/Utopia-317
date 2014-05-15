@@ -2,6 +2,7 @@ package com.rakeyjakey.client;
 
 import com.rakeyjakey.client.animation.Animation;
 import com.rakeyjakey.client.model.Model;
+import com.rakeyjakey.client.nodes.MRUNodes;
 
 
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.

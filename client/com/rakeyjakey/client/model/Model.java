@@ -13,7 +13,7 @@ import com.rakeyjakey.client.OnDemandFetcherParent;
 import com.rakeyjakey.client.Stream;
 import com.rakeyjakey.client.Texture;
 import com.rakeyjakey.client.animation.Animable;
-import com.rakeyjakey.client.sign.signlink;
+import com.rakeyjakey.client.sign.SignLink;
 
 public final class Model extends Animable {
 

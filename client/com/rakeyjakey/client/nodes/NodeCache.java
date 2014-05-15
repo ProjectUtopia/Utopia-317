@@ -1,13 +1,13 @@
-package com.rakeyjakey.client;
+package com.rakeyjakey.client.nodes;
 
 
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import com.rakeyjakey.client.sign.signlink;
+import com.rakeyjakey.client.sign.SignLink;
 
-final class NodeCache {
+public final class NodeCache {
 
     public NodeCache()
     {
@@ -49,7 +49,7 @@ final class NodeCache {
         }
         catch(RuntimeException runtimeexception)
         {
-            signlink.reporterror("91499, " + node + ", " + l + ", " + (byte)7 + ", " + runtimeexception.toString());
+            SignLink.reporterror("91499, " + node + ", " + l + ", " + (byte)7 + ", " + runtimeexception.toString());
         }
         throw new RuntimeException();
     }
