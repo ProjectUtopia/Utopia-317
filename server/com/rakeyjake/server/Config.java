@@ -3,7 +3,7 @@ package com.rakeyjake.server;
 public class Config {
 
 	public static final boolean SERVER_DEBUG = false;
-	public static String SERVER_NAME = "Utopia v1.0";
+	public static String SERVER_NAME = "ProjectUtopia v1.0";
 	public static final int CLIENT_VERSION = 1;
 	public static final double SERVER_VERSION = 1.0;
 	public static int MESSAGE_DELAY = 6000;
