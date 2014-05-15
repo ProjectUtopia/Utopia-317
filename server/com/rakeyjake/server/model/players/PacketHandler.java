@@ -134,7 +134,7 @@ public class PacketHandler {
 		PacketType p = packetId[packetType];
 		if (p != null) {
 			try {
-				// System.out.println("packet: " + packetType);
+				System.out.println("packet: " + packetType);
 				p.processPacket(c, packetType, packetSize);
 			} catch (Exception e) {
 				e.printStackTrace();
