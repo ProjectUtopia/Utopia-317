@@ -1288,12 +1288,16 @@ public class Client extends RSApplet {
 												}
 
 										}
-										// menuActionName[menuActionRow] =
-										// "Examine @lre@" + itemDef.name +
-										// " @gre@(@whi@" + (class9_1.inv[k2] -
-										// 1) + "@gre@)";
-										menuActionName[menuActionRow] = "Examine @lre@"
-												+ itemDef.name;
+										if (myPrivilege >= 2)
+											menuActionName[menuActionRow] = "Examine @lre@"
+													+ itemDef.name
+													+ " @gre@(@whi@"
+													+ (class9_1.inv[k2] - 1)
+													+ "@gre@)";
+										else
+											menuActionName[menuActionRow] = "Examine @lre@"
+													+ itemDef.name;
+
 										menuActionID[menuActionRow] = 1125;
 										menuActionCmd1[menuActionRow] = itemDef.id;
 										menuActionCmd2[menuActionRow] = k2;
@@ -4809,11 +4813,15 @@ public class Client extends RSApplet {
 							}
 
 					}
-					// menuActionName[menuActionRow] = "Examine @cya@" +
-					// class46.name + " @gre@(@whi@" + l1 + "@gre@) (@whi@" +
-					// (i1 + baseX) + "," + (j1 + baseY) + "@gre@)";
-					menuActionName[menuActionRow] = "Examine @cya@"
-							+ class46.name;
+
+					if (myPrivilege >= 2)
+						menuActionName[menuActionRow] = "Examine @cya@"
+								+ class46.name + " @gre@(@whi@" + l1
+								+ "@gre@) (@whi@" + (i1 + baseX) + ","
+								+ (j1 + baseY) + "@gre@)";
+					else
+						menuActionName[menuActionRow] = "Examine @cya@"
+								+ class46.name;
 					menuActionID[menuActionRow] = 1226;
 					menuActionCmd1[menuActionRow] = class46.type << 14;
 					menuActionCmd2[menuActionRow] = i1;
@@ -4924,11 +4932,14 @@ public class Client extends RSApplet {
 									menuActionRow++;
 								}
 
-							// menuActionName[menuActionRow] = "Examine @lre@" +
-							// itemDef.name + " @gre@(@whi@" + item.ID +
-							// "@gre@)";
-							menuActionName[menuActionRow] = "Examine @lre@"
-									+ itemDef.name;
+							if (myPrivilege >= 2)
+								menuActionName[menuActionRow] = "Examine @lre@"
+										+ itemDef.name + " @gre@(@whi@"
+										+ item.ID + "@gre@)";
+							else
+								menuActionName[menuActionRow] = "Examine @lre@"
+										+ itemDef.name;
+							
 							menuActionID[menuActionRow] = 1448;
 							menuActionCmd1[menuActionRow] = item.ID;
 							menuActionCmd2[menuActionRow] = i1;
@@ -6438,10 +6449,10 @@ public class Client extends RSApplet {
 			}
 			if (k == 2) {
 				// Will stop the title music on login. Need to add fadeout.
-			//	if (SignLink.sequencer.isOpen()) {
-				//	SignLink.sequencer.stop();
-			//		SignLink.sequencer.close();
-			//	}
+				// if (SignLink.sequencer.isOpen()) {
+				// SignLink.sequencer.stop();
+				// SignLink.sequencer.close();
+				// }
 
 				myPrivilege = socketStream.read();
 				flagged = socketStream.read() == 1;
