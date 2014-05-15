@@ -3512,7 +3512,7 @@ public class Client extends RSApplet {
 		char c1 = '\310';
 		byte byte1 = 20;
 		chatTextDrawingArea.drawText(0xffffff,
-				"RuneScape is loading - please wait...", c1 / 2 - 26 - byte1,
+				"Project Utopia is loading - please wait...", c1 / 2 - 26 - byte1,
 				c / 2);
 		int j = c1 / 2 - 18 - byte1;
 		DrawingArea.fillPixels(c / 2 - 152, 304, 34, 0x8c1111, j);
@@ -6567,7 +6567,7 @@ public class Client extends RSApplet {
 				return;
 			}
 			if (k == 6) {
-				loginMessage1 = "RuneScape has been updated!";
+				loginMessage1 = "ProjectUtopia has been updated!";
 				loginMessage2 = "Please reload this page.";
 				return;
 			}
@@ -7726,7 +7726,7 @@ public class Client extends RSApplet {
 			g.setColor(Color.yellow);
 			int k = 35;
 			g.drawString(
-					"Sorry, an error has occured whilst loading RuneScape", 30,
+					"Sorry, an error has occured whilst loading ProjectUtopia", 30,
 					k);
 			k += 50;
 			g.setColor(Color.white);
@@ -7755,15 +7755,15 @@ public class Client extends RSApplet {
 			g.setFont(new Font("Helvetica", 1, 20));
 			g.setColor(Color.white);
 			g.drawString("Error - unable to load game!", 50, 50);
-			g.drawString("To play RuneScape make sure you play from", 50, 100);
-			g.drawString("http://www.runescape.com", 50, 150);
+			g.drawString("To play ProjectUtopia make sure you play from", 50, 100);
+			g.drawString("http://www.projectutopia.com", 50, 150);
 		}
 		if (rsAlreadyLoaded) {
 			aBoolean831 = false;
 			g.setColor(Color.yellow);
 			int l = 35;
 			g.drawString(
-					"Error a copy of RuneScape already appears to be loaded",
+					"Error a copy of ProjectUtopia already appears to be loaded",
 					30, l);
 			l += 50;
 			g.setColor(Color.white);
@@ -10067,7 +10067,7 @@ public class Client extends RSApplet {
 					i, true);
 			i = c1 / 2 - 20;
 			chatTextDrawingArea.method382(0xffff00, c / 2,
-					"Welcome to RuneScape", i, true);
+					"Welcome to ProjectUtopia", i, true);
 			i += 30;
 			int l = c / 2 - 80;
 			int k1 = c1 / 2 + 20;
@@ -10124,7 +10124,7 @@ public class Client extends RSApplet {
 					"To create a new account you need to", k, true);
 			k += 15;
 			chatTextDrawingArea.method382(0xffffff, c / 2,
-					"go back to the main RuneScape webpage", k, true);
+					"go back to the main ProjectUtopia webpage", k, true);
 			k += 15;
 			chatTextDrawingArea.method382(0xffffff, c / 2,
 					"and choose the red 'create account'", k, true);
