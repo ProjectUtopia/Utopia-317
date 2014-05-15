@@ -1,6 +1,7 @@
 package com.rakeyjakey.client.frame;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -15,7 +16,10 @@ import java.net.URI;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
-import javax.swing.GroupLayout;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -24,9 +28,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.WindowConstants;
 
-import com.jgoodies.forms.layout.CellConstraints.Alignment;
 import com.rakeyjakey.client.Client;
 import com.rakeyjakey.client.settings.Settings;
 import com.rakeyjakey.client.xml.Xml;
@@ -156,7 +159,7 @@ public class ClientFrame extends Client implements ActionListener {
 				System.exit(0);
 			}
 			if (cmd.equalsIgnoreCase("about utopia")) {
-				createAboutUtopiaFrame();
+				createAboutProjectUtopiaFrame();
 			}
 			if (cmd.equalsIgnoreCase("change ip")) {
 				Client.server = JOptionPane
@@ -187,64 +190,47 @@ public class ClientFrame extends Client implements ActionListener {
 	}
 
 	/**
-	 * Creates the frame to display information about the server. Used
-	 * windowbuilder for ease so it's messy.
+	 * Creates a frame showing information about Project Utopia
 	 * 
 	 * @author Rakeyjakey
+	 * @author PatriqDesigns
 	 */
-	private void createAboutUtopiaFrame() {
-		JLabel lblRakeyjakey = new JLabel("Copyright \u00A9 2014 ProjectUtopia");
-		JLabel lblUtopiaVersion = new JLabel(Settings.SERVER_NAME + " v"
+	private void createAboutProjectUtopiaFrame() {
+		final JLabel versionLabel = new JLabel("<html><u>"+Settings.SERVER_NAME + " v"
 				+ Settings.VERSION_NUMBER + " (rev" + Settings.REVISION_ID
-				+ ")");
-		JFrame frame = new JFrame("About Utopia");
-
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout
-				.setHorizontalGroup(groupLayout
-						.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addGroup(
-								groupLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												groupLayout
-														.createParallelGroup(
-																GroupLayout.Alignment.LEADING)
-														.addComponent(
-																lblUtopiaVersion,
-																GroupLayout.PREFERRED_SIZE,
-																304,
-																GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																lblRakeyjakey,
-																GroupLayout.PREFERRED_SIZE,
-																285,
-																GroupLayout.PREFERRED_SIZE))
-										.addContainerGap(193, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				groupLayout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(lblUtopiaVersion,
-								GroupLayout.PREFERRED_SIZE, 59,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblRakeyjakey,
-								GroupLayout.PREFERRED_SIZE, 59,
-								GroupLayout.PREFERRED_SIZE).addGap(290)));
-
-		frame.setLayout(groupLayout);
-		frame.setSize(345, 160);
-		frame.setResizable(false);
-		frame.setAlwaysOnTop(true);
-		frame.setAutoRequestFocus(true);
-		frame.setLocationRelativeTo(frame);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setVisible(true);
+				+ ")</u></html>");
+		final JLabel runescapeLabel = new JLabel("<html><font size=0>RuneScape is a trademark of Jagex Software 1999 - 2013 Jagex, Ltd.</font></html>");
+		final JLabel jagexLabel = new JLabel("<html><font size=0>Copyright © 2009-2014 Jagex Ltd. Jagex is a registered trademark of Jagex Ltd.</font></html>");
+		final JLabel copyrightLabel = new JLabel("<html><font size=0>Copyright \u00A9 2014 ProjectUtopia</font></html>");
+		final JFrame frame = new JFrame("About ProjectUtopia"){{
+			getContentPane().add(new JPanel(){{
+				setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+				setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+				add(versionLabel);
+				add(Box.createRigidArea(new Dimension(0, 10)));
+				add(runescapeLabel);
+				add(jagexLabel);
+				add(Box.createRigidArea(new Dimension(0, 20)));
+				add(copyrightLabel);
+			}}, BorderLayout.NORTH);
+			getContentPane().add(new JPanel(){{
+				add(new JButton("OK"){{
+					addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							dispose();
+						}
+					});
+					setAlignmentX(Component.RIGHT_ALIGNMENT);
+				}});
+			}}, BorderLayout.SOUTH);
+			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			setSize(345, 160);
+			setResizable(false);
+			setLocationRelativeTo(ClientFrame.this.frame);
+			setVisible(true);
+		}};	
 	}
-
 	public static final String findcachedir() {
 		try {
 			String s = "./";

@@ -61,11 +61,9 @@ public class PlayerAssistant {
 			return;
 		}
 		c.startAnimation(4410);
-		c.gfx100(604);// Just use c.gfx100
+		c.gfx100(604);
 		c.getItems().deleteItem2(9075, 4);
-		c.getItems().deleteItem2(557, 10);// For these you need to change to
-											// deleteItem(item, itemslot,
-											// amount);.
+		c.getItems().deleteItem2(557, 10);
 		c.getItems().deleteItem2(560, 2);
 		addSkillXP(112, 6);
 		refreshSkill(6);
