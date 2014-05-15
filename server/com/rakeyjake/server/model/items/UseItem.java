@@ -255,8 +255,7 @@ public class UseItem {
 		case 1515:
 		case 1513:
 		case 590:
-			//c.getFiremaking().checkLogType(itemUsed, useWith);
-			c.sendMessage("Firemaking is disabled.");
+			c.getFiremaking().checkLogType(itemUsed, useWith);
 			break;
 
 		default:

@@ -178,8 +178,10 @@ public class ClickingButtons implements PacketType {
 			} else if (c.teleAction == 4) {
 				// ardy lever
 				c.getPA().spellTeleport(2561, 3311, 0);
-			} else if (c.teleAction == 5) {
-				c.getPA().spellTeleport(2812, 3463, 0);
+			} else if (c.teleAction == 5) { //Next page
+				c.getDH().sendOption5("Mining/dfsfds", "Cooking",
+						"Fishing", "Woodcutting", "Next Page");
+			} else if (c.teleAction == 6) { //Next page
 			}
 			if (c.dialogueAction == 10 || c.dialogueAction == 11) {
 				c.dialogueId++;
@@ -760,8 +762,6 @@ public class ClickingButtons implements PacketType {
 		case 50235:
 		case 4140:
 		case 117112:
-			// c.getPA().startTeleport(Config.LUMBY_X, Config.LUMBY_Y, 0,
-			// "modern");
 			c.getDH().sendOption5("Rock Crabs", "Taverly Dungeon",
 					"Slayer Tower", "Brimhaven Dungeon", "Island");
 			c.teleAction = 1;
@@ -795,7 +795,7 @@ public class ClickingButtons implements PacketType {
 		case 6004:
 		case 117162:
 			c.getDH().sendOption5("Mining/Smithing", "Cooking",
-					"Fishing/Cooking", "Woodcutting", "Farming");
+					"Fishing", "Woodcutting", "Next Page");
 			c.teleAction = 5;
 			break;
 

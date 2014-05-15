@@ -43,7 +43,7 @@ public class PestControl {
 	}
 
 	public void startGame() {
-		if (playersInBoat() > 2) {
+		if (playersInBoat() >= 2) {
 			gameTimer = GAME_TIMER;
 			waitTimer = -1;
 			// spawn npcs
