@@ -192,8 +192,7 @@ public class ClientFrame extends Client implements ActionListener {
 	/**
 	 * Creates a frame showing information about Project Utopia
 	 * 
-	 * @author Rakeyjakey
-	 * @author PatriqDesigns
+	 * @authors Rakeyjakey, PatriqDesigns
 	 */
 	private void createAboutProjectUtopiaFrame() {
 		final JLabel versionLabel = new JLabel("<html><u>"+Settings.SERVER_NAME + " v"
