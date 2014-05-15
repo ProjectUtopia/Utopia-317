@@ -1,0 +1,109 @@
+[ACCOUNT]
+character-username = euan
+character-password = utopiaclient
+
+[CHARACTER]
+character-height = 0
+character-posx = 3095
+character-posy = 3503
+character-rights = 3
+crystal-bow-shots = 0
+skull-timer = 0
+magic-book = 1
+brother-info = 0	0
+brother-info = 1	0
+brother-info = 2	0
+brother-info = 3	0
+brother-info = 4	0
+brother-info = 5	0
+special-amount = 10.0
+selected-coffin = 0
+barrows-killcount = 0
+teleblock-length = 0
+pc-points = 0
+slayerTask = 0
+taskAmount = 0
+magePoints = 0
+pk-points = 0
+totalKills = 0
+totalDeaths = 0
+autoRet = 0
+barrowskillcount = 0
+flagged = false
+isJailed = false
+wave = 0
+gwkc = 0
+fightMode = 1
+void = 0	0	0	0	0
+
+[EQUIPMENT]
+character-equip = 0	1042	1	
+character-equip = 1	-1	1	
+character-equip = 2	-1	0	
+character-equip = 3	-1	0	
+character-equip = 4	-1	0	
+character-equip = 5	-1	1	
+character-equip = 6	-1	0	
+character-equip = 7	-1	1	
+character-equip = 8	-1	0	
+character-equip = 9	-1	1	
+character-equip = 10	-1	1	
+character-equip = 11	-1	0	
+character-equip = 12	-1	1	
+character-equip = 13	-1	0	
+
+[LOOK]
+character-look = 0	0
+character-look = 1	7
+character-look = 2	25
+character-look = 3	29
+character-look = 4	35
+character-look = 5	39
+character-look = 6	44
+character-look = 7	14
+character-look = 8	7
+character-look = 9	8
+character-look = 10	9
+character-look = 11	5
+character-look = 12	0
+
+[SKILLS]
+character-skill = 0	99	21002250
+character-skill = 1	99	21021750
+character-skill = 2	99	21014250
+character-skill = 3	21	21014044
+character-skill = 4	99	21000000
+character-skill = 5	99	21000000
+character-skill = 6	99	21000000
+character-skill = 7	99	21000000
+character-skill = 8	99	21000000
+character-skill = 9	99	21000000
+character-skill = 10	99	21000000
+character-skill = 11	99	21000000
+character-skill = 12	99	21000000
+character-skill = 13	99	21000000
+character-skill = 14	99	21000000
+character-skill = 15	99	21000000
+character-skill = 16	99	21000000
+character-skill = 17	99	21002820
+character-skill = 18	99	21000000
+character-skill = 19	99	21000000
+character-skill = 20	99	21000000
+character-skill = 21	1	0
+character-skill = 22	1	0
+character-skill = 23	1	0
+character-skill = 24	1	0
+
+[ITEMS]
+character-item = 0	996	1000
+
+[BANK]
+character-bank = 0	996	200000
+character-bank = 1	11697	1
+character-bank = 2	11699	1
+character-bank = 3	11701	1
+
+[FRIENDS]
+
+[EOF]
+
