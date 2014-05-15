@@ -3,7 +3,7 @@ package com.rakeyjakey.client.settings;
 public final class Settings {
 
 	public static final double VERSION_NUMBER = 1.01;
-	public static final String REVISION_ID = "#00002";
+	public static final String REVISION_ID = "#00003";
 	public static final String REVISION_NAME = "Alpha";
 	public static final String NAME = "Utopia";
 	public static final String SERVER_IP = "rakeyjake.no-ip.org";

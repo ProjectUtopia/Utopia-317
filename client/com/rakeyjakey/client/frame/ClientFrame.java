@@ -15,25 +15,28 @@ import java.net.URI;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.UIManager;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.jgoodies.forms.layout.CellConstraints.Alignment;
 import com.rakeyjakey.client.Client;
 import com.rakeyjakey.client.settings.Settings;
 import com.rakeyjakey.client.xml.Xml;
 
-public class Jframe extends Client implements ActionListener {
+@SuppressWarnings("serial")
+public class ClientFrame extends Client implements ActionListener {
 
-	private static JMenuItem menuItem;
 	private JFrame frame;
 
-	public Jframe(String args[]) {
+	public ClientFrame(String args[]) {
 		super();
 		try {
 			com.rakeyjakey.client.sign.SignLink.startpriv(InetAddress
@@ -44,29 +47,24 @@ public class Jframe extends Client implements ActionListener {
 		}
 	}
 
-	public void close() {
-		frame.dispose();
-	}
-
 	public void initUI() {
 		try {
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 			frame = new JFrame(Settings.NAME + " v" + Settings.VERSION_NUMBER
 					+ " (rev" + Settings.REVISION_ID + ")");
 			frame.setLayout(new BorderLayout());
 			frame.setResizable(false);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			JPanel gamePanel = new JPanel();
 
+			JPanel gamePanel = new JPanel();
 			gamePanel.setLayout(new BorderLayout());
 			gamePanel.add(this);
 			gamePanel.setPreferredSize(new Dimension(765, 503));
 
 			JMenu fileMenu = new JMenu("File");
-
 			String[] mainButtons = new String[] { "Change IP", "Change Port",
-					"Item IDs", "Object IDs", "NPC IDs", "-", "Exit" };
+					"Item IDs", "Object IDs", "NPC IDs", "-", "About Utopia",
+					"Exit" };
 
 			for (String name : mainButtons) {
 				JMenuItem menuItem = new JMenuItem(name);
@@ -92,10 +90,10 @@ public class Jframe extends Client implements ActionListener {
 
 			frame.pack();
 
-			frame.setVisible(true); // can see the client
-			frame.setResizable(false); // resizeable frame
+			frame.setVisible(true);
 
 			init();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -153,66 +151,97 @@ public class Jframe extends Client implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		String cmd = evt.getActionCommand();
-		try {
-			if (cmd != null) {
-				if (cmd.equalsIgnoreCase("exit")) {
-					System.exit(0);
-				}
-				if (cmd.equalsIgnoreCase("change ip")) {
-					Client.server = JOptionPane
-							.showInputDialog("Input server IP address:");
-					System.out.println("IP Address set to: " + Client.server);
-				}
-				if (cmd.equalsIgnoreCase("change port")) {
-					String temp = JOptionPane
-							.showInputDialog("Input server port:");
-					Client.port = Integer.parseInt(temp);
-					System.out.println("Port set to: " + Client.port);
-				}
-
-				if (cmd.equalsIgnoreCase("item ids")) {
-					// if (isApplet) {
-					// new Xml$((new StringBuilder())
-					// .append(findcachedir())
-					// .append("Files/all_IDs/Items.xml")
-					// .toString());
-					// } else {
-					new Xml("cache/all_IDs/Items.xml");
-					// }
-				}
-
-				if (cmd.equalsIgnoreCase("NPC IDs")) {
-					if (isApplet) {
-
-						new Xml((new StringBuilder()).append(findcachedir())
-								.append("Files/all_IDs/NPCs.xml").toString());
-					} else {
-						new Xml("cache/all_IDs/NPCs.xml");
-					}
-				}
-				if (cmd.equalsIgnoreCase("New Item IDs")) {
-					if (isApplet) {
-
-						new Xml((new StringBuilder()).append(findcachedir())
-								.append("Files/all_IDs/NewItems.xml")
-								.toString());
-					} else {
-						new Xml("cache/all_IDs/NewItems.xml");
-					}
-				}
-				if (cmd.equalsIgnoreCase("Object IDs")) {
-					if (isApplet) {
-
-						new Xml((new StringBuilder()).append(findcachedir())
-								.append("Files/all_IDs/Objects.xml").toString());
-					} else {
-						new Xml("cache/all_IDs/Objects.xml");
-					}
-				}
+		if (cmd != null) {
+			if (cmd.equalsIgnoreCase("exit")) {
+				System.exit(0);
+			}
+			if (cmd.equalsIgnoreCase("about utopia")) {
+				createAboutUtopiaFrame();
+			}
+			if (cmd.equalsIgnoreCase("change ip")) {
+				Client.server = JOptionPane
+						.showInputDialog("Input server IP address:");
+				System.out.println("IP Address set to: " + Client.server);
+			}
+			if (cmd.equalsIgnoreCase("change port")) {
+				String temp = JOptionPane.showInputDialog("Input server port:");
+				Client.port = Integer.parseInt(temp);
+				System.out.println("Port set to: " + Client.port);
 			}
 
-		} catch (Exception e) {
+			if (cmd.equalsIgnoreCase("item ids")) {
+				new Xml("cache/all_IDs/Items.xml");
+			}
+
+			if (cmd.equalsIgnoreCase("NPC IDs")) {
+				new Xml("cache/all_IDs/NPCs.xml");
+			}
+			if (cmd.equalsIgnoreCase("New Item IDs")) {
+				new Xml("cache/all_IDs/NewItems.xml");
+			}
+			if (cmd.equalsIgnoreCase("Object IDs")) {
+				new Xml("cache/all_IDs/Objects.xml");
+			}
 		}
+
+	}
+
+	/**
+	 * Creates the frame to display information about the server.
+	 * 
+	 * @author Rakeyjakey
+	 */
+	private void createAboutUtopiaFrame() {
+		JLabel lblRakeyjakey = new JLabel("Copyright \u00A9 2014 Rakeyjakey");
+		JLabel lblUtopiaVersion = new JLabel(Settings.NAME + " v"
+				+ Settings.VERSION_NUMBER + " (rev" + Settings.REVISION_ID
+				+ ")");
+		JFrame frame = new JFrame("About Utopia");
+
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout
+				.setHorizontalGroup(groupLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								groupLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												groupLayout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addComponent(
+																lblUtopiaVersion,
+																GroupLayout.PREFERRED_SIZE,
+																304,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																lblRakeyjakey,
+																GroupLayout.PREFERRED_SIZE,
+																285,
+																GroupLayout.PREFERRED_SIZE))
+										.addContainerGap(193, Short.MAX_VALUE)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGroup(
+				groupLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(lblUtopiaVersion,
+								GroupLayout.PREFERRED_SIZE, 59,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblRakeyjakey,
+								GroupLayout.PREFERRED_SIZE, 59,
+								GroupLayout.PREFERRED_SIZE).addGap(290)));
+
+		frame.setLayout(groupLayout);
+		frame.setSize(345, 160);
+		frame.setResizable(false);
+		frame.setAlwaysOnTop(true);
+		frame.setAutoRequestFocus(true);
+		frame.setLocationRelativeTo(frame);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
 	}
 
 	public static final String findcachedir() {
@@ -228,5 +257,4 @@ public class Jframe extends Client implements ActionListener {
 		return null;
 	}
 
-	private static boolean isApplet = false;
 }

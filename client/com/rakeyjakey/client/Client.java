@@ -27,7 +27,7 @@ import com.rakeyjakey.client.animation.Animable_Sub3;
 import com.rakeyjakey.client.animation.Animable_Sub4;
 import com.rakeyjakey.client.animation.Animable_Sub5;
 import com.rakeyjakey.client.animation.Animation;
-import com.rakeyjakey.client.frame.Jframe;
+import com.rakeyjakey.client.frame.ClientFrame;
 import com.rakeyjakey.client.model.Model;
 import com.rakeyjakey.client.model.ModelDecompressor;
 import com.rakeyjakey.client.nodes.Node;
@@ -2795,7 +2795,7 @@ public class Client extends RSApplet {
 			isMembers = true;
 			SignLink.storeid = 32;
 			SignLink.startpriv(InetAddress.getLocalHost());
-			new Jframe(args);
+			new ClientFrame(args);
 		} catch (Exception exception) {
 			System.out.println("Problem occured when loading the client.");
 		}
