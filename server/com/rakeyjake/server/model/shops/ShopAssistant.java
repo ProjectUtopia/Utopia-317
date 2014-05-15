@@ -212,12 +212,13 @@ public class ShopAssistant {
 		case 4714:
 			return 10;
 		case 11694:
-			return 200;
+			return 25;
 		case 11696:
-			return 1;
+			return 10;
 		case 11698:
+			return 20;
 		case 11700:
-			return 100;
+			return 15;
 		case 10548:
 			return 50;
 		case 11235:
