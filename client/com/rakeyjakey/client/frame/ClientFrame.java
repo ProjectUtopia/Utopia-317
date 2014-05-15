@@ -187,7 +187,8 @@ public class ClientFrame extends Client implements ActionListener {
 	}
 
 	/**
-	 * Creates the frame to display information about the server.
+	 * Creates the frame to display information about the server. Used
+	 * windowbuilder for ease so it's messy.
 	 * 
 	 * @author Rakeyjakey
 	 */
