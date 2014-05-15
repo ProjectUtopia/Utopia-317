@@ -1,5 +1,7 @@
 package com.rakeyjake.server.model.players;
 
+import java.util.Random;
+
 import com.rakeyjake.server.Config;
 import com.rakeyjake.server.Server;
 import com.rakeyjake.server.model.npcs.NPCHandler;
@@ -426,7 +428,7 @@ public class CombatAssistant {
 		case 11696:
 			c.startAnimation(4301);
 			c.gfx0(1223);
-			c.specDamage = 1.10;
+			c.specDamage = 1.15;
 			c.specAccuracy = 1.5;
 			c.hitDelay = getHitDelay(c.getItems()
 					.getItemName(c.playerEquipment[c.playerWeapon])
@@ -821,10 +823,12 @@ public class CombatAssistant {
 				o.getPA().requestUpdates();
 			}
 			break;
+
+		// ZGS Special - 
 		case 2:
 			if (damage > 0) {
 				if (o.freezeTimer <= 0) {
-					o.freezeTimer = 30;
+					o.freezeTimer = 20;
 				}
 				o.gfx0(369);
 				o.sendMessage("You have been frozen.");
@@ -833,30 +837,61 @@ public class CombatAssistant {
 				c.sendMessage("You freeze your enemy.");
 			}
 			break;
+
+		// BGS Special - reduces defence by amount hit.
 		case 3:
 			if (damage > 0) {
-				o.playerLevel[1] -= damage;
-				o.sendMessage("You feel weak.");
-				if (o.playerLevel[1] < 1) {
-					o.playerLevel[1] = 1;
+				int r = (new Random()).nextInt(3);
+				switch(r){
+				case 0 : 
+					o.playerLevel[r+1] -= damage;
+					if (o.playerLevel[r+1] < 1) {
+						o.playerLevel[r+1] = 1;
+					}
+					break;
+					
+				case 1: 
+					o.playerLevel[r+1] -= damage;
+					if (o.playerLevel[r+1] < 1) {
+						o.playerLevel[r+1] = 1;
+					}
+					break;
+					
+				case 2:
+					o.playerLevel[r+1] -= damage;
+					if (o.playerLevel[r+1] < 1) {
+						o.playerLevel[r+1] = 1;
+					}
+					break;
+					
 				}
+				o.sendMessage("You feel weak.");
+			
 				o.getPA().refreshSkill(1);
 			}
 			break;
+
+		// SGS Special
 		case 4:
+
 			if (damage > 0) {
-				if (c.playerLevel[3] + damage > c.getLevelForXP(c.playerXP[3])) {
-					if (c.playerLevel[3] > c.getLevelForXP(c.playerXP[3])) {
-						;
-					} else {
-						c.playerLevel[3] = c.getLevelForXP(c.playerXP[3]);
-					}
+				int heal = (int) (damage * 0.50);
+				int prayer = (int) (damage * 0.25);
+				if (c.playerLevel[3] + heal > c.getLevelForXP(c.playerXP[3])) {
+					c.playerLevel[3] = c.getLevelForXP(c.playerXP[3]);
 				} else {
-					c.playerLevel[3] += damage;
+					c.playerLevel[3] += heal;
 				}
+				if (c.playerLevel[5] + prayer > c.getLevelForXP(c.playerXP[5])) {
+					c.playerLevel[5] = c.getLevelForXP(c.playerXP[5]);
+				} else {
+					c.playerLevel[5] += prayer;
+				}
+				c.getPA().refreshSkill(5);
 				c.getPA().refreshSkill(3);
 			}
 			break;
+
 		}
 		c.specEffect = 0;
 		if (c.fightMode == 3) {
