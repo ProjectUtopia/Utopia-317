@@ -6430,10 +6430,12 @@ public class Client extends RSApplet {
 				return;
 			}
 			if (k == 2) {
-				//Will stop the title music on login. Need to add fadeout.
-				SignLink.sequencer.stop();
-				SignLink.sequencer.close();
-
+				// Will stop the title music on login. Need to add fadeout.
+				if (SignLink.sequencer.isOpen()) {
+					SignLink.sequencer.stop();
+					SignLink.sequencer.close();
+				}
+				
 				myPrivilege = socketStream.read();
 				flagged = socketStream.read() == 1;
 				aLong1220 = 0L;
