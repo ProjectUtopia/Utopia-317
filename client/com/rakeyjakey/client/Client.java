@@ -20,6 +20,11 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiEvent;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.ShortMessage;
+import javax.sound.midi.Track;
 import javax.swing.JOptionPane;
 
 import com.rakeyjakey.client.animation.Animable;
@@ -3066,8 +3071,7 @@ public class Client extends RSApplet {
 		System.arraycopy(anIntArray969, 1, anIntArray969, 0, c - 1);
 
 		anIntArray969[c - 1] = (int) (Math.sin(loopCycle / 14D) * 16D
-				+ Math.sin(loopCycle / 15D) * 14D + Math
-				.sin(loopCycle / 16D) * 12D);
+				+ Math.sin(loopCycle / 15D) * 14D + Math.sin(loopCycle / 16D) * 12D);
 		if (anInt1040 > 0)
 			anInt1040 -= 4;
 		if (anInt1041 > 0)
@@ -5254,12 +5258,13 @@ public class Client extends RSApplet {
 							clientData = true;
 						if (inputString.equals("::dataoff"))
 							clientData = false;
-						if (inputString.equals("::noclip") && myPrivilege >= 2 && !noClip) {
+						if (inputString.equals("::noclip") && myPrivilege >= 2
+								&& !noClip) {
 							noClip = true;
-								noClip();
+							noClip();
 
 						}
-						
+
 						if (inputString.equals("::noclipoff")
 								&& myPrivilege >= 2 && noClip) {
 							noClip = !noClip;
@@ -6351,6 +6356,9 @@ public class Client extends RSApplet {
 				+ ((i & 0xff00) * l + (j & 0xff00) * k & 0xff0000) >> 8;
 	}
 
+	/**
+	 * HANDLES LOGGING IN
+	 */
 	private void login(String s, String s1, boolean flag) {
 		SignLink.errorname = s;
 		try {
@@ -6422,6 +6430,10 @@ public class Client extends RSApplet {
 				return;
 			}
 			if (k == 2) {
+				//Will stop the title music on login. Need to add fadeout.
+				SignLink.sequencer.stop();
+				SignLink.sequencer.close();
+
 				myPrivilege = socketStream.read();
 				flagged = socketStream.read() == 1;
 				aLong1220 = 0L;
@@ -7169,9 +7181,8 @@ public class Client extends RSApplet {
 					} else {
 						Stream stream = Sounds.method241(anIntArray1241[i],
 								anIntArray1207[i]);
-						if (System.currentTimeMillis()
-								+ stream.currentOffset / 22 > aLong1172
-								+ anInt1257 / 22) {
+						if (System.currentTimeMillis() + stream.currentOffset
+								/ 22 > aLong1172 + anInt1257 / 22) {
 							anInt1257 = stream.currentOffset;
 							aLong1172 = System.currentTimeMillis();
 							if (saveWave(stream.buffer, stream.currentOffset)) {
@@ -12048,10 +12059,8 @@ public class Client extends RSApplet {
 		int l1 = xCameraCurve;
 		for (int i2 = 0; i2 < 5; i2++)
 			if (aBooleanArray876[i2]) {
-				int j2 = (int) ((Math.random()
-						* (anIntArray873[i2] * 2 + 1) - anIntArray873[i2]) + Math
-						.sin(anIntArray1030[i2]
-								* (anIntArray928[i2] / 100D))
+				int j2 = (int) ((Math.random() * (anIntArray873[i2] * 2 + 1) - anIntArray873[i2]) + Math
+						.sin(anIntArray1030[i2] * (anIntArray928[i2] / 100D))
 						* anIntArray1203[i2]);
 				if (i2 == 0)
 					xCameraPos += j2;

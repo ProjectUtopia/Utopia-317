@@ -6,8 +6,20 @@
 package com.rakeyjakey.client.sign;
 
 import java.applet.Applet;
-import java.io.*;
-import java.net.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.URL;
+
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
 
 public final class SignLink
     implements Runnable
@@ -106,14 +118,22 @@ public final class SignLink
                         fileoutputstream.close();
                     }
                     catch(Exception _ex) { }
-                if(waveplay)
-                {
-                    String wave = s + savereq;
-                    waveplay = false;
-                }
-                if(midiplay)
-                {
+              
+                if (midiplay) {
                     midi = s + savereq;
+                    try {
+                        File music = new File(midi);
+
+                        if (music.exists()) {
+                            sequence = MidiSystem.getSequence(music);
+                            sequencer = MidiSystem.getSequencer();
+                            sequencer.open();
+                            sequencer.setSequence(sequence);
+                            sequencer.start();
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                     midiplay = false;
                 }
                 savereq = null;
@@ -331,5 +351,7 @@ public final class SignLink
     public static int wavevol;
     public static boolean reporterror = true;
     public static String errorname = "";
-
+    public static Sequence sequence;
+    public static Sequencer sequencer;
+    
 }

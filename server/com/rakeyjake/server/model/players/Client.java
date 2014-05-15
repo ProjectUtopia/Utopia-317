@@ -355,136 +355,6 @@ public class Client extends Player {
 		}
 	}
 
-	/*
-	 * Dragon Claws Code For Npc with Conventions
-	 * 
-	 * @Author Aintaro
-	 */
-	public void NpcDragonClaws() {
-		if (Server.npcHandler.npcs[npcIndex] != null) {
-			if (DclawDamageNpc == 4
-					&& System.currentTimeMillis() - tTime2 >= 200) {
-				if (Server.npcHandler.npcs[npcIndex].HP <= 0) {
-					DclawDamageNpc = 0;
-					getCombat().resetPlayerAttack();
-					return;
-				}
-				int damage = DclawDamg1;
-				startAnimation(6000);
-				Server.npcHandler.npcs[npcIndex].gfx100(282);
-				Server.npcHandler.npcs[npcIndex].gfx100(283);
-				Server.npcHandler.npcs[npcIndex].HP -= damage;
-				Server.npcHandler.npcs[npcIndex].hitDiff2 = damage;
-				Server.npcHandler.npcs[npcIndex].hitUpdateRequired2 = true;
-				Server.npcHandler.npcs[npcIndex].updateRequired = true;
-				DclawDamageNpc = 3;
-				DclawDamg2 = Math.round((DclawDamg1) / 2);
-				DclawDamg3 = Math.round((DclawDamg1) / 2);
-				DclawDamg4 = Math.round((DclawDamg1) / 2 + 1);
-				tTime2 = System.currentTimeMillis();
-			}
-			if (DclawDamageNpc == 3
-					&& System.currentTimeMillis() - tTime2 >= 200) {
-				if (Server.npcHandler.npcs[npcIndex].HP <= 0) {
-					DclawDamageNpc = 0;
-					getCombat().resetPlayerAttack();
-					return;
-				}
-				int damage = DclawDamg2;
-				Server.npcHandler.npcs[npcIndex].HP -= damage;
-				Server.npcHandler.npcs[npcIndex].hitDiff2 = damage;
-				Server.npcHandler.npcs[npcIndex].hitUpdateRequired2 = true;
-				Server.npcHandler.npcs[npcIndex].updateRequired = true;
-				DclawDamageNpc = 2;
-				tTime2 = System.currentTimeMillis();
-			}
-			if (DclawDamageNpc == 2
-					&& System.currentTimeMillis() - tTime2 >= 400) {
-				if (Server.npcHandler.npcs[npcIndex].HP <= 0) {
-					DclawDamageNpc = 0;
-					getCombat().resetPlayerAttack();
-					return;
-				}
-				int damage = DclawDamg3;
-				startAnimation(2068);
-				Server.npcHandler.npcs[npcIndex].gfx100(282);
-				Server.npcHandler.npcs[npcIndex].gfx100(283);
-				Server.npcHandler.npcs[npcIndex].HP -= damage;
-				Server.npcHandler.npcs[npcIndex].hitDiff2 = damage;
-				Server.npcHandler.npcs[npcIndex].hitUpdateRequired2 = true;
-				Server.npcHandler.npcs[npcIndex].updateRequired = true;
-				DclawDamageNpc = 1;
-				tTime2 = System.currentTimeMillis();
-			}
-			if (DclawDamageNpc == 1
-					&& System.currentTimeMillis() - tTime2 >= 200) {
-				if (Server.npcHandler.npcs[npcIndex].HP <= 0) {
-					DclawDamageNpc = 0;
-					getCombat().resetPlayerAttack();
-					return;
-				}
-				/*int damage = DclawDamg4;
-				Server.npcHandler.npcs[npcIndex].HP -= damage;
-				Server.npcHandler.npcs[npcIndex].hitDiff2 = damage;
-				Server.npcHandler.npcs[npcIndex].hitUpdateRequired2 = true;
-				Server.npcHandler.npcs[npcIndex].updateRequired = true;
-				DclawDamageNpc = 0;
-				tTime2 = System.currentTimeMillis();*/
-			}
-		}
-	}
-
-	/**
-	 * Dragon Claws Code For Players
-	 * 
-	 * @Author Aintaro
-	 */
-	public void dragonClawsProcess() {
-		if (DclawDamage == 4 && System.currentTimeMillis() - tTime2 >= 200) {
-			dealDamage(DclawDamg1);
-			hitDiff = DclawDamg1;
-			startAnimation(6000);
-		//	gfx100(282);
-		//	gfx100(283);
-			updateRequired = true;
-			hitUpdateRequired2 = true;
-			DclawDamage = 3;
-			DclawDamg2 = Math.round((DclawDamg1) / 2);
-			DclawDamg3 = Math.round((DclawDamg1) / 2);
-			DclawDamg4 = Math.round((DclawDamg1) / 2 + 1);
-			tTime2 = System.currentTimeMillis();
-		}
-		if (DclawDamage == 3 && System.currentTimeMillis() - tTime2 >= 200) {
-			dealDamage(DclawDamg2);
-			hitDiff = (DclawDamg2);
-			updateRequired = true;
-			hitUpdateRequired2 = true;
-			DclawDamage = 2;
-			tTime2 = System.currentTimeMillis();
-		}
-		if (DclawDamage == 2 && System.currentTimeMillis() - tTime2 >= 400) {
-			dealDamage(DclawDamg3);
-			hitDiff = (DclawDamg3);
-			startAnimation(2068);
-			gfx100(282);
-			gfx100(283);
-			updateRequired = true;
-			hitUpdateRequired2 = true;
-			DclawDamage = 1;
-			tTime2 = System.currentTimeMillis();
-		}
-		if (DclawDamage == 1 && System.currentTimeMillis() - tTime2 >= 200) {
-			dealDamage(DclawDamg4);
-			hitDiff = (DclawDamg4);
-			updateRequired = true;
-			hitUpdateRequired2 = true;
-			DclawDamage = 0;
-			tTime2 = System.currentTimeMillis();
-
-		}
-
-	}
-
 	public int packetSize = 0, packetType = -1;
 
 	public int donatorPoints = 0;
@@ -502,10 +372,7 @@ public class Client extends Player {
 	}
 
 	public void process() {
-		
 
-		NpcDragonClaws();
-		dragonClawsProcess();
 		if (wcTimer > 0 && woodcut[0] > 0) {
 			wcTimer--;
 		} else if (wcTimer == 0 && woodcut[0] > 0) {
@@ -945,12 +812,11 @@ public class Client extends Player {
 		}
 
 	}
-	
+
 	public void clearPlayersInterface() {
-	      for (int i = 8147; i < 8348; i++) {
-	            getPA().sendFrame126("",i);
-	      }
+		for (int i = 8147; i < 8348; i++) {
+			getPA().sendFrame126("", i);
+		}
 	};
-	
 
 }
