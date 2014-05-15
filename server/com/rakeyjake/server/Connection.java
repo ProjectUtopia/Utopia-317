@@ -80,6 +80,14 @@ public class Connection {
 	}
 
 	/**
+	 * Removes username given from the IP banned list.
+	 */
+	public static void unIPBanUser(String name) {
+		bannedIps.remove(name);
+		deleteFromFile("./Data/bans/IpsBanned.txt", name);
+	}
+	
+	/**
 	 * Adding Ban IP
 	 **/
 	public static void addIpToBanList(String IP) {
@@ -98,6 +106,7 @@ public class Connection {
 		bannedIps.remove(IP);
 	}
 
+	
 	/**
 	 * Contains Ban IP
 	 **/
