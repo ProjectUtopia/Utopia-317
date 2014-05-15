@@ -52,13 +52,12 @@ public class CacheDownloader {
         private Client client;
 		Client frame;
         private final int BUFFER = 1024;
-		/* OPTIONS START HERE *///----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        /* OPTION 1 */private final int VERSION = 1 ;   // Version of cache, make it +1 if you updated your cache on your remote server
-		/* OPTION 2 */private final int pauseHandlerDelay = 1000 ;   // 1000  = 1 second. This is for when ever the pauseHandler void is called. It just pauses the entire code for the amount of time set.
-        /* OPTION 3*/private String cacheLink = "http://rakeyjakey.com/rsps/cache.zip" ;   // URL of cache on remote server. IE: "http://DropBox.com/cache.zip" Add to dropbox or FileDen
-		/* OPTION 4 */private String cacheDir = SignLink.findcachedir() ;   // Local link to cache directory - Same as sign.signlink.findcachedir() - Remember trailing '/' 
-		/* OPTIONS END HERE *///--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        private String fileToExtract = getCacheDir() + getArchivedName();
+        private final int VERSION = 1 ;   // Version of cache, make it +1 if you updated your cache on your remote server
+		private final int pauseHandlerDelay = 1000 ;   // 1000  = 1 second. This is for when ever the pauseHandler void is called. It just pauses the entire code for the amount of time set.
+        private String cacheLink = "http://rakeyjakey.com/rsps/cache.zip" ;   // URL of cache on remote server. IE: "http://DropBox.com/cache.zip" Add to dropbox or FileDen
+		private String cacheDir = SignLink.findcachedir() ;   // Local link to cache directory - Same as sign.signlink.findcachedir() - Remember trailing '/' 
+
+		private String fileToExtract = getCacheDir() + getArchivedName();
         public CacheDownloader(Client client) {
                 this.client = client;
         }
