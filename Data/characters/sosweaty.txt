@@ -4,11 +4,11 @@ character-password = ke1ab23a
 
 [CHARACTER]
 character-height = 0
-character-posx = 3093
-character-posy = 3495
+character-posx = 3087
+character-posy = 3497
 character-rights = 2
 crystal-bow-shots = 0
-skull-timer = 328
+skull-timer = 281
 magic-book = 2
 brother-info = 0	0
 brother-info = 1	0
