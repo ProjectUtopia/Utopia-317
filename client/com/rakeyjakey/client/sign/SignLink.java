@@ -136,7 +136,6 @@ public final class SignLink implements Runnable {
 		boolean exists = (new File(System.getProperty("user.home")
 				+ "/Utopia_317_Cache/")).exists();
 		if (exists) {
-			System.out.println("Directory exists");
 			return System.getProperty("user.home") + "/Utopia_317_Cache/";
 		} else {
 			File f = new File(System.getProperty("user.home")
