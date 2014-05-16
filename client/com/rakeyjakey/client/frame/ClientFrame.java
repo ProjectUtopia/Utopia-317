@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
@@ -12,6 +13,7 @@ import java.net.URI;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import com.rakeyjakey.client.Client;
+import com.rakeyjakey.client.cache.DownloadImage;
 import com.rakeyjakey.client.settings.Settings;
 
 /**
@@ -61,6 +64,13 @@ public class ClientFrame extends Client implements ActionListener {
 					setLayout(new BorderLayout());
 					setResizable(false);
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					
+					Image logo = DownloadImage.getImage("http://i.imgur.com/W8knrGP.png", "logo2");
+
+					if(System.getProperty("os.name").startsWith("Windows"))
+							setIconImage(logo);
+					else if(System.getProperty("os.name").startsWith("Mac"))
+					com.apple.eawt.Application.getApplication().setDockIconImage(logo);
 
 				}
 			};
