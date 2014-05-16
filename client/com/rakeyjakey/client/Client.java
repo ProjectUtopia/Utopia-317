@@ -408,6 +408,9 @@ public class Client extends RSApplet {
 								.getTextWidth(clanname);
 						if (chatTypeView == 11 || chatTypeView == 0) {
 							if (yPos > 3 && yPos < 130)
+								
+								/*MOD ICONS*/
+								
 								switch (chatRights[k]) {
 								case 1:
 									j2 += clanNameWidth;
