@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -32,7 +33,6 @@ import javax.swing.WindowConstants;
 
 import com.rakeyjakey.client.Client;
 import com.rakeyjakey.client.settings.Settings;
-import com.rakeyjakey.client.xml.Xml;
 
 @SuppressWarnings("serial")
 public class ClientFrame extends Client implements ActionListener {
@@ -53,8 +53,9 @@ public class ClientFrame extends Client implements ActionListener {
 	public void initUI() {
 		try {
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
-			frame = new JFrame(Settings.SERVER_NAME + " v" + Settings.VERSION_NUMBER
-					+ " (rev" + Settings.REVISION_ID + ")");
+			frame = new JFrame(Settings.SERVER_NAME + " v"
+					+ Settings.VERSION_NUMBER + " (rev" + Settings.REVISION_ID
+					+ ")");
 			frame.setLayout(new BorderLayout());
 			frame.setResizable(false);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,8 +67,7 @@ public class ClientFrame extends Client implements ActionListener {
 
 			JMenu fileMenu = new JMenu("File");
 			String[] mainButtons = new String[] { "Change IP", "Change Port",
-					"Item IDs", "Object IDs", "NPC IDs", "-", "About Utopia",
-					"Exit" };
+					"Item IDs", "-", "About Utopia", "Exit" };
 
 			for (String name : mainButtons) {
 				JMenuItem menuItem = new JMenuItem(name);
@@ -173,18 +173,9 @@ public class ClientFrame extends Client implements ActionListener {
 			}
 
 			if (cmd.equalsIgnoreCase("item ids")) {
-				new Xml("cache/all_IDs/Items.xml");
+				openUpWebSite("http://itemdb.biz");
 			}
 
-			if (cmd.equalsIgnoreCase("NPC IDs")) {
-				new Xml("cache/all_IDs/NPCs.xml");
-			}
-			if (cmd.equalsIgnoreCase("New Item IDs")) {
-				new Xml("cache/all_IDs/NewItems.xml");
-			}
-			if (cmd.equalsIgnoreCase("Object IDs")) {
-				new Xml("cache/all_IDs/Objects.xml");
-			}
 		}
 
 	}
@@ -195,52 +186,52 @@ public class ClientFrame extends Client implements ActionListener {
 	 * @authors Rakeyjakey, PatriqDesigns
 	 */
 	private void createAboutProjectUtopiaFrame() {
-		final JLabel versionLabel = new JLabel("<html><u>"+Settings.SERVER_NAME + " v"
-				+ Settings.VERSION_NUMBER + " (rev" + Settings.REVISION_ID
-				+ ")</u></html>");
-		final JLabel runescapeLabel = new JLabel("<html><font size=0>RuneScape is a trademark of Jagex Software 1999 - 2013 Jagex, Ltd.</font></html>");
-		final JLabel jagexLabel = new JLabel("<html><font size=0>Copyright © 2009-2014 Jagex Ltd. Jagex is a registered trademark of Jagex Ltd.</font></html>");
-		final JLabel copyrightLabel = new JLabel("<html><font size=0>Copyright \u00A9 2014 ProjectUtopia</font></html>");
-		final JFrame frame = new JFrame("About ProjectUtopia"){{
-			getContentPane().add(new JPanel(){{
-				setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-				setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-				add(versionLabel);
-				add(Box.createRigidArea(new Dimension(0, 10)));
-				add(runescapeLabel);
-				add(jagexLabel);
-				add(Box.createRigidArea(new Dimension(0, 20)));
-				add(copyrightLabel);
-			}}, BorderLayout.NORTH);
-			getContentPane().add(new JPanel(){{
-				add(new JButton("OK"){{
-					addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent arg0) {
-							dispose();
-						}
-					});
-					setAlignmentX(Component.RIGHT_ALIGNMENT);
-				}});
-			}}, BorderLayout.SOUTH);
-			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			setSize(345, 160);
-			setResizable(false);
-			setLocationRelativeTo(ClientFrame.this.frame);
-			setVisible(true);
-		}};	
-	}
-	public static final String findcachedir() {
-		try {
-			String s = "./";
-			String s1 = "cache";
-			File file = new File(s1 + s);
-			if (file.exists() || file.mkdir())
-				return s1 + s + "/";
-		} catch (Exception _ex) {
-		}
-
-		return null;
+		final JLabel versionLabel = new JLabel("<html><u>"
+				+ Settings.SERVER_NAME + " v" + Settings.VERSION_NUMBER
+				+ " (rev" + Settings.REVISION_ID + ")</u></html>");
+		final JLabel runescapeLabel = new JLabel(
+				"<html><font size=0>RuneScape is a trademark of Jagex Software 1999 - 2013 Jagex, Ltd.</font></html>");
+		final JLabel jagexLabel = new JLabel(
+				"<html><font size=0>Copyright ï¿½ 2009-2014 Jagex Ltd. Jagex is a registered trademark of Jagex Ltd.</font></html>");
+		final JLabel copyrightLabel = new JLabel(
+				"<html><font size=0>Copyright \u00A9 2014 ProjectUtopia</font></html>");
+		final JFrame frame = new JFrame("About ProjectUtopia") {
+			{
+				getContentPane().add(new JPanel() {
+					{
+						setBorder(BorderFactory.createEmptyBorder(10, 10, 10,
+								10));
+						setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+						add(versionLabel);
+						add(Box.createRigidArea(new Dimension(0, 10)));
+						add(runescapeLabel);
+						add(jagexLabel);
+						add(Box.createRigidArea(new Dimension(0, 20)));
+						add(copyrightLabel);
+					}
+				}, BorderLayout.NORTH);
+				getContentPane().add(new JPanel() {
+					{
+						add(new JButton("OK") {
+							{
+								addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent arg0) {
+										dispose();
+									}
+								});
+								setAlignmentX(Component.RIGHT_ALIGNMENT);
+							}
+						});
+					}
+				}, BorderLayout.SOUTH);
+				setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+				setSize(345, 160);
+				setResizable(false);
+				setLocationRelativeTo(ClientFrame.this.frame);
+				setVisible(true);
+			}
+		};
 	}
 
 }
