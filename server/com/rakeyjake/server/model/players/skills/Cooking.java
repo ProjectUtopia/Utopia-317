@@ -10,6 +10,8 @@ public class Cooking {
 
 	Client c;
 	CookingEnum cook;
+	int objectX;
+	int objectY;
 
 	public Cooking(Client c) {
 		this.c = c;
@@ -35,7 +37,7 @@ public class Cooking {
 				c.getItems().addItem(cook.cookedId, 1);
 				c.getPA().addSkillXP(cook.xpGained * Config.COOKING_EXPERIENCE,
 						c.playerCooking);
-				c.sendMessage("You successfully cook a" + cook.name + ".");
+				c.sendMessage("You successfully cook a " + cook.name + ".");
 			} else {
 				c.isCooking = false;
 				sendStatementTwo("You need a cooking level of " + cook.levelReq
@@ -76,11 +78,11 @@ public class Cooking {
 }
 
 enum CookingEnum {
-	SHRIMP("Shrimp", 317, 315, 7954, 30, 50), TROUT("Trout", 335, 333, 323,
-			100, 20), SALMON("Salmon", 331, 329, 323, 150, 30), TUNA("Tuna",
-			359, 361, 363, 175, 35), MONKFISH("Monkfish", 7944, 7946, 7948,
-			300, 62), SHARK("Shark", 383, 385, 387, 500, 80), MANTA(
-			"Manta Ray", 389, 391, 393, 700, 91);
+	SHRIMP("Shrimp", 317, 315, 7954, 30, 1), TROUT("Trout", 335, 333, 323, 100,
+			20), SALMON("Salmon", 331, 329, 323, 150, 30), TUNA("Tuna", 359,
+			361, 363, 175, 35), MONKFISH("Monkfish", 7944, 7946, 7948, 300, 62), SHARK(
+			"Shark", 383, 385, 387, 500, 80), MANTA("Manta Ray", 389, 391, 393,
+			700, 91);
 
 	int rawId, cookedId, burntId, xpGained, levelReq;
 	String name;
