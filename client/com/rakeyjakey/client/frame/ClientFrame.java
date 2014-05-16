@@ -70,10 +70,11 @@ public class ClientFrame extends Client implements ActionListener {
 
 					if (System.getProperty("os.name").startsWith("Windows"))
 						setIconImage(logo);
-					else if (System.getProperty("os.name").startsWith("Mac"))
+					//FOR MAC
+					/*else if (System.getProperty("os.name").startsWith("Mac"))
 						com.apple.eawt.Application.getApplication()
 								.setDockIconImage(logo);
-
+*/
 				}
 			};
 
