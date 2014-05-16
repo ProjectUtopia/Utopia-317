@@ -96,7 +96,7 @@ public class Item {
 
 	public static boolean playerArrows(int itemId) {
 		String[] data = {
-			"Arrows", "arrows", "Arrow", "arrow", "Bolts", "bolts",
+			"Arrows", "arrows", "Arrow", "arrow", "Bolts", "bolts", "bolt", "Bolt"
 		};
 		String item = getItemName(itemId);
 		if (item == null) {
