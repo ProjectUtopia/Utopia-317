@@ -4,19 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -102,23 +95,7 @@ public class ClientFrame extends Client implements ActionListener {
 		}
 	}
 
-	private Image getImage(String url) {
-		try {
-			File f = new File("./Cache/" + name);
-			if (f.exists())
-				return ImageIO.read(f.toURI().toURL());
-			Image img = ImageIO.read(new URL(url));
-			if (img != null) {
-				ImageIO.write((RenderedImage) img, "PNG", f);
-				return img;
-			}
-		} catch (MalformedURLException e) {
-			System.out.println("Error connecting to image URL: " + url);
-		} catch (IOException e) {
-			System.out.println("Error reading file: " + name);
-		}
-		return null;
-	}
+	
 
 	@Override
 	public URL getCodeBase() {
