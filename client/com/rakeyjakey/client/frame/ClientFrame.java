@@ -87,12 +87,12 @@ public class ClientFrame extends Client implements ActionListener {
 			frame.getContentPane().add(menuBar, BorderLayout.NORTH);
 			frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
 
-			Image icon = getImage("L2bSkVW.png");
+			/*Image icon = getImage("L2bSkVW.png");
 			if (icon != null)
 				frame.setIconImage(icon);
+				*/
 
 			frame.pack();
-
 			frame.setVisible(true);
 
 			init();
