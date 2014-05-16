@@ -25,9 +25,17 @@ import javax.swing.WindowConstants;
 import com.rakeyjakey.client.Client;
 import com.rakeyjakey.client.settings.Settings;
 
+/**
+ * The main client frame and its contents that run on start. 
+ * Was very basic and untidy when I acquired it but I have nearly completely rewritten it.
+ * 
+ * @authors Rakeyjakey, PatriqDesigns
+ *
+ */
 @SuppressWarnings("serial")
 public class ClientFrame extends Client implements ActionListener {
 
+	// The main frame that will hold everything.
 	private JFrame frame;
 
 	public ClientFrame(String args[]) {
@@ -41,6 +49,9 @@ public class ClientFrame extends Client implements ActionListener {
 		}
 	}
 
+	/**
+	 * Initializes the contents of the main frame.
+	 */
 	public void initUI() {
 		try {
 			frame = new JFrame(Settings.SERVER_NAME + " v"
@@ -86,7 +97,7 @@ public class ClientFrame extends Client implements ActionListener {
 					add(fileMenu);
 				}
 			};
-			
+
 			JMenuBar jmenubar = new JMenuBar();
 
 			frame.add(jmenubar);
@@ -111,6 +122,12 @@ public class ClientFrame extends Client implements ActionListener {
 		return "";
 	}
 
+	/**
+	 * Opens a url in the default browser.
+	 * 
+	 * @param url
+	 *            The url that you wish to open in the default browser.
+	 */
 	private static void openUpWebSite(String url) {
 		Desktop d = Desktop.getDesktop();
 		try {
@@ -149,7 +166,7 @@ public class ClientFrame extends Client implements ActionListener {
 	}
 
 	/**
-	 * Creates a frame showing information about Project Utopia
+	 * Creates a frame showing information about ProjectUtopia
 	 * 
 	 * @authors Rakeyjakey, PatriqDesigns
 	 */
