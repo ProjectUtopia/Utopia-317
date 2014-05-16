@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.URI;
-import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -21,7 +20,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.WindowConstants;
 
 import com.rakeyjakey.client.Client;
@@ -45,46 +43,55 @@ public class ClientFrame extends Client implements ActionListener {
 
 	public void initUI() {
 		try {
-			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 			frame = new JFrame(Settings.SERVER_NAME + " v"
 					+ Settings.VERSION_NUMBER + " (rev" + Settings.REVISION_ID
-					+ ")");
-			frame.setLayout(new BorderLayout());
-			frame.setResizable(false);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					+ ")") {
+				{
+					setLayout(new BorderLayout());
+					setResizable(false);
+					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-			JPanel gamePanel = new JPanel();
-			gamePanel.setLayout(new BorderLayout());
-			gamePanel.add(this);
-			gamePanel.setPreferredSize(new Dimension(765, 503));
-
-			JMenu fileMenu = new JMenu("File");
-			String[] mainButtons = new String[] { "Change IP", "Change Port",
-					"Item IDs", "-", "About Utopia", "Exit" };
-
-			for (String name : mainButtons) {
-				JMenuItem menuItem = new JMenuItem(name);
-				if (name.equalsIgnoreCase("-")) {
-					fileMenu.addSeparator();
-				} else {
-					menuItem.addActionListener(this);
-					fileMenu.add(menuItem);
 				}
-			}
+			};
 
-			JMenuBar menuBar = new JMenuBar();
+			JPanel gamePanel = new JPanel() {
+				{
+					setLayout(new BorderLayout());
+					setPreferredSize(new Dimension(765, 503));
+					add(ClientFrame.this);
+				}
+			};
+
+			final JMenu fileMenu = new JMenu("File") {
+				{
+					String[] mainButtons = new String[] { "Change IP",
+							"Change Port", "Item IDs", "-", "About Utopia",
+							"Exit" };
+
+					for (String name : mainButtons) {
+						JMenuItem menuItem = new JMenuItem(name);
+						if (name.equalsIgnoreCase("-")) {
+							addSeparator();
+						} else {
+							menuItem.addActionListener(ClientFrame.this);
+							add(menuItem);
+						}
+					}
+
+				}
+			};
+
+			JMenuBar menuBar = new JMenuBar() {
+				{
+					add(fileMenu);
+				}
+			};
+			
 			JMenuBar jmenubar = new JMenuBar();
 
 			frame.add(jmenubar);
-			menuBar.add(fileMenu);
 			frame.getContentPane().add(menuBar, BorderLayout.NORTH);
 			frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
-
-			/*Image icon = getImage("L2bSkVW.png");
-			if (icon != null)
-				frame.setIconImage(icon);
-				*/
-
 			frame.pack();
 			frame.setVisible(true);
 
@@ -93,22 +100,6 @@ public class ClientFrame extends Client implements ActionListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	
-
-	@Override
-	public URL getCodeBase() {
-		try {
-			return new URL("http://" + server + "/cache");
-		} catch (Exception e) {
-			return super.getCodeBase();
-		}
-	}
-
-	@Override
-	public URL getDocumentBase() {
-		return getCodeBase();
 	}
 
 	public void loadError(String s) {

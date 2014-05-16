@@ -16,8 +16,10 @@ public class DownloadImage {
 	public static Image getImage(String url, String name) {
 		try {
 			File f = new File(SignLink.findcachedir() + "Logos/" + name);
+			
 			if (f.exists())
 				return ImageIO.read(f.toURI().toURL());
+			
 			Image img = ImageIO.read(new URL(url));
 			if (img != null) {
 				ImageIO.write((RenderedImage) img, "PNG", f);
