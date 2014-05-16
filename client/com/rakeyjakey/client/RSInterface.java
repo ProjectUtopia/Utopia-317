@@ -1,5 +1,6 @@
 package com.rakeyjakey.client;
 
+import com.rakeyjakey.client.frame.Sprite;
 import com.rakeyjakey.client.model.Model;
 import com.rakeyjakey.client.nodes.MRUNodes;
 

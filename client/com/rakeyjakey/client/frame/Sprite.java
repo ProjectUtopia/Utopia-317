@@ -1,4 +1,4 @@
-package com.rakeyjakey.client;
+package com.rakeyjakey.client.frame;
 
 
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
@@ -10,7 +10,14 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
 import java.awt.image.PixelGrabber;
+
 import javax.swing.ImageIcon;
+
+import com.rakeyjakey.client.Background;
+import com.rakeyjakey.client.DrawingArea;
+import com.rakeyjakey.client.FileOperations;
+import com.rakeyjakey.client.Stream;
+import com.rakeyjakey.client.StreamLoader;
 import com.rakeyjakey.client.sign.SignLink;
 
 public final class Sprite extends DrawingArea {
@@ -26,7 +33,6 @@ public final class Sprite extends DrawingArea {
 
 	public Sprite(byte abyte0[], Component component) {
 		try {
-			//Image image = Toolkit.getDefaultToolkit().getImage(location+"mopar.jpg");
 			Image image = Toolkit.getDefaultToolkit().createImage(abyte0);
 			MediaTracker mediatracker = new MediaTracker(component);
 			mediatracker.addImage(image, 0);

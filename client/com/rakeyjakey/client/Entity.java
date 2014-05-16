@@ -1,31 +1,23 @@
 package com.rakeyjakey.client;
 
-
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
-import java.util.Random;
-
 import com.rakeyjakey.client.animation.Animable;
 import com.rakeyjakey.client.animation.Animation;
 
 public class Entity extends Animable {
 
-	
-	public final void setPos(int i, int j, boolean flag)
-	{
-		if(anim != -1 && Animation.anims[anim].anInt364 == 1)
+	public final void setPos(int i, int j, boolean flag) {
+		if (anim != -1 && Animation.anims[anim].anInt364 == 1)
 			anim = -1;
-		if(!flag)
-		{
+		if (!flag) {
 			int k = i - smallX[0];
 			int l = j - smallY[0];
-			if(k >= -8 && k <= 8 && l >= -8 && l <= 8)
-			{
-				if(smallXYIndex < 9)
+			if (k >= -8 && k <= 8 && l >= -8 && l <= 8) {
+				if (smallXYIndex < 9)
 					smallXYIndex++;
-				for(int i1 = smallXYIndex; i1 > 0; i1--)
-				{
+				for (int i1 = smallXYIndex; i1 > 0; i1--) {
 					smallX[i1] = smallX[i1 - 1];
 					smallY[i1] = smallY[i1 - 1];
 					aBooleanArray1553[i1] = aBooleanArray1553[i1 - 1];
@@ -46,18 +38,16 @@ public class Entity extends Animable {
 		y = smallY[0] * 128 + anInt1540 * 64;
 	}
 
-	public final void method446()
-	{
+	public final void method446() {
 		smallXYIndex = 0;
 		anInt1542 = 0;
 	}
 
-	public final void updateHitData(int j, int k, int l)
-	{
-		for(int i1 = 0; i1 < 4; i1++)
-			if(hitsLoopCycle[i1] <= l)
-			{
-				hitArray[i1] = k * ((Client.newDamage == true && k > 0) ? 10 : 1);
+	public final void updateHitData(int j, int k, int l) {
+		for (int i1 = 0; i1 < 4; i1++)
+			if (hitsLoopCycle[i1] <= l) {
+				hitArray[i1] = k
+						* ((Client.newDamage == true && k > 0) ? 10 : 1);
 				if (Client.newDamage && k > 0) {
 					hitArray[i1] += new java.util.Random().nextInt(9);
 				}
@@ -67,63 +57,56 @@ public class Entity extends Animable {
 			}
 	}
 
-	public final void moveInDir(boolean flag, int i)
-	{
+	public final void moveInDir(boolean flag, int i) {
 		int j = smallX[0];
 		int k = smallY[0];
-		if(i == 0)
-		{
+		if (i == 0) {
 			j--;
 			k++;
 		}
-		if(i == 1)
+		if (i == 1)
 			k++;
-		if(i == 2)
-		{
+		if (i == 2) {
 			j++;
 			k++;
 		}
-		if(i == 3)
+		if (i == 3)
 			j--;
-		if(i == 4)
+		if (i == 4)
 			j++;
-		if(i == 5)
-		{
+		if (i == 5) {
 			j--;
 			k--;
 		}
-		if(i == 6)
+		if (i == 6)
 			k--;
-		if(i == 7)
-		{
+		if (i == 7) {
 			j++;
 			k--;
 		}
-		if(anim != -1 && Animation.anims[anim].anInt364 == 1)
+		if (anim != -1 && Animation.anims[anim].anInt364 == 1)
 			anim = -1;
-		if(smallXYIndex < 9)
+		if (smallXYIndex < 9)
 			smallXYIndex++;
-		for(int l = smallXYIndex; l > 0; l--)
-		{
+		for (int l = smallXYIndex; l > 0; l--) {
 			smallX[l] = smallX[l - 1];
 			smallY[l] = smallY[l - 1];
 			aBooleanArray1553[l] = aBooleanArray1553[l - 1];
 		}
-			smallX[0] = j;
-			smallY[0] = k;
-			aBooleanArray1553[0] = flag;
+		smallX[0] = j;
+		smallY[0] = k;
+		aBooleanArray1553[0] = flag;
 	}
 
 	public int entScreenX;
 	public int entScreenY;
 	public final int index = -1;
-	public boolean isVisible()
-	{
+
+	public boolean isVisible() {
 		return false;
 	}
 
-	public Entity()
-	{
+	public Entity() {
 		smallX = new int[10];
 		smallY = new int[10];
 		interactingEntity = -1;
@@ -192,10 +175,10 @@ public class Entity extends Animable {
 	public int anInt1543;
 	public int anInt1544;
 	public int anInt1545;
-	public 	int anInt1546;
-	public 	int anInt1547;
-	public 	int anInt1548;
-	public 	int anInt1549;
+	public int anInt1546;
+	public int anInt1547;
+	public int anInt1548;
+	public int anInt1549;
 	public int x;
 	public int y;
 	public int anInt1552;

@@ -1,9 +1,6 @@
 package com.rakeyjakey.client;
 
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 import com.rakeyjakey.client.animation.Animation;
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
 import com.rakeyjakey.client.sign.SignLink;
 
 public final class Class36 {

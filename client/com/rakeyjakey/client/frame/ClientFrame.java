@@ -26,11 +26,11 @@ import com.rakeyjakey.client.Client;
 import com.rakeyjakey.client.settings.Settings;
 
 /**
- * The main client frame and its contents that run on start. 
- * Was very basic and untidy when I acquired it but I have nearly completely rewritten it.
+ * The main client frame and its contents that run on start. Was very basic and
+ * untidy when I acquired it but I have nearly completely rewritten it.
  * 
  * @authors Rakeyjakey, PatriqDesigns
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class ClientFrame extends Client implements ActionListener {
@@ -139,7 +139,9 @@ public class ClientFrame extends Client implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		String cmd = evt.getActionCommand();
+
 		if (cmd != null) {
+			
 			if (cmd.equalsIgnoreCase("exit")) {
 				System.exit(0);
 			}
