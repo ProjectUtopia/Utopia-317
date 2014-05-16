@@ -8622,13 +8622,13 @@ public class Client extends RSApplet {
 									i4, s1, l6);
 					}
 				} else if (class9_1.type == 5) {
-					// whats this?
+					//Lights up spells
 					Sprite sprite;
 					if (interfaceIsSelected(class9_1))
 						sprite = class9_1.sprite2;
 					else
 						sprite = class9_1.sprite1;
-
+					
 					// Lights up working lunar spells.
 					int lunarSpellsToBeLit[] = { 30075, 30083, 30106,
 							30114/* , 30306 */, 30064 };
