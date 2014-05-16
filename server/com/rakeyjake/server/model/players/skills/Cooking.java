@@ -1,5 +1,6 @@
 package com.rakeyjake.server.model.players.skills;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import com.rakeyjake.server.Config;
@@ -9,12 +10,7 @@ import com.rakeyjake.server.event.EventManager;
 import com.rakeyjake.server.model.players.Client;
 
 /**
- * All done except for burning food. No food is burnt at the moment. A check
- * needs to be done to see if a) the food can be burnt at all, b) if cooking
- * gloves are worn. <br>
- * <br>
- * Also, a random burn rate needs to be added that will scale depending on your
- * level above the required.
+ * All done except for a minor problem where it doesn't always exactly face the fire.
  * 
  * @author Rakeyjakey
  * 
@@ -22,7 +18,7 @@ import com.rakeyjake.server.model.players.Client;
 public class Cooking {
 
 	private Client c;
-	private CookingEnum cook;
+	private FishToCook cook;
 
 	public Cooking(Client c) {
 		this.c = c;
@@ -34,7 +30,7 @@ public class Cooking {
 	 * @author Rakeyjakey
 	 */
 	public void itemOnObject(int id) {
-		cook = CookingEnum.checkIngredients(id);
+		cook = FishToCook.fish.get(id);
 		cookFish(cook.rawId, 1);
 	}
 
@@ -164,7 +160,7 @@ public class Cooking {
  * @author Rakeyjakey
  *
  */
-enum CookingEnum {
+enum FishToCook {
 	SHRIMP("Shrimp", 317, 315, 7954, 30, 1, 34, 34), 
 	TROUT("Trout", 335, 333,323, 100, 20, 50, 48), 
 	SALMON("Salmon", 331, 329, 323, 150, 30, 57,57), 
@@ -180,29 +176,8 @@ enum CookingEnum {
 			levelStopBurningAtWithoutGloves, levelStopBurningAtWithGloves;
 	String name;
 
-	
 
-	/**
-	 * 
-	 * @param id the id of the fish used on the fire/range.
-	 * @return an instance of CookingEnum relevant to the item used. Eg. if a shrimp is used it will return CookingEnum.SHRIMP;
-	 * @author Rakeyjakey
-	 */
-	public static CookingEnum checkIngredients(int id) {
-		
-		int[] rawIds = { 317, 335, 331, 359, 377, 371, 7944, 383, 395, 389 };
-		CookingEnum[] enumArray = { SHRIMP, TROUT, SALMON, TUNA, LOBSTER, SWORDFISH, MONKFISH,
-					SHARK, SEA_TURTLE, MANTA_RAY };
-			
-		for (int i = 0; i < rawIds.length; i++) {
-			if (id == rawIds[i])
-				return enumArray[i];
-		}
-		
-		return null;
-	}
-
-	private CookingEnum(String name, int rawId, int cookedId, int burntId,
+	private FishToCook(String name, int rawId, int cookedId, int burntId,
 			int xpGained, int levelReq, int levelStopBurningAtWithoutGloves,
 			int levelStopBurningAtWithGloves) {
 		
@@ -215,6 +190,16 @@ enum CookingEnum {
 		this.levelReq = levelReq;
 		this.levelStopBurningAtWithoutGloves = levelStopBurningAtWithoutGloves;
 		this.levelStopBurningAtWithoutGloves = levelStopBurningAtWithGloves;
+	}
+	
+	public static HashMap<Integer, FishToCook> fish = new HashMap<Integer, FishToCook>();
+	
+	/**
+	 * Initialises the HashMap
+	 */
+	static {
+		for (FishToCook f : FishToCook.values())
+			fish.put(f.rawId, f);
 	}
 
 }

@@ -22,13 +22,19 @@ public class Fishing {
 
 	private static enum Fish {
 
-		SHRIMP(317, 1, 10, 303, 621, "Shrimp"), TROUT(335, 20, 50, 309, 622,
-				"Trout"), SALMON(331, 30, 70, 309, 622, "Salmon"), LOBSTER(377,
-				40, 80, 301, 619, "Lobster"), TUNA(359, 35, 90, 311, 618,
+		SHRIMP(317, 1, 10, 303, 621, "Shrimp"), 
+		TROUT(335, 20, 50, 309, 622,
+				"Trout"), 
+				SALMON(331, 30, 70, 309, 622, "Salmon"), 
+				LOBSTER(377,
+				40, 80, 301, 619, "Lobster"),
+				TUNA(359, 35, 90, 311, 618,
 				"Tuna"),
 
-		SWORDFISH(371, 50, 100, 311, 618, "Swordfish"), MONKFISH(7944, 62, 120,
-				303, 621, "Monkfish"), SHARK(383, 76, 110, 311, 418, "Shark");
+		SWORDFISH(371, 50, 100, 311, 618, "Swordfish"), 
+		MONKFISH(7944, 62, 120,
+				303, 621, "Monkfish"), 
+				SHARK(383, 76, 110, 311, 418, "Shark");
 
 		private int id;
 		private int levelReq;
@@ -98,10 +104,6 @@ public class Fishing {
 
 		public static HashMap<Integer, Fish> fish = new HashMap<Integer, Fish>();
 
-		/*
-		 * public static Fish forId(int id) { return fish.get(id); }
-		 */
-
 		static {
 			for (Fish f : Fish.values())
 				fish.put(f.getId(), f);
@@ -139,7 +141,6 @@ public class Fishing {
 					c.sendMessage("Your inventory is full.");
 					c.getDH().sendStatement("Your inventory is full.");
 					resetFishing();
-
 				}
 
 			} else {
@@ -166,6 +167,7 @@ public class Fishing {
 		if (c.getItems().playerHasItem(f.getEquipmentType())) {
 			if (c.playerLevel[c.playerFishing] >= f.getLevelReq()) {
 				if (c.getItems().freeSlots() > 0) {
+					
 					if (canFishOther(f.getId())) {
 						Fish ftemp = Fish.fish.get(currentlyFishing);
 						c.getItems().addItem(ftemp.getId(), 1);

@@ -1000,7 +1000,7 @@ public class ActionHandler {
 			c.getDH().sendDialogues(7, i);
 			break;
 
-		// FISHING START
+		// FISHING START FIRST CLICKS
 		case 319: //Shrimp
 			c.getFishing().setupFishing(317);
 			break;

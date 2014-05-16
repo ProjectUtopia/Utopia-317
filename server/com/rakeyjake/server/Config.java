@@ -70,7 +70,7 @@ public class Config {
 	public static final boolean RUNES_REQUIRED = true; // magic rune required?
 	public static final boolean CORRECT_ARROWS = true;
 	public static final boolean CRYSTAL_BOW_DEGRADES = true;
-	public static final int SAVE_TIMER = 120; // save every 1 minute
+	public static final int SAVE_TIMER = 50; // save every 1 minute
 	public static final int NPC_RANDOM_WALK_DISTANCE = 5;
 	public static final int NPC_FOLLOW_DISTANCE = 10;
 	public static final int[] UNDEAD_NPCS = { 90, 91, 92, 93, 94, 103, 104, 73,
