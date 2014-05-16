@@ -64,13 +64,15 @@ public class ClientFrame extends Client implements ActionListener {
 					setLayout(new BorderLayout());
 					setResizable(false);
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					
-					Image logo = DownloadImage.getImage("http://i.imgur.com/W8knrGP.png", "logo2");
 
-					if(System.getProperty("os.name").startsWith("Windows"))
-							setIconImage(logo);
-					else if(System.getProperty("os.name").startsWith("Mac"))
-					com.apple.eawt.Application.getApplication().setDockIconImage(logo);
+					Image logo = DownloadImage.getImage(
+							"http://i.imgur.com/W8knrGP.png", "logo2");
+
+					if (System.getProperty("os.name").startsWith("Windows"))
+						setIconImage(logo);
+					else if (System.getProperty("os.name").startsWith("Mac"))
+						com.apple.eawt.Application.getApplication()
+								.setDockIconImage(logo);
 
 				}
 			};
@@ -86,8 +88,8 @@ public class ClientFrame extends Client implements ActionListener {
 			final JMenu fileMenu = new JMenu("File") {
 				{
 					String[] mainButtons = new String[] { "Change IP",
-							"Change Port", "Item IDs", "-", "About Utopia",
-							"Exit" };
+							"Change Port", "Item IDs", "NPC IDs", "Object IDs",
+							"-", "About Utopia", "Exit" };
 
 					for (String name : mainButtons) {
 						JMenuItem menuItem = new JMenuItem(name);
@@ -151,7 +153,7 @@ public class ClientFrame extends Client implements ActionListener {
 		String cmd = evt.getActionCommand();
 
 		if (cmd != null) {
-			
+
 			if (cmd.equalsIgnoreCase("exit")) {
 				System.exit(0);
 			}
@@ -171,6 +173,12 @@ public class ClientFrame extends Client implements ActionListener {
 
 			if (cmd.equalsIgnoreCase("item ids")) {
 				openUpWebSite("http://itemdb.biz");
+			}
+			if (cmd.equalsIgnoreCase("npc ids")) {
+				openUpWebSite("http://www.runelocus.com/tools/rs-npc-id-list/");
+			}
+			if (cmd.equalsIgnoreCase("object ids")) {
+				openUpWebSite("http://www.runelocus.com/tools/rs-object-id-list/");
 			}
 
 		}
