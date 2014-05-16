@@ -1,6 +1,7 @@
 package com.rakeyjakey.client;
 
 import com.rakeyjakey.client.animation.Animation;
+import com.rakeyjakey.client.animation.SpotAnim;
 import com.rakeyjakey.client.model.Model;
 import com.rakeyjakey.client.nodes.MRUNodes;
 

@@ -279,6 +279,7 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
 		mouseY = j;
 	}
 	public static int hotKey = 508;
+	
 	@Override
 	public final void keyPressed(KeyEvent keyevent)
 	{

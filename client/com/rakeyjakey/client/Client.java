@@ -27,6 +27,7 @@ import com.rakeyjakey.client.animation.Animable_Sub3;
 import com.rakeyjakey.client.animation.Animable_Sub4;
 import com.rakeyjakey.client.animation.Animable_Sub5;
 import com.rakeyjakey.client.animation.Animation;
+import com.rakeyjakey.client.animation.SpotAnim;
 import com.rakeyjakey.client.cache.CacheDownloader;
 import com.rakeyjakey.client.frame.ClientFrame;
 import com.rakeyjakey.client.frame.Sprite;

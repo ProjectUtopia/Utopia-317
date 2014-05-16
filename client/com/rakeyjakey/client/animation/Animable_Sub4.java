@@ -1,7 +1,6 @@
 package com.rakeyjakey.client.animation;
 
 import com.rakeyjakey.client.Class36;
-import com.rakeyjakey.client.SpotAnim;
 import com.rakeyjakey.client.model.Model;
 
 

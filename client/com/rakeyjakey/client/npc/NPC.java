@@ -3,8 +3,8 @@ package com.rakeyjakey.client.npc;
 import com.rakeyjakey.client.Class36;
 import com.rakeyjakey.client.Entity;
 import com.rakeyjakey.client.EntityDef;
-import com.rakeyjakey.client.SpotAnim;
 import com.rakeyjakey.client.animation.Animation;
+import com.rakeyjakey.client.animation.SpotAnim;
 import com.rakeyjakey.client.model.Model;
 
 public final class NPC extends Entity {
