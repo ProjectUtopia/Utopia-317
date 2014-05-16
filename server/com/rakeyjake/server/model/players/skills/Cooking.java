@@ -6,12 +6,21 @@ import com.rakeyjake.server.event.EventContainer;
 import com.rakeyjake.server.event.EventManager;
 import com.rakeyjake.server.model.players.Client;
 
+/**
+ * All done except for burning food. No food is burnt at the moment. A check
+ * needs to be done to see if a) the food can be burnt at all, b) if cooking
+ * gloves are worn. 
+ * <br><br>
+ * Also, a random burn rate needs to be added that will scale
+ * depending on your level above the required.
+ * 
+ * @author Rakeyjakey
+ * 
+ */
 public class Cooking {
 
 	Client c;
 	CookingEnum cook;
-	int objectX;
-	int objectY;
 
 	public Cooking(Client c) {
 		this.c = c;

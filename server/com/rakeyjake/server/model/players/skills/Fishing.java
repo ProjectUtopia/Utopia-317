@@ -10,7 +10,7 @@ import com.rakeyjake.server.util.Misc;
  * Fishing.java
  * <br><br>
  * Currently have: Shrimp, Trout, Lobster, Tuna, Swordfish, Monkfish and Sharks added.
- * @author Rakeyjake
+ * @author Rakeyjakey
  * @version 1.0
  **/
 
