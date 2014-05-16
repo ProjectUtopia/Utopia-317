@@ -1,64 +1,114 @@
 package com.rakeyjake.server.model.players.skills;
 
 import com.rakeyjake.server.Config;
+import com.rakeyjake.server.event.Event;
+import com.rakeyjake.server.event.EventContainer;
+import com.rakeyjake.server.event.EventManager;
 import com.rakeyjake.server.model.players.Client;
-import com.rakeyjake.server.util.Misc;
 
 public class Cooking {
 
 	Client c;
+	CookingEnum cook;
 
 	public Cooking(Client c) {
 		this.c = c;
 	}
 
-	private int[][] cookingItems = { { 317, 315, 7954, 1, 30 },
-			{ 335, 333, 323, 20, 70 }, { 331, 329, 323, 30, 90 },
-			{ 359, 361, 363, 35, 100 }, { 377, 379, 381, 40, 120 },
-			{ 371, 373, 375, 50, 140 }, { 7944, 7946, 7948, 62, 150 },
-			{ 383, 385, 387, 80, 210 }, { 389, 391, 393, 91, 169 } };
-
 	public void itemOnObject(int id) {
-		for (int j = 0; j < cookingItems.length; j++) {
-			if (cookingItems[j][0] == id)
-				cookFish(cookingItems[j][0], j);
-		}
+		cook = CookingEnum.checkIngredients(id);
+		cookFish(cook.rawId, 1);
 	}
 
-	public void cookFish(int id, int slot) {
-		for (int j = 0; j < 28; j++) {
-			try {
-				if (c.getItems().playerHasItem(id, 1)) {
-					if (c.playerLevel[c.playerCooking] >= cookingItems[slot][3]) {
-						if (Misc.random(c.playerLevel[c.playerCooking] + 3
-								- cookingItems[slot][3]) == 1) {
-							c.sendMessage("You accidently burn the fish.");
-							c.getItems().deleteItem(id,
-									c.getItems().getItemSlot(id), 1);
-							c.getItems().addItem(cookingItems[slot][2], 1);
-							Thread.sleep(1000);
-						} else {
-					
-							c.getItems().deleteItem(id,
-									c.getItems().getItemSlot(id), 1);
-							c.getItems().addItem(cookingItems[slot][1], 1);
-							c.getPA().addSkillXP(
-									cookingItems[slot][4]
-											* Config.COOKING_EXPERIENCE,
-									c.playerCooking);
-							Thread.sleep(1000);
-						}
+	private void sendStatementTwo(String s) {
+		c.getPA().sendFrame126(s, 357);
+		c.getPA().sendFrame126("Click here to continue", 358);
+		c.getPA().sendFrame164(356);
+	}
+
+	public void cookFish(final int id, final int slot) {
+		if (c.getItems().playerHasItem(id, 1)) {
+			if (c.playerLevel[c.playerCooking] >= cook.levelReq) {
+				c.isCooking = true;
+				c.startAnimation(883);
+				c.getItems().deleteItem(id, c.getItems().getItemSlot(id), 1);
+				c.getItems().addItem(cook.cookedId, 1);
+				c.getPA().addSkillXP(cook.xpGained * Config.COOKING_EXPERIENCE,
+						c.playerCooking);
+				c.sendMessage("You successfully cook a" + cook.name + ".");
+			} else {
+				c.isCooking = false;
+				sendStatementTwo("You need a cooking level of " + cook.levelReq
+						+ " to cook this fish.");
+				return;
+			}
+		} else {
+			c.isCooking = false;
+			return;
+		}
+		EventManager.getSingleton().addEvent(new Event() {
+			public void execute(EventContainer container) {
+				if (c.isCooking) {
+					if (c.getItems().playerHasItem(id, 1)) {
+						c.startAnimation(883);
+						c.getItems().deleteItem(id,
+								c.getItems().getItemSlot(id), 1);
+						c.getItems().addItem(cook.cookedId, 1);
+						c.getPA().addSkillXP(
+								cook.xpGained * Config.COOKING_EXPERIENCE,
+								c.playerCooking);
+						c.sendMessage("You successfully cook a " + cook.name
+								+ ".");
 					} else {
-						c.sendMessage("You need a cooking level of "
-								+ cookingItems[slot][3] + " to cook this fish.");
-						break;
+						container.stop();
+						c.isCooking = false;
+						return;
 					}
 				} else {
-					break;
+					container.stop();
+					c.isCooking = false;
+					return;
 				}
-			} catch (Exception e) {
-				c.sendMessage("error");
 			}
-		}
+
+		}, 1800);
 	}
+}
+
+enum CookingEnum {
+	SHRIMP("Shrimp", 317, 315, 7954, 30, 50), TROUT("Trout", 335, 333, 323,
+			100, 20), SALMON("Salmon", 331, 329, 323, 150, 30), TUNA("Tuna",
+			359, 361, 363, 175, 35), MONKFISH("Monkfish", 7944, 7946, 7948,
+			300, 62), SHARK("Shark", 383, 385, 387, 500, 80), MANTA(
+			"Manta Ray", 389, 391, 393, 700, 91);
+
+	int rawId, cookedId, burntId, xpGained, levelReq;
+	String name;
+
+	static int[] rawIds = { 317, 335, 331, 359, 7944, 383, 389 };
+	static CookingEnum[] enumArray = { SHRIMP, TROUT, SALMON, TUNA, MONKFISH,
+			SHARK, MANTA };
+
+	public static CookingEnum checkIngredients(int id) {
+		for (int i = 0; i < rawIds.length; i++) {
+			if (id == rawIds[i])
+				return enumArray[i];
+		}
+		return null;
+	}
+
+	private CookingEnum(String name, int rawId, int cookedId, int burntId,
+			int xpGained, int levelReq) {
+		this.name = name;
+		this.rawId = rawId;
+		this.levelReq = levelReq;
+		this.cookedId = cookedId;
+		this.burntId = burntId;
+		this.xpGained = xpGained;
+		this.levelReq = levelReq;
+	}
+
+	private CookingEnum(int rawId) {
+		this.rawId = rawId;
+	};
 }

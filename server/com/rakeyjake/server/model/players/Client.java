@@ -63,6 +63,7 @@ public class Client extends Player {
 	public int returnCode = 2;
 	private Future<?> currentTask;
 	public boolean temporaryAdmin;
+	public boolean isCooking;
 
 	public Client(IoSession s, int _playerId) {
 		super(_playerId);

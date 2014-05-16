@@ -11,6 +11,7 @@ public class Walking implements PacketType {
 
 	@Override
 	public void processPacket(Client c, int packetType, int packetSize) {
+		c.isCooking = false;
 		c.walkingToItem = false;
 		c.clickNpcType = 0;
 		c.clickObjectType = 0;

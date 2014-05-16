@@ -28,6 +28,7 @@ public class UseItem {
 		case 2728:
 		case 2732:
 		case 12269:
+			c.turnPlayerTo(objectX, objectY);
 			c.getCooking().itemOnObject(itemId);
 			break;
 		case 409:
