@@ -5,7 +5,7 @@ import com.rakeyjake.server.model.players.Client;
 
 /**
  * Changes the user password.
- * 
+ * ::changepassword NEWPASSWORD
  * @author André
  * 
  */
@@ -28,5 +28,4 @@ public class ChangePassword extends Command {
 			c.sendMessage("Your new password is the same as the old one.");
 		}
 	}
-
 }

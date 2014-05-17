@@ -1179,11 +1179,6 @@ public class ControlPanel extends JFrame {
 		btnNa_1.setText("N/A");
 
 		btnNa = new JButton();
-		btnNa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new Xml$("Data/allIDs/Objects.xml");
-			}
-		});
 		
 		
 		btnNa.setToolTipText("Needs to be added.");

@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 import com.rakeyjake.server.Config;
@@ -56,9 +55,7 @@ public class Commands implements PacketType {
 			case 3: ownerCommands(c, playerCommand);
 			case 2: adminCommands(c, playerCommand);
 			case 1: donatorCommands(c, playerCommand);
-			default:
-				playerCommands(c, playerCommand);
-				break;
+			default: playerCommands(c, playerCommand);
 		}
 	}
 
@@ -66,29 +63,10 @@ public class Commands implements PacketType {
 		/*
 		 * Owner commands
 		 */
-
-		if (playerCommand.startsWith("restart")) {
-			for (Player p : PlayerHandler.players) {
-				if (p == null)
-					continue;
-				PlayerSave.saveGame((Client) p);
-			}
-			System.exit(0);
-		}
-
-		if (playerCommand.equalsIgnoreCase("npcreset")) {
-			for (int i = 0; i < NPCHandler.maxNPCs; i++) {
-				if (NPCHandler.npcs[i] != null) {
-					NPCHandler.npcs[i].isDead = true;
-					NPCHandler.npcs[i].actionTimer = 0;
-				}
-			}
-			for (int j = 0; j < PlayerHandler.players.length; j++) {
-				if (PlayerHandler.players[j] != null) {
-					Client c2 = (Client) PlayerHandler.players[j];
-					c2.sendMessage("[Server] NPCs reset by "
-							+ Misc.optimizeText(c.playerName) + ".");
-				}
+		for(Command co : Commands.OWNER){
+			if(playerCommand.startsWith(co.command())){
+				co.execute(c, playerCommand);
+				break;
 			}
 		}
 
@@ -98,15 +76,7 @@ public class Commands implements PacketType {
 				c.getItems().addItem(runes[i], 1000);
 			}
 		}
-
-		// Announces update for two minutes. FULLYWORKING.
-		if (playerCommand.startsWith("update")) {
-			PlayerHandler.updateSeconds = 120;
-			PlayerHandler.updateAnnounced = false;
-			PlayerHandler.updateRunning = true;
-			PlayerHandler.updateStartTime = System.currentTimeMillis();
-		}
-
+		
 		// Gives target player Owner Status.
 		if (playerCommand.startsWith("giveowner")) {
 			String name = playerCommand.substring(10);

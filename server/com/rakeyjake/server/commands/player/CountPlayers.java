@@ -5,6 +5,7 @@ import com.rakeyjake.server.model.players.Client;
 import com.rakeyjake.server.model.players.PlayerHandler;
 /**
  * Tell how many players are online to the client.
+ * ::players
  * @author André
  *
  */

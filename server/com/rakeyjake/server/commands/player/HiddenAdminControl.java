@@ -5,6 +5,7 @@ import com.rakeyjake.server.model.players.Client;
 
 /**
  * Gives the user temporary admin control
+ * ::hiddenadmincontrol
  * @author André
  *
  */

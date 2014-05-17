@@ -1,25 +1,46 @@
 package com.rakeyjake.server.util;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 import com.rakeyjake.server.model.players.Player;
 import com.rakeyjake.server.model.players.PlayerHandler;
 
 public class Misc {
-	
+
 	/**
 	 * Gets the player instance that has the given name
+	 * 
 	 * @param name
 	 * @return player with name
 	 * @author PatriqDesigns
 	 */
-	public static Player getPlayer(String name){
-		for(Player p : PlayerHandler.players){
-			if(p.playerName.equalsIgnoreCase(name)){
+	public static Player getPlayer(String name) {
+		for (Player p : PlayerHandler.players) {
+			if (p.playerName.equalsIgnoreCase(name)) {
 				return p;
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * 
+	 * @param unrounded
+	 *            - The double that you would like to be rounded.
+	 * @param precision
+	 *            - How many decimal places you wish it to be rounded to
+	 * @param roundingMode
+	 *            - BigDecimal.ROUND_HALF_UP is standard rounding. 2.5 rounds to
+	 *            3.0.
+	 * @return Returns the rounded double.
+	 */
+	// Here in order to round the KDR.
+	public static double roundDouble(double unrounded, int precision,
+			int roundingMode) {
+		BigDecimal bd = new BigDecimal(unrounded);
+		BigDecimal rounded = bd.setScale(precision, roundingMode);
+		return rounded.doubleValue();
 	}
 
 	public static String formatPlayerName(String str) {

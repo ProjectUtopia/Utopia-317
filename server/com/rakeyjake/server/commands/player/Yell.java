@@ -8,6 +8,7 @@ import com.rakeyjake.server.util.Misc;
 
 /**
  * Yells the given message to everyone in the server
+ * ::yell MESSAGE
  * @author André
  *
  */

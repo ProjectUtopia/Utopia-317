@@ -5,6 +5,7 @@ import com.rakeyjake.server.model.players.Client;
 
 /**
  * Speaks using the clan chat, if in one.
+ * /MESSAGE TO CLAN CHAT
  * @author André
  *
  */
