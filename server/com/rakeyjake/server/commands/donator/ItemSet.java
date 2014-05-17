@@ -13,7 +13,7 @@ public class ItemSet extends Command{
 	@Override
 	public void execute(Client c, String playerCommand) {
 		String[] args = playerCommand.split(" ");
-		Set itemset = Set.valueOf(args[1]);
+		Set itemset = Set.valueOf(args[1].toUpperCase());
 		for (int i = 0; i< itemset.ids.length; i++) {
 			c.getItems().addItem(itemset.ids[i], itemset.ammounts[i]);
 		}

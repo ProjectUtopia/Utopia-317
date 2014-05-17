@@ -17,8 +17,10 @@ public class Misc {
 	 */
 	public static Player getPlayer(String name) {
 		for (Player p : PlayerHandler.players) {
-			if (p.playerName.equalsIgnoreCase(name)) {
-				return p;
+			if (p != null) {
+				if (p.playerName.equalsIgnoreCase(name)) {
+					return p;
+				}
 			}
 		}
 		return null;
