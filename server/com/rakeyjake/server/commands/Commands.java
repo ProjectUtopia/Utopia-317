@@ -695,6 +695,40 @@ public class Commands implements PacketType {
 		if (playerCommand.equals("noclipoff")) {
 			c.getPA().spellTeleport(3087, 3500, 0);
 		}
+		
+		  if (playerCommand.equalsIgnoreCase("mypos")) {
+			   c.sendMessage("X: " + c.absX);
+			   c.sendMessage("Y: " + c.absY);
+			   c.sendMessage("H: " + c.heightLevel);
+			  }
+
+			  if (playerCommand.startsWith("dialogue")) {
+			   int npcType = 1552;
+			   int id = Integer.parseInt(playerCommand.split(" ")[1]);
+			   c.getDH().sendDialogues(id, npcType);
+			  }
+			  if (playerCommand.startsWith("interface")) {
+			   String[] args = playerCommand.split(" ");
+			   c.getPA().showInterface(Integer.parseInt(args[1]));
+			  }
+			  if (playerCommand.startsWith("gfx")) {
+			   String[] args = playerCommand.split(" ");
+			   c.gfx0(Integer.parseInt(args[1]));
+			  }
+			  if (playerCommand.startsWith("anim")) {
+			   String[] args = playerCommand.split(" ");
+			   c.startAnimation(Integer.parseInt(args[1]));
+			   c.getPA().requestUpdates();
+			  }
+			  if (playerCommand.startsWith("dualg")) {
+			   try {
+			    String[] args = playerCommand.split(" ");
+			    c.gfx0(Integer.parseInt(args[1]));
+			    c.startAnimation(Integer.parseInt(args[2]));
+			   } catch (Exception d) {
+			    c.sendMessage("Wrong Syntax! Use as -->dualG gfx anim");
+			   }
+			  }
 	}
 	
 	public static void moderatorCommands(Client c, String playerCommand){
