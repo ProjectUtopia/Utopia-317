@@ -4,8 +4,8 @@ character-password = pd
 
 [CHARACTER]
 character-height = 0
-character-posx = 3095
-character-posy = 3495
+character-posx = 2905
+character-posy = 9707
 character-rights = 3
 crystal-bow-shots = 0
 skull-timer = -1
@@ -37,19 +37,19 @@ fightMode = 2
 void = 0	0	0	0	0
 
 [EQUIPMENT]
-character-equip = 0	4716	1	
-character-equip = 1	6570	1	
-character-equip = 2	6859	1	
-character-equip = 3	11698	1	
-character-equip = 4	4720	1	
+character-equip = 0	-1	1	
+character-equip = 1	-1	1	
+character-equip = 2	-1	1	
+character-equip = 3	-1	0	
+character-equip = 4	-1	1	
 character-equip = 5	-1	1	
 character-equip = 6	-1	1	
-character-equip = 7	4722	1	
+character-equip = 7	-1	1	
 character-equip = 8	-1	1	
 character-equip = 9	-1	1	
-character-equip = 10	6666	1	
+character-equip = 10	-1	1	
 character-equip = 11	-1	1	
-character-equip = 12	7927	1	
+character-equip = 12	-1	1	
 character-equip = 13	-1	1	
 
 [LOOK]
@@ -97,9 +97,21 @@ character-skill = 24	1	0
 [ITEMS]
 character-item = 0	996	100101000
 character-item = 1	1200	1
-character-item = 2	1038	1
+character-item = 2	4717	1
 character-item = 3	1200	1
 character-item = 4	6571	1
+character-item = 5	160	1
+character-item = 6	146	1
+character-item = 7	166	1
+character-item = 8	1038	1
+character-item = 9	6860	1
+character-item = 10	4721	1
+character-item = 11	4723	1
+character-item = 12	6667	1
+character-item = 13	7928	1
+character-item = 14	11699	1
+character-item = 15	6571	1
+character-item = 16	123	1
 
 [BANK]
 
