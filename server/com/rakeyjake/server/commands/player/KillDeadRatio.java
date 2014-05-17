@@ -24,7 +24,7 @@ public class KillDeadRatio extends Command {
 	public void execute(Client c, String playerCommand) {
 		String[] args = playerCommand.split(" ");
 		switch (args.length) {
-		case 1:
+		case 2:
 			switch (args[1]) {
 			case "reset":
 				if (c.deaths != 0 && c.kills != 0) {
@@ -35,11 +35,8 @@ public class KillDeadRatio extends Command {
 					c.sendMessage("Your KDR doesn't need to be reset.");
 				}
 				break;
-			default:
-				break;
 			}
 			break;
-
 		default:
 			if (c.deaths != 0 && c.kills != 0) {
 				double kdr = (double) (c.kills / c.deaths);

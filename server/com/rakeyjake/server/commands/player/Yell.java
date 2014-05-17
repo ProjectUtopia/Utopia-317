@@ -36,22 +36,12 @@ public class Yell extends Command{
 		for(Player p : PlayerHandler.players){
 			Client c2 = (Client) p;
 			if(c2 != null){
-				if (c.playerRights == 1) {
-					c2.sendMessage("[Donator] "
+				if (c.playerRights != 0) {
+					c2.sendMessage(""+Command.Type.values()[c.playerRights]+"] "
 							+ Misc.optimizeText(c.playerName) + ": "
 							+ Misc.optimizeText(playerCommand.substring(5))
 							+ "");
-				} else if (c.playerRights == 2) {
-					c2.sendMessage("[Admin] "
-							+ Misc.optimizeText(c.playerName) + ": "
-							+ Misc.optimizeText(playerCommand.substring(5))
-							+ "");
-				} else if (c.playerRights == 3) {
-					c2.sendMessage("[Owner] "
-							+ Misc.optimizeText(c.playerName) + ": "
-							+ Misc.optimizeText(playerCommand.substring(5))
-							+ "");
-				} else if (c.playerRights == 0) {
+				}else{
 					c.sendMessage(Misc
 							.optimizeText("@red@Please consider donating to use this feature"));
 				}

@@ -19,16 +19,18 @@ import com.rakeyjake.server.util.Misc;
 public class Commands implements PacketType {
 	
 	static{
-		PLAYER = load(Command.Type.PLAYER);
 		OWNER = load(Command.Type.OWNER);
-		DONATOR = load(Command.Type.DONATOR);
 		ADMIN = load(Command.Type.ADMIN);
+		MODERATOR = load(Command.Type.MODERATOR);
+		DONATOR = load(Command.Type.DONATOR);
+		PLAYER = load(Command.Type.PLAYER);
 	}
 
-	private final static Command[] PLAYER;
 	private final static Command[] OWNER; 
-	private final static Command[] DONATOR;
 	private final static Command[] ADMIN;
+	private final static Command[] MODERATOR;
+	private final static Command[] DONATOR;
+	private final static Command[] PLAYER;
 	
 	public static Command[] load(Command.Type type){
 		ArrayList<Command> commands = new ArrayList<>();
@@ -51,8 +53,9 @@ public class Commands implements PacketType {
 		String playerCommand = c.getInStream().readString();
 		Misc.println(c.playerName + " playerCommand: " + playerCommand);
 		switch(c.playerRights){
-			case 3: ownerCommands(c, playerCommand);
-			case 2: adminCommands(c, playerCommand);
+			case 4: ownerCommands(c, playerCommand);
+			case 3: adminCommands(c, playerCommand);
+			case 2: moderatorCommands(c, playerCommand);
 			case 1: donatorCommands(c, playerCommand);
 			default: playerCommands(c, playerCommand);
 		}
@@ -68,154 +71,6 @@ public class Commands implements PacketType {
 				break;
 			}
 		}
-
-		if (playerCommand.equalsIgnoreCase("veng")) {
-			int[] runes = { 9075, 557, 560 };
-			for (int i = 0; i < runes.length; i++) {
-				c.getItems().addItem(runes[i], 1000);
-			}
-		}
-		
-		// Gives target player Owner Status.
-		if (playerCommand.startsWith("giveowner")) {
-			String name = playerCommand.substring(10);
-			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-				Client c2 = (Client) PlayerHandler.players[i];
-				if (c2 != null && c2.playerName.equalsIgnoreCase(name)) {
-					c2.sendMessage("You have been given owner status by "
-							+ c.playerName);
-					c2.playerRights = 3;
-					c2.logout();
-					break;
-				}
-			}
-		}
-
-		// Gives target player Donator Status.
-		if (playerCommand.startsWith("givedonor")) {
-			try {
-				String playerToDonor = playerCommand.substring(10);
-				for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-					if (PlayerHandler.players[i] != null) {
-						if (PlayerHandler.players[i].playerName
-								.equalsIgnoreCase(playerToDonor)) {
-							Client c2 = (Client) PlayerHandler.players[i];
-							c2.sendMessage("You have been given donator status by "
-									+ c.playerName);
-							c2.playerRights = 1;
-							c2.logout();
-							break;
-						}
-					}
-				}
-			} catch (Exception e) {
-				c.sendMessage("Player Must Be Offline.");
-			}
-		}
-
-		// Gives player admin status. FULLYWORKING.
-		if (playerCommand.startsWith("giveadmin")) {
-			try {
-				String playerToAdmin = playerCommand.substring(10);
-				for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-					if (PlayerHandler.players[i] != null) {
-						if (PlayerHandler.players[i].playerName
-								.equalsIgnoreCase(playerToAdmin)) {
-							Client c2 = (Client) PlayerHandler.players[i];
-							c2.sendMessage("You have been given admin status by "
-									+ c.playerName);
-							c2.playerRights = 2;
-							c2.logout();
-							break;
-						}
-					}
-				}
-			} catch (Exception e) {
-				c.sendMessage("Player Must Be Offline.");
-			}
-		}
-
-		// Demotes to normal player. FULLYWORKING.
-		if (playerCommand.startsWith("demote")) {
-			try {
-				String playerToDemote = playerCommand.substring(7);
-				for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-					if (PlayerHandler.players[i] != null) {
-						if (PlayerHandler.players[i].playerName
-								.equalsIgnoreCase(playerToDemote)) {
-							Client c2 = (Client) PlayerHandler.players[i];
-							c2.sendMessage("You have been demoted by "
-									+ c.playerName);
-							c2.playerRights = 0;
-							c2.logout();
-							break;
-						}
-					}
-				}
-			} catch (Exception e) {
-				c.sendMessage("Player Must Be Offline.");
-			}
-		}
-
-		// Returns target player's ip.
-		if (playerCommand.startsWith("query")) {
-			try {
-				String playerToBan = playerCommand.substring(6);
-				for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-					if (PlayerHandler.players[i] != null) {
-						if (PlayerHandler.players[i].playerName
-								.equalsIgnoreCase(playerToBan)) {
-							c.sendMessage("IP: "
-									+ PlayerHandler.players[i].connectedFrom);
-
-						}
-					}
-				}
-			} catch (Exception e) {
-				c.sendMessage("Player Must Be Offline.");
-			}
-		}
-
-		if (playerCommand.equalsIgnoreCase("mypos")) {
-			c.sendMessage("X: " + c.absX);
-			c.sendMessage("Y: " + c.absY);
-			c.sendMessage("H: " + c.heightLevel);
-		}
-
-		if (playerCommand.startsWith("dialogue")) {
-			int npcType = 1552;
-			int id = Integer.parseInt(playerCommand.split(" ")[1]);
-			c.getDH().sendDialogues(id, npcType);
-		}
-		if (playerCommand.startsWith("interface")) {
-			String[] args = playerCommand.split(" ");
-			c.getPA().showInterface(Integer.parseInt(args[1]));
-		}
-		if (playerCommand.startsWith("gfx")) {
-			String[] args = playerCommand.split(" ");
-			c.gfx0(Integer.parseInt(args[1]));
-		}
-		if (playerCommand.startsWith("anim")) {
-			String[] args = playerCommand.split(" ");
-			c.startAnimation(Integer.parseInt(args[1]));
-			c.getPA().requestUpdates();
-		}
-		if (playerCommand.startsWith("dualg")) {
-			try {
-				String[] args = playerCommand.split(" ");
-				c.gfx0(Integer.parseInt(args[1]));
-				c.startAnimation(Integer.parseInt(args[2]));
-			} catch (Exception d) {
-				c.sendMessage("Wrong Syntax! Use as -->dualG gfx anim");
-			}
-		}
-
-		if (playerCommand.startsWith("spec")) {
-			String[] args = playerCommand.split(" ");
-			c.specAmount = (Integer.parseInt(args[1]));
-			c.getItems().updateSpecialBar();
-		}
-
 	}
 
 	public static void adminCommands(Client c, String playerCommand) {
@@ -841,22 +696,30 @@ public class Commands implements PacketType {
 			c.getPA().spellTeleport(3087, 3500, 0);
 		}
 	}
-
-	public static void donatorCommands(Client c, String playerCommand) {
+	
+	public static void moderatorCommands(Client c, String playerCommand){
 		/*
 		 * When a moderator does a comand it goes through all these commands to
 		 * find a match
 		 */
-
-		if (playerCommand.startsWith("barrage")) {
-			c.getItems().addItem(555, 6000);
-			c.getItems().addItem(560, 4000);
-			c.getItems().addItem(565, 2000);
-
+		for(Command co : Commands.MODERATOR){
+			if(playerCommand.startsWith(co.command())){
+				co.execute(c, playerCommand);
+				break;
+			}
 		}
+	}
 
-		if (playerCommand.startsWith("empty")) {
-			c.getItems().removeAllItems();
+	public static void donatorCommands(Client c, String playerCommand) {
+		/*
+		 * When a donator does a comand it goes through all these commands to
+		 * find a match
+		 */
+		for(Command co : Commands.DONATOR){
+			if(playerCommand.startsWith(co.command())){
+				co.execute(c, playerCommand);
+				break;
+			}
 		}
 
 		// Changes spellbook between ancients and modern. FULLYWORKING.
@@ -871,69 +734,6 @@ public class Commands implements PacketType {
 				c.setSidebarInterface(6, 1151);
 				c.playerMagicBook = 0;
 			}
-		}
-
-		if (playerCommand.equals("potmeup")) {
-			// if (c.inWild())
-			// return;
-			c.getItems().addItem(157, 1);
-			c.getItems().addItem(145, 1);
-			c.getItems().addItem(163, 1);
-			c.sendMessage("Potions!");
-		}
-
-		if (playerCommand.equalsIgnoreCase("tank")) {
-			c.getPA().addSkillXP(0, 0);
-			c.getPA().addSkillXP(1210422, 1);
-			c.getPA().addSkillXP(0, 2);
-			c.getPA().addSkillXP(14000000, 3);
-			c.getPA().addSkillXP(14000000, 4);
-			c.getPA().addSkillXP(136594, 5);
-			c.getPA().addSkillXP(14000000, 6);
-		}
-		if (playerCommand.equalsIgnoreCase("zerk")) {
-			c.getPA().addSkillXP(14000000, 0);
-			c.getPA().addSkillXP(65000, 1);
-			c.getPA().addSkillXP(14000000, 2);
-			c.getPA().addSkillXP(14000000, 3);
-			c.getPA().addSkillXP(14000000, 4);
-			c.getPA().addSkillXP(136594, 5);
-			c.getPA().addSkillXP(14000000, 6);
-		}
-		if (playerCommand.equalsIgnoreCase("pure")) {
-			c.getPA().addSkillXP(14000000, 0);
-			c.getPA().addSkillXP(0, 1);
-			c.getPA().addSkillXP(14000000, 2);
-			c.getPA().addSkillXP(14000000, 3);
-			c.getPA().addSkillXP(14000000, 4);
-			c.getPA().addSkillXP(136594, 5);
-			c.getPA().addSkillXP(14000000, 6);
-		}
-		if (playerCommand.equalsIgnoreCase("master")) {
-			for (int i = 0; i < 21; i++) {
-				c.getPA().addSkillXP(14000000, i);
-			}
-		}
-
-		if (playerCommand.equalsIgnoreCase("resetme")) {
-
-			for (int j = 0; j < c.playerEquipment.length; j++) {
-				if (c.playerEquipment[j] > 0) {
-					c.sendMessage("You may not wear items while using this command.");
-					return;
-				}
-			}
-
-			for (int i = 0; i < 21; i++) {
-
-				c.playerXP[i] = c.getPA().getXPForLevel(1) + 5;
-				c.playerLevel[i] = c.getPA().getLevelForXP(c.playerXP[i]);
-				c.getPA().refreshSkill(i);
-			}
-
-			c.playerXP[3] = c.getPA().getXPForLevel(10) + 5;
-			c.playerLevel[3] = c.getPA().getLevelForXP(c.playerXP[3]);
-			c.getPA().refreshSkill(3);
 		}
 
 	}

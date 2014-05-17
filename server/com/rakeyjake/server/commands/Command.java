@@ -7,7 +7,12 @@ public abstract class Command {
 	public abstract void execute(Client c, String playerCommand);
 	
 	public enum Type{
-		PLAYER, DONATOR, ADMIN, OWNER;
+		
+		PLAYER,
+		DONATOR,
+		MODERATOR,
+		ADMIN, 
+		OWNER;
 		
 		@Override
 	    public String toString() {
