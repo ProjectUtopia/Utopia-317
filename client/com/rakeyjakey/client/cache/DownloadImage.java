@@ -15,7 +15,7 @@ public class DownloadImage {
 
 	public static Image getImage(String url, String name) {
 		try {
-			File f = new File(SignLink.findcachedir() + "Logos/" + name);
+			File f = new File(SignLink.findcachedir() + "Logo/" + name);
 			
 			if (f.exists())
 				return ImageIO.read(f.toURI().toURL());

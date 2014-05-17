@@ -64,11 +64,11 @@ public class ClientFrame extends Client implements ActionListener {
 					setResizable(false);
 					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-					Image logo = DownloadImage.getImage(
-							"http://i.imgur.com/W8knrGP.png", "logo2");
+					//Image logo = DownloadImage.getImage(
+					//		"http://i.imgur.com/W8knrGP.png", "logo2");
 
-					if (System.getProperty("os.name").startsWith("Windows"))
-						setIconImage(logo);
+					//if (System.getProperty("os.name").startsWith("Windows"))
+					//	setIconImage(logo);
 					//FOR MAC
 					/*else if (System.getProperty("os.name").startsWith("Mac"))
 						com.apple.eawt.Application.getApplication()
@@ -197,7 +197,7 @@ public class ClientFrame extends Client implements ActionListener {
 		final JLabel runescapeLabel = new JLabel(
 				"<html><font size=0>RuneScape is a trademark of Jagex Software 1999 - 2013 Jagex, Ltd.</font></html>");
 		final JLabel jagexLabel = new JLabel(
-				"<html><font size=0>Copyright ��� 2009-2014 Jagex Ltd. Jagex is a registered trademark of Jagex Ltd.</font></html>");
+				"<html><font size=0>Copyright ��������� 2009-2014 Jagex Ltd. Jagex is a registered trademark of Jagex Ltd.</font></html>");
 		final JLabel copyrightLabel = new JLabel(
 				"<html><font size=0>Copyright \u00A9 2014 ProjectUtopia</font></html>");
 		new JFrame("About ProjectUtopia") {
