@@ -5992,6 +5992,10 @@ public class Client extends RSApplet {
 					s = s.substring(5);
 					byte1 = 2;
 				}
+				if (s != null && s.startsWith("@cr4@")) {
+					s = s.substring(5);
+					byte1 = 2;
+				}
 				if ((k == 3 || k == 7)
 						&& (k == 7 || privateChatMode == 0 || privateChatMode == 1
 								&& isFriendOrSelf(s))) {
@@ -8876,7 +8880,9 @@ public class Client extends RSApplet {
 						player.privelage = j2;
 						player.anInt1531 = i1 & 0xff;
 						player.textCycle = 150;
-						if (j2 == 2 || j2 == 3)
+						if (j2 == 4)
+							pushMessage(s, 1, "@cr4@" + player.name);
+						else if (j2 == 2 || j2 == 3)
 							pushMessage(s, 1, "@cr2@" + player.name);
 						else if (j2 == 1)
 							pushMessage(s, 1, "@cr1@" + player.name);
@@ -9840,6 +9846,10 @@ public class Client extends RSApplet {
 				if (s != null && s.startsWith("@cr1@")) {
 					s = s.substring(5);
 					boolean flag2 = true;
+				}
+				if (s != null && s.startsWith("@cr2@")) {
+					s = s.substring(5);
+					byte byte0 = 2;
 				}
 				if (s != null && s.startsWith("@cr2@")) {
 					s = s.substring(5);
