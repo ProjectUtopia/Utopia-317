@@ -58,7 +58,7 @@ public class CacheDownloader {
 	 * Version of cache, make it +1 if you updated your cache on your remote
 	 * server
 	 */
-	private final int VERSION = 2;
+	private final int VERSION = 3;
 
 	/**
 	 * 1000 = 1 second. This is for when ever the pauseHandler void is called.
