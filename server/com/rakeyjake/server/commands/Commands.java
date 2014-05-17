@@ -17,8 +17,8 @@ import com.rakeyjake.server.model.players.PlayerSave;
 import com.rakeyjake.server.util.Misc;
 
 public class Commands implements PacketType {
-	
-	static{
+
+	static {
 		OWNER = load(Command.Type.OWNER);
 		ADMIN = load(Command.Type.ADMIN);
 		MODERATOR = load(Command.Type.MODERATOR);
@@ -26,25 +26,28 @@ public class Commands implements PacketType {
 		PLAYER = load(Command.Type.PLAYER);
 	}
 
-	private final static Command[] OWNER; 
+	private final static Command[] OWNER;
 	private final static Command[] ADMIN;
 	private final static Command[] MODERATOR;
 	private final static Command[] DONATOR;
 	private final static Command[] PLAYER;
-	
-	public static Command[] load(Command.Type type){
+
+	public static Command[] load(Command.Type type) {
 		ArrayList<Command> commands = new ArrayList<>();
-		File obtainDir = new File("server\\com\\rakeyjake\\server\\commands\\" + type);
+		File obtainDir = new File("server\\com\\rakeyjake\\server\\commands\\"
+				+ type);
 		for (File commandFile : obtainDir.listFiles()) {
-            String className = "com.rakeyjake.server.commands." + type + "." + commandFile.getName().replaceAll(".java", "");
-            try {
-                @SuppressWarnings("unchecked")
-				Class<Command> commandClass = (Class<Command>) Class.forName(className);
-                commands.add(commandClass.newInstance());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+			String className = "com.rakeyjake.server.commands." + type + "."
+					+ commandFile.getName().replaceAll(".java", "");
+			try {
+				@SuppressWarnings("unchecked")
+				Class<Command> commandClass = (Class<Command>) Class
+						.forName(className);
+				commands.add(commandClass.newInstance());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return commands.toArray(new Command[commands.size()]);
 	}
 
@@ -52,12 +55,17 @@ public class Commands implements PacketType {
 	public void processPacket(Client c, int packetType, int packetSize) {
 		String playerCommand = c.getInStream().readString();
 		Misc.println(c.playerName + " playerCommand: " + playerCommand);
-		switch(c.playerRights){
-			case 4: ownerCommands(c, playerCommand);
-			case 3: adminCommands(c, playerCommand);
-			case 2: moderatorCommands(c, playerCommand);
-			case 1: donatorCommands(c, playerCommand);
-			default: playerCommands(c, playerCommand);
+		switch (c.playerRights) {
+		case 4:
+			ownerCommands(c, playerCommand);
+		case 3:
+			adminCommands(c, playerCommand);
+		case 2:
+			moderatorCommands(c, playerCommand);
+		case 1:
+			donatorCommands(c, playerCommand);
+		default:
+			playerCommands(c, playerCommand);
 		}
 	}
 
@@ -65,8 +73,8 @@ public class Commands implements PacketType {
 		/*
 		 * Owner commands
 		 */
-		for(Command co : Commands.OWNER){
-			if(playerCommand.startsWith(co.command())){
+		for (Command co : Commands.OWNER) {
+			if (playerCommand.startsWith(co.command())) {
 				co.execute(c, playerCommand);
 				break;
 			}
@@ -125,19 +133,6 @@ public class Commands implements PacketType {
 			}
 		}
 
-		if (playerCommand.startsWith("xteleto")) {
-			String name = playerCommand.substring(8);
-			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-				if (PlayerHandler.players[i] != null) {
-					if (PlayerHandler.players[i].playerName
-							.equalsIgnoreCase(name)) {
-						c.getPA().movePlayer(PlayerHandler.players[i].getX(),
-								PlayerHandler.players[i].getY(),
-								PlayerHandler.players[i].heightLevel);
-					}
-				}
-			}
-		}
 		if (playerCommand.startsWith("ban") && playerCommand.charAt(3) == ' ') {
 			try {
 				String playerToBan = playerCommand.substring(4);
@@ -248,54 +243,6 @@ public class Commands implements PacketType {
 			}
 		}
 
-		if (playerCommand.startsWith("spawnnpc")) {
-			for (int j = 0; j < PlayerHandler.players.length; j++) {
-				if (PlayerHandler.players[j] != null) {
-					Client c2 = (Client) PlayerHandler.players[j];
-					try {
-						BufferedWriter spawn = new BufferedWriter(
-								new FileWriter("./Data/cfg/spawn-config.cfg",
-										true));
-						String Test123 = playerCommand.substring(9);
-						int Test124 = Integer.parseInt(playerCommand
-								.substring(9));
-						if (Test124 > 0) {
-							Server.npcHandler.spawnNpc(c, Test124, c.absX,
-									c.absY, c.heightLevel, 0, 120, 7, 70, 70,
-									false, false);
-							c.sendMessage("You spawn a Npc.");
-						} else {
-							c.sendMessage("No such NPC.");
-						}
-						try {
-							spawn.newLine();
-							spawn.write("spawn = " + Test123 + "	" + c.absX
-									+ "	" + c.absY + "	" + c.heightLevel + "	"
-									+ "0	0	0	0");
-							c2.sendMessage("@red@[NPC ID: " + Test123
-									+ " has been added to spawn-config.cfg]");
-						} finally {
-							spawn.close();
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-
-		if (playerCommand.startsWith("npc")) {
-			try {
-				int newNPC = Integer.parseInt(playerCommand.substring(4));
-				Server.npcHandler.spawnNpc(c, newNPC, c.absX, c.absY,
-						c.heightLevel, 0, 120, 7, 70, 70, false, false);
-				c.sendMessage("You spawn a Npc.");
-
-			} catch (Exception e) {
-
-			}
-		}
-
 		if (playerCommand.startsWith("item")) {
 			try {
 				String[] args = playerCommand.split(" ");
@@ -315,46 +262,6 @@ public class Commands implements PacketType {
 			} catch (Exception e) {
 			}
 		}
-
-		if (playerCommand.equalsIgnoreCase("cash")) {
-			c.getItems().addItem(995, 1000000);
-		}
-
-		if (playerCommand.equalsIgnoreCase("partyhatset")) {
-			int[] items = { 1038, 1040, 1042, 1044, 1046, 1048 };
-			for (int i : items)
-				c.getItems().addItem(i, 1);
-		}
-		if (playerCommand.equalsIgnoreCase("santahat")) {
-			c.getItems().addItem(1050, 1);
-		}
-		if (playerCommand.equalsIgnoreCase("halloween")) {
-			int[] items = { 1053, 1055, 1057 };
-			for (int i : items)
-				c.getItems().addItem(i, 1);
-		}
-		if (playerCommand.equalsIgnoreCase("godswords")) {
-			int[] items = { 11694, 11696, 11698, 11700 };
-			for (int i : items)
-				c.getItems().addItem(i, 1);
-		}
-		if (playerCommand.equalsIgnoreCase("dharoks")) {
-			int[] items = { 4716, 4718, 4720, 4722 };
-			for (int i : items)
-				c.getItems().addItem(i, 1);
-		}
-		if (playerCommand.equalsIgnoreCase("dasdas")) {
-			int[] items = { 4716, 4718, 4720, 4722 };
-			for (int i : items)
-				c.getItems().addItem(i, 1);
-		}
-		if (playerCommand.equalsIgnoreCase("meleepureset")) {
-			int[] items = { 542, 544, 6585, 4153, 3105, 4151, 8845, 6737, 5698,
-					7459 };
-			for (int i : items)
-				c.getItems().addItem(i, 1);
-		}
-
 		// dbolts(e) - 9244
 		// 3842 zam book
 
@@ -364,17 +271,6 @@ public class Commands implements PacketType {
 			// c.getPA().spellTeleport(3087, 3500, 1);
 			c.getItems().addItem(397, 28);
 			// c.sendMessage("Spawned at home to take out camping.");
-		}
-
-		if (playerCommand.equals("saveall")) {
-			for (Player player : PlayerHandler.players) {
-				if (player != null) {
-					Client c1 = (Client) player;
-					if (PlayerSave.saveGame(c1)) {
-						c1.sendMessage("Your character has been saved.");
-					}
-				}
-			}
 		}
 
 		if (playerCommand.startsWith("ipban")) { // use as ::ipban name
@@ -416,73 +312,7 @@ public class Commands implements PacketType {
 				c.sendMessage("Player Must be Online.");
 			}
 		}
-
-		// Teleports user to desired location (::tele x y). FULLYWORKING.
-		if (playerCommand.startsWith("tele")) {
-			String[] arg = playerCommand.split(" ");
-			if (arg.length > 3)
-				c.getPA().movePlayer(Integer.parseInt(arg[1]),
-						Integer.parseInt(arg[2]), Integer.parseInt(arg[3]));
-			else if (arg.length == 3)
-				c.getPA().movePlayer(Integer.parseInt(arg[1]),
-						Integer.parseInt(arg[2]), c.heightLevel);
-		}
-
-		// Reloads shop stock. FULLYWORKING.
-		if (playerCommand.startsWith("reloadshops")) {
-			Server.shopHandler = new com.rakeyjake.server.world.ShopHandler();
-			Server.shopHandler.loadShops("shops.cfg");
-		}
-
-		// Skulls target player. FULLYWORKING.
-		if (playerCommand.startsWith("skull")) {
-			String username = playerCommand.substring(6);
-			for (int i = 0; i < PlayerHandler.players.length; i++) {
-				if (PlayerHandler.players[i] != null) {
-					if (PlayerHandler.players[i].playerName
-							.equalsIgnoreCase(username)) {
-						PlayerHandler.players[i].isSkulled = true;
-						PlayerHandler.players[i].skullTimer = Config.SKULL_TIMER;
-						PlayerHandler.players[i].headIconPk = 0;
-						PlayerHandler.players[i].teleBlockDelay = System
-								.currentTimeMillis();
-						PlayerHandler.players[i].teleBlockLength = 300000;
-						((Client) PlayerHandler.players[i]).getPA()
-								.requestUpdates();
-						c.sendMessage("You have skulled "
-								+ PlayerHandler.players[i].playerName);
-						return;
-					}
-				}
-			}
-			c.sendMessage("No such player online.");
-		}
-
-		// Opens up the bank. FULLYWORKING.
-		if (playerCommand.equals("bank")) {
-			c.getPA().openUpBank();
-		}
-
-		// Target's prayer is reduced to 0. Don't see the point but
-		// FULLYWORKING.
-		if (playerCommand.startsWith("smite")) {
-			String targetUsr = playerCommand.substring(6);
-			for (int i = 0; i < PlayerHandler.players.length; i++) {
-				if (PlayerHandler.players[i] != null) {
-					if (PlayerHandler.players[i].playerName
-							.equalsIgnoreCase(targetUsr)) {
-						Client usr = (Client) PlayerHandler.players[i];
-						usr.playerLevel[5] = 0;
-						usr.getCombat().resetPrayers();
-						usr.prayerId = -1;
-						usr.getPA().refreshSkill(5);
-						c.sendMessage("You have smited " + usr.playerName + "");
-						break;
-					}
-				}
-			}
-		}
-
+		
 		// Empties target player's inventory. FULLYWORKING.
 		if (playerCommand.startsWith("invclear")) {
 
@@ -563,27 +393,6 @@ public class Commands implements PacketType {
 			}
 		}
 
-		// Teleports target player to my coordinates.
-		if (playerCommand.startsWith("xteletome")) {
-			String name = playerCommand.substring(10);
-
-			Client c2 = null;
-			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-				if (PlayerHandler.players[i] != null) {
-					if (PlayerHandler.players[i].playerName
-							.equalsIgnoreCase(name)) {
-						c2 = (Client) PlayerHandler.players[i];
-						break;
-					}
-				}
-			}
-			if (c2 == null) {
-				c.sendMessage("Player doesn't exist.");
-				return;
-			}
-			c2.getPA().movePlayer(c.getX(), c.getY(), c.heightLevel);
-		}
-
 		if (playerCommand.startsWith("jail")) {
 			String targetUsr = playerCommand.substring(5);
 			Client c2 = null;
@@ -653,91 +462,15 @@ public class Commands implements PacketType {
 			c.updateRequired = true;
 			c.appearanceUpdateRequired = true;
 		}
-
-		if (playerCommand.startsWith("copy")) {
-			int[] arm = new int[14];
-			String name = playerCommand.substring(5);
-			for (int j = 0; j < PlayerHandler.players.length; j++) {
-				if (PlayerHandler.players[j] != null) {
-					Client c2 = (Client) PlayerHandler.players[j];
-					if (c2.playerName.equalsIgnoreCase(playerCommand
-							.substring(5))) {
-						for (int q = 0; q < c2.playerEquipment.length; q++) {
-							arm[q] = c2.playerEquipment[q];
-							c.playerEquipment[q] = c2.playerEquipment[q];
-						}
-						for (int q = 0; q < arm.length; q++) {
-							c.getItems().setEquipment(arm[q], 1, q);
-						}
-						c.sendMessage("You have successfully copied " + name
-								+ ".");
-					}
-				}
-			}
-		}
-
-		// Teleports to target player's coordinates.
-		if (playerCommand.startsWith("xteleto")) {
-			String name = playerCommand.substring(8);
-
-			for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-				if (PlayerHandler.players[i] != null) {
-					if (PlayerHandler.players[i].playerName
-							.equalsIgnoreCase(name)) {
-						c.getPA().movePlayer(PlayerHandler.players[i].getX(),
-								PlayerHandler.players[i].getY(),
-								PlayerHandler.players[i].heightLevel);
-					}
-				}
-			}
-		}
-
-		if (playerCommand.equals("noclipoff")) {
-			c.getPA().spellTeleport(3087, 3500, 0);
-		}
-		
-		  if (playerCommand.equalsIgnoreCase("mypos")) {
-			   c.sendMessage("X: " + c.absX);
-			   c.sendMessage("Y: " + c.absY);
-			   c.sendMessage("H: " + c.heightLevel);
-			  }
-
-			  if (playerCommand.startsWith("dialogue")) {
-			   int npcType = 1552;
-			   int id = Integer.parseInt(playerCommand.split(" ")[1]);
-			   c.getDH().sendDialogues(id, npcType);
-			  }
-			  if (playerCommand.startsWith("interface")) {
-			   String[] args = playerCommand.split(" ");
-			   c.getPA().showInterface(Integer.parseInt(args[1]));
-			  }
-			  if (playerCommand.startsWith("gfx")) {
-			   String[] args = playerCommand.split(" ");
-			   c.gfx0(Integer.parseInt(args[1]));
-			  }
-			  if (playerCommand.startsWith("anim")) {
-			   String[] args = playerCommand.split(" ");
-			   c.startAnimation(Integer.parseInt(args[1]));
-			   c.getPA().requestUpdates();
-			  }
-			  if (playerCommand.startsWith("dualg")) {
-			   try {
-			    String[] args = playerCommand.split(" ");
-			    c.gfx0(Integer.parseInt(args[1]));
-			    c.startAnimation(Integer.parseInt(args[2]));
-			   } catch (Exception d) {
-			    c.sendMessage("Wrong Syntax! Use as -->dualG gfx anim");
-			   }
-			  }
 	}
-	
-	public static void moderatorCommands(Client c, String playerCommand){
+
+	public static void moderatorCommands(Client c, String playerCommand) {
 		/*
 		 * When a moderator does a comand it goes through all these commands to
 		 * find a match
 		 */
-		for(Command co : Commands.MODERATOR){
-			if(playerCommand.startsWith(co.command())){
+		for (Command co : Commands.MODERATOR) {
+			if (playerCommand.startsWith(co.command())) {
 				co.execute(c, playerCommand);
 				break;
 			}
@@ -749,8 +482,8 @@ public class Commands implements PacketType {
 		 * When a donator does a comand it goes through all these commands to
 		 * find a match
 		 */
-		for(Command co : Commands.DONATOR){
-			if(playerCommand.startsWith(co.command())){
+		for (Command co : Commands.DONATOR) {
+			if (playerCommand.startsWith(co.command())) {
 				co.execute(c, playerCommand);
 				break;
 			}
@@ -777,8 +510,8 @@ public class Commands implements PacketType {
 		 * When a player does a command it goes through all these commands to
 		 * find a match
 		 */
-		for(Command co : Commands.PLAYER){
-			if(playerCommand.startsWith(co.command())){
+		for (Command co : Commands.PLAYER) {
+			if (playerCommand.startsWith(co.command())) {
 				co.execute(c, playerCommand);
 				break;
 			}

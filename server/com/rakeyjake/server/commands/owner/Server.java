@@ -21,17 +21,20 @@ public class Server extends Command {
 	@Override
 	public void execute(Client c, String playerCommand) {
 		String[] args = playerCommand.split(" ");
-		switch (args.length) {
-		case 2:
-			switch (args[1]) {
-			case "stop":
-				for (Player p : PlayerHandler.players) {
-					if (p != null) PlayerSave.saveGame((Client) p);
-				}
-				System.exit(0);
-				break;
-			}
+		switch (args[1]) {
+		case "stop":
+			saveData();
+			System.exit(0);
 			break;
+		case "save":
+			saveData();
+			break;
+		}
+	}
+	
+	public void saveData(){
+		for (Player p : PlayerHandler.players) {
+			if (p != null) PlayerSave.saveGame((Client) p);
 		}
 	}
 

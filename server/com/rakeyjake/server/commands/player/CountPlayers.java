@@ -1,4 +1,4 @@
-package com.rakeyjake.server.commands.admin;
+package com.rakeyjake.server.commands.player;
 
 import com.rakeyjake.server.commands.Command;
 import com.rakeyjake.server.model.players.Client;
