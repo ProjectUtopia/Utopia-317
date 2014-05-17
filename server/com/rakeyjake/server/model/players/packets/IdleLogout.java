@@ -11,7 +11,7 @@ public class IdleLogout implements PacketType {
 
 	@Override
 	public void processPacket(Client c, int packetType, int packetSize) {
-		 if (!c.playerName.equalsIgnoreCase("Jake") || c.playerName.equalsIgnoreCase("Pd"))
+		 if (!c.playerName.equalsIgnoreCase("Jake") || !c.playerName.equalsIgnoreCase("Pd"))
 		 c.logout();
 	}
 }
