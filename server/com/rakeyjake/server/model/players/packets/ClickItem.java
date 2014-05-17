@@ -2,7 +2,7 @@ package com.rakeyjake.server.model.players.packets;
 
 import com.rakeyjake.server.model.players.Client;
 import com.rakeyjake.server.model.players.PacketType;
-import com.rakeyjake.server.model.players.skills.*;
+import com.rakeyjake.server.model.players.skills.Prayer;
 
 /**
  * Clicking an item, bury bone, eat food etc

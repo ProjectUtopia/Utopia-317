@@ -1,6 +1,6 @@
 package com.rakeyjake.server.model.players.packets;
 
-import com.rakeyjake.server.*;
+import com.rakeyjake.server.Server;
 import com.rakeyjake.server.model.players.Client;
 import com.rakeyjake.server.model.players.PacketType;
 import com.rakeyjake.server.util.Misc;

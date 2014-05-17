@@ -1,6 +1,5 @@
 package com.rakeyjake.server.model.players.skills;
 
-import com.rakeyjake.server.Config;
 import com.rakeyjake.server.model.players.Client;
 
 	/**

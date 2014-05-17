@@ -1,14 +1,14 @@
 package com.rakeyjake.server.util;
 
-import javax.swing.*;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import com.rakeyjake.server.Config;
 import com.rakeyjake.server.Connection;
 import com.rakeyjake.server.Server;
 import com.rakeyjake.server.model.npcs.NPC;
 import com.rakeyjake.server.model.players.Client;
-
-import java.util.ArrayList;
 
 public class PanelSettings {
 

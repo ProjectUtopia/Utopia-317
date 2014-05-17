@@ -4,7 +4,6 @@ import com.rakeyjake.server.Config;
 import com.rakeyjake.server.Server;
 import com.rakeyjake.server.model.npcs.NPCHandler;
 import com.rakeyjake.server.util.Misc;
-import com.rakeyjakey.client.sign.SignLink;
 
 public class PlayerAssistant {
 

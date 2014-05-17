@@ -1,8 +1,7 @@
 package com.rakeyjakey.client.model;
 
-import java.io.*;
-import java.net.*;
-import java.util.zip.*;
+import java.io.File;
+import java.io.FileInputStream;
 
 import com.rakeyjakey.client.Class18;
 import com.rakeyjakey.client.Class21;
@@ -13,7 +12,6 @@ import com.rakeyjakey.client.OnDemandFetcherParent;
 import com.rakeyjakey.client.Stream;
 import com.rakeyjakey.client.Texture;
 import com.rakeyjakey.client.animation.Animable;
-import com.rakeyjakey.client.sign.SignLink;
 
 public final class Model extends Animable {
 

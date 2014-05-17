@@ -4,7 +4,8 @@ package com.rakeyjakey.client;
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import java.io.*;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 final class Decompressor {
 

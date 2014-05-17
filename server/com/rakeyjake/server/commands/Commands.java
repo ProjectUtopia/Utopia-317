@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import com.rakeyjake.server.Config;
 import com.rakeyjake.server.Connection;
 import com.rakeyjake.server.Server;
-import com.rakeyjake.server.model.npcs.NPCHandler;
 import com.rakeyjake.server.model.players.Client;
 import com.rakeyjake.server.model.players.PacketType;
 import com.rakeyjake.server.model.players.Player;

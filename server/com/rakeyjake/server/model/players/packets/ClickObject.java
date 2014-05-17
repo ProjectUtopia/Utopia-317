@@ -3,7 +3,8 @@ package com.rakeyjake.server.model.players.packets;
 import com.rakeyjake.server.event.CycleEvent;
 import com.rakeyjake.server.event.CycleEventContainer;
 import com.rakeyjake.server.event.CycleEventHandler;
-import com.rakeyjake.server.model.players.*;
+import com.rakeyjake.server.model.players.Client;
+import com.rakeyjake.server.model.players.PacketType;
 import com.rakeyjake.server.util.Misc;
 
 public class ClickObject implements PacketType {

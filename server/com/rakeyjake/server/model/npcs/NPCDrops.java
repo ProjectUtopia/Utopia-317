@@ -2,8 +2,8 @@ package com.rakeyjake.server.model.npcs;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /**
  * @author Sanity

@@ -1,7 +1,8 @@
 package com.rakeyjakey.client;
 
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import com.rakeyjakey.client.frame.Sprite;
 import com.rakeyjakey.client.model.Model;

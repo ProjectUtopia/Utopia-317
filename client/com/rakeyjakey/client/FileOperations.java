@@ -1,7 +1,11 @@
 package com.rakeyjakey.client;
 
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class FileOperations {
 

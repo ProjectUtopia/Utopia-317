@@ -1,7 +1,10 @@
 package com.rakeyjake.server.clip.region;
 
-import java.io.*;
-import java.util.zip.*;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.zip.GZIPInputStream;
 
 
 public class Region {

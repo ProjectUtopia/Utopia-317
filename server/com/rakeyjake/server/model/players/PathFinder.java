@@ -1,11 +1,8 @@
 package com.rakeyjake.server.model.players;
  
 import java.util.LinkedList;
- 
-
 
 import com.rakeyjake.server.clip.region.Region;
-import com.rakeyjake.server.model.players.Client;
  
 public class PathFinder {
  
