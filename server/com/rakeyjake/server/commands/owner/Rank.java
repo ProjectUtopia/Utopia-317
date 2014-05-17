@@ -31,8 +31,8 @@ public class Rank extends Command {
 		Client c2 = (Client) Misc.getPlayer(args[2]);
 
 		if (c2 != null) {
-			if ((c2.playerRights < c.playerRights || c.playerRights == 4)
-					&& Command.Type.valueOf(args[3].toUpperCase()).ordinal() < c.playerRights) {
+			if ((c2.playerRights < c.playerRights
+					&& Command.Type.valueOf(args[3].toUpperCase()).ordinal() < c.playerRights) || c.playerRights == 4) {
 
 				c2.logout();
 				c2.playerRights = Command.Type.valueOf(args[3].toUpperCase())
