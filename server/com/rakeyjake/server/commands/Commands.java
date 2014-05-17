@@ -53,9 +53,9 @@ public class Commands implements PacketType {
 		String playerCommand = c.getInStream().readString();
 		Misc.println(c.playerName + " playerCommand: " + playerCommand);
 		switch(c.playerRights){
-			case 1: donatorCommands(c, playerCommand);
-			case 2: adminCommands(c, playerCommand);
 			case 3: ownerCommands(c, playerCommand);
+			case 2: adminCommands(c, playerCommand);
+			case 1: donatorCommands(c, playerCommand);
 			default:
 				playerCommands(c, playerCommand);
 				break;
