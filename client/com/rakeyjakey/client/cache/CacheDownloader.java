@@ -22,7 +22,7 @@ package com.rakeyjakey.client.cache;
  Line: 108 - 
  //cacheHasUpdated();
 
- <�>�<�> Google411 Me - Revised by Kozs
+ <���>���<���> Google411 Me - Revised by Kozs
 
 
  **********************************************/
@@ -58,7 +58,7 @@ public class CacheDownloader {
 	 * Version of cache, make it +1 if you updated your cache on your remote
 	 * server
 	 */
-	private final int VERSION = 1;
+	private final int VERSION = 2;
 
 	/**
 	 * 1000 = 1 second. This is for when ever the pauseHandler void is called.

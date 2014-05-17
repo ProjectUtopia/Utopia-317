@@ -269,6 +269,9 @@ public class Client extends RSApplet {
 					} else if (s1 != null && s1.startsWith("@cr3@")) {
 						s1 = s1.substring(5);
 						byte0 = 3;
+					} else if (s1 != null && s1.startsWith("@cr4@")) {
+						s1 = s1.substring(5);
+						byte0 = 4;
 					}
 					if (chatType == 0) {
 						if (chatTypeView == 5 || chatTypeView == 0) {
@@ -295,6 +298,10 @@ public class Client extends RSApplet {
 											yPos - 12);
 									xPos += 14;
 								} else if (byte0 == 3) {
+									modIcons[2].drawBackground(xPos + 1,
+											yPos - 12);
+									xPos += 14;
+								} else if (byte0 == 4) {
 									modIcons[2].drawBackground(xPos + 1,
 											yPos - 12);
 									xPos += 14;
@@ -327,6 +334,10 @@ public class Client extends RSApplet {
 								} else if (byte0 == 3) {
 									modIcons[2].drawBackground(k1, yPos - 12);
 									k1 += 12;
+								} else if (byte0 == 4) {
+									modIcons[2].drawBackground(yPos + 1,
+											yPos - 12);
+									yPos += 14;
 								}
 								textDrawingArea
 										.method385(0, s1 + ":", yPos, k1);
@@ -408,9 +419,9 @@ public class Client extends RSApplet {
 								.getTextWidth(clanname);
 						if (chatTypeView == 11 || chatTypeView == 0) {
 							if (yPos > 3 && yPos < 130)
-								
-								/*MOD ICONS*/
-								
+
+								/* MOD ICONS */
+
 								switch (chatRights[k]) {
 								case 1:
 									j2 += clanNameWidth;
@@ -427,6 +438,13 @@ public class Client extends RSApplet {
 									break;
 
 								case 3:
+									j2 += clanNameWidth;
+									modIcons[1].drawBackground(j2 - 18,
+											yPos - 12);
+									j2 += 14;
+									break;
+
+								case 4:
 									j2 += clanNameWidth;
 									modIcons[1].drawBackground(j2 - 18,
 											yPos - 12);
@@ -5389,7 +5407,10 @@ public class Client extends RSApplet {
 						myPlayer.anInt1513 = j2;
 						myPlayer.anInt1531 = i3;
 						myPlayer.textCycle = 150;
-						if (myPrivilege == 2)
+						if (myPrivilege == 4)
+							pushMessage(myPlayer.textSpoken, 2, "@cr4@"
+									+ myPlayer.name);
+						else if (myPrivilege == 2)
 							pushMessage(myPlayer.textSpoken, 2, "@cr2@"
 									+ myPlayer.name);
 						else if (myPrivilege == 1)
@@ -5432,6 +5453,9 @@ public class Client extends RSApplet {
 				s = s.substring(5);
 			if (s != null && s.startsWith("@cr3@"))
 				s = s.substring(5);
+			if(s != null && s.startsWith("@cr4@"))
+				s = s.substring(5);
+
 			if ((j1 == 1 || j1 == 2)
 					&& (j1 == 1 || publicChatMode == 0 || publicChatMode == 1
 							&& isFriendOrSelf(s))) {
@@ -5472,6 +5496,8 @@ public class Client extends RSApplet {
 			if (s != null && s.startsWith("@cr2@"))
 				s = s.substring(5);
 			if (s != null && s.startsWith("@cr3@"))
+				s = s.substring(5);
+			if(s != null && s.startsWith("@cr4@"))
 				s = s.substring(5);
 			if ((j1 == 5 || j1 == 6)
 					&& (splitPrivateChat == 0 || chatTypeView == 2)
@@ -5518,6 +5544,8 @@ public class Client extends RSApplet {
 			if (s != null && s.startsWith("@cr2@"))
 				s = s.substring(5);
 			if (s != null && s.startsWith("@cr3@"))
+				s = s.substring(5);
+			if(s != null && s.startsWith("@cr4@"))
 				s = s.substring(5);
 			if (chatTypeView == 3 && j1 == 4
 					&& (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s))) {
@@ -5589,6 +5617,10 @@ public class Client extends RSApplet {
 			if (s != null && s.startsWith("@cr3@")) {
 				s = s.substring(5);
 				byte byte0 = 3;
+			}
+			if (s != null && s.startsWith("@cr4@")) {
+				s = s.substring(5);
+				byte byte0 = 4;
 			}
 			if (j1 == 0)
 				l++;
@@ -7498,7 +7530,7 @@ public class Client extends RSApplet {
 			scrollBar1 = new Sprite(streamLoader_2, "scrollbar", 0);
 			scrollBar2 = new Sprite(streamLoader_2, "scrollbar", 1);
 
-			for (int l4 = 0; l4 < 2; l4++)
+			for(int l4 = 0; l4 < 3; l4++)
 				modIcons[l4] = new Background(streamLoader_2, "mod_icons", l4);
 
 			Sprite sprite = new Sprite(streamLoader_2, "screenframe", 0);
@@ -8622,13 +8654,13 @@ public class Client extends RSApplet {
 									i4, s1, l6);
 					}
 				} else if (class9_1.type == 5) {
-					//Lights up spells
+					// Lights up spells
 					Sprite sprite;
 					if (interfaceIsSelected(class9_1))
 						sprite = class9_1.sprite2;
 					else
 						sprite = class9_1.sprite1;
-					
+
 					// Lights up working lunar spells.
 					int lunarSpellsToBeLit[] = { 30075, 30083, 30106,
 							30114/* , 30306 */, 30064 };
@@ -12281,7 +12313,7 @@ public class Client extends RSApplet {
 		anInt1210 = 2;
 		anInt1211 = 78;
 		promptInput = "";
-		modIcons = new Background[2];
+		modIcons = new Background[3];
 		tabID = 3;
 		inputTaken = false;
 		songChanging = true;
