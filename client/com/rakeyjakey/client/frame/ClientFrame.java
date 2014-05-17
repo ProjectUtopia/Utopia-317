@@ -40,7 +40,7 @@ public class ClientFrame extends Client implements ActionListener {
 	// The main frame that will hold everything.
 	private JFrame frame;
 
-	public ClientFrame(String args[]) {
+	public ClientFrame() {
 		super();
 		try {
 			com.rakeyjakey.client.sign.SignLink.startpriv(InetAddress
@@ -197,10 +197,10 @@ public class ClientFrame extends Client implements ActionListener {
 		final JLabel runescapeLabel = new JLabel(
 				"<html><font size=0>RuneScape is a trademark of Jagex Software 1999 - 2013 Jagex, Ltd.</font></html>");
 		final JLabel jagexLabel = new JLabel(
-				"<html><font size=0>Copyright � 2009-2014 Jagex Ltd. Jagex is a registered trademark of Jagex Ltd.</font></html>");
+				"<html><font size=0>Copyright ��� 2009-2014 Jagex Ltd. Jagex is a registered trademark of Jagex Ltd.</font></html>");
 		final JLabel copyrightLabel = new JLabel(
 				"<html><font size=0>Copyright \u00A9 2014 ProjectUtopia</font></html>");
-		final JFrame frame = new JFrame("About ProjectUtopia") {
+		new JFrame("About ProjectUtopia") {
 			{
 				getContentPane().add(new JPanel() {
 					{

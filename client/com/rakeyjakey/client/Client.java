@@ -2812,7 +2812,7 @@ public class Client extends RSApplet {
 			isMembers = true;
 			SignLink.storeid = 32;
 			SignLink.startpriv(InetAddress.getLocalHost());
-			new ClientFrame(args);
+			new ClientFrame();
 		} catch (Exception exception) {
 			System.out.println("Problem occured when loading the client.");
 		}
