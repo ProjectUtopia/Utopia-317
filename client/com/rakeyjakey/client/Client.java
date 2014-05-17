@@ -289,18 +289,22 @@ public class Client extends RSApplet {
 						if (chatTypeView == 1 || chatTypeView == 0) {
 							if (yPos > 0 && yPos < 210) {
 								int xPos = 11;
+								// Donator
 								if (byte0 == 1) {
+									modIcons[3].drawBackground(xPos + 1,
+											yPos - 12);
+									xPos += 14;
+									// Moderator
+								} else if (byte0 == 2) {
 									modIcons[0].drawBackground(xPos + 1,
 											yPos - 12);
 									xPos += 14;
-								} else if (byte0 == 2) {
+									// admin
+								} else if (byte0 == 3) {
 									modIcons[1].drawBackground(xPos + 1,
 											yPos - 12);
 									xPos += 14;
-								} else if (byte0 == 3) {
-									modIcons[2].drawBackground(xPos + 1,
-											yPos - 12);
-									xPos += 14;
+									// donator
 								} else if (byte0 == 4) {
 									modIcons[2].drawBackground(xPos + 1,
 											yPos - 12);
@@ -326,13 +330,13 @@ public class Client extends RSApplet {
 								textDrawingArea.method385(0, "From", yPos, k1);
 								k1 += textDrawingArea.getTextWidth("From ");
 								if (byte0 == 1) {
-									modIcons[0].drawBackground(k1, yPos - 12);
+									modIcons[3].drawBackground(k1, yPos - 12);
 									k1 += 12;
 								} else if (byte0 == 2) {
-									modIcons[1].drawBackground(k1, yPos - 12);
+									modIcons[0].drawBackground(k1, yPos - 12);
 									k1 += 12;
 								} else if (byte0 == 3) {
-									modIcons[2].drawBackground(k1, yPos - 12);
+									modIcons[1].drawBackground(k1, yPos - 12);
 									k1 += 12;
 								} else if (byte0 == 4) {
 									modIcons[2].drawBackground(yPos + 1,
@@ -5410,6 +5414,9 @@ public class Client extends RSApplet {
 						if (myPrivilege == 4)
 							pushMessage(myPlayer.textSpoken, 2, "@cr4@"
 									+ myPlayer.name);
+						else if (myPrivilege == 3)
+							pushMessage(myPlayer.textSpoken, 2, "@cr3@"
+									+ myPlayer.name);
 						else if (myPrivilege == 2)
 							pushMessage(myPlayer.textSpoken, 2, "@cr2@"
 									+ myPlayer.name);
@@ -5453,7 +5460,7 @@ public class Client extends RSApplet {
 				s = s.substring(5);
 			if (s != null && s.startsWith("@cr3@"))
 				s = s.substring(5);
-			if(s != null && s.startsWith("@cr4@"))
+			if (s != null && s.startsWith("@cr4@"))
 				s = s.substring(5);
 
 			if ((j1 == 1 || j1 == 2)
@@ -5497,7 +5504,7 @@ public class Client extends RSApplet {
 				s = s.substring(5);
 			if (s != null && s.startsWith("@cr3@"))
 				s = s.substring(5);
-			if(s != null && s.startsWith("@cr4@"))
+			if (s != null && s.startsWith("@cr4@"))
 				s = s.substring(5);
 			if ((j1 == 5 || j1 == 6)
 					&& (splitPrivateChat == 0 || chatTypeView == 2)
@@ -5545,7 +5552,7 @@ public class Client extends RSApplet {
 				s = s.substring(5);
 			if (s != null && s.startsWith("@cr3@"))
 				s = s.substring(5);
-			if(s != null && s.startsWith("@cr4@"))
+			if (s != null && s.startsWith("@cr4@"))
 				s = s.substring(5);
 			if (chatTypeView == 3 && j1 == 4
 					&& (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s))) {
@@ -5992,9 +5999,13 @@ public class Client extends RSApplet {
 					s = s.substring(5);
 					byte1 = 2;
 				}
+				if (s != null && s.startsWith("@cr3@")) {
+					s = s.substring(5);
+					byte1 = 3;
+				}
 				if (s != null && s.startsWith("@cr4@")) {
 					s = s.substring(5);
-					byte1 = 2;
+					byte1 = 4;
 				}
 				if ((k == 3 || k == 7)
 						&& (k == 7 || privateChatMode == 0 || privateChatMode == 1
@@ -7534,7 +7545,7 @@ public class Client extends RSApplet {
 			scrollBar1 = new Sprite(streamLoader_2, "scrollbar", 0);
 			scrollBar2 = new Sprite(streamLoader_2, "scrollbar", 1);
 
-			for(int l4 = 0; l4 < 3; l4++)
+			for (int l4 = 0; l4 < 4; l4++)
 				modIcons[l4] = new Background(streamLoader_2, "mod_icons", l4);
 
 			Sprite sprite = new Sprite(streamLoader_2, "screenframe", 0);
@@ -8882,7 +8893,9 @@ public class Client extends RSApplet {
 						player.textCycle = 150;
 						if (j2 == 4)
 							pushMessage(s, 1, "@cr4@" + player.name);
-						else if (j2 == 2 || j2 == 3)
+						else if (j2 == 3)
+							pushMessage(s, 1, "@cr3@" + player.name);
+						else if (j2 == 2)
 							pushMessage(s, 1, "@cr2@" + player.name);
 						else if (j2 == 1)
 							pushMessage(s, 1, "@cr1@" + player.name);
@@ -12323,7 +12336,7 @@ public class Client extends RSApplet {
 		anInt1210 = 2;
 		anInt1211 = 78;
 		promptInput = "";
-		modIcons = new Background[3];
+		modIcons = new Background[4];
 		tabID = 3;
 		inputTaken = false;
 		songChanging = true;
