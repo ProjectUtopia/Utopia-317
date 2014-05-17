@@ -1,4 +1,4 @@
-package com.rakeyjake.server.commands.owner;
+package com.rakeyjake.server.commands.moderator;
 
 import com.rakeyjake.server.commands.Command;
 import com.rakeyjake.server.model.players.Client;
