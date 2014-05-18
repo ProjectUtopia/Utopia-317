@@ -1,19 +1,14 @@
 package com.rakeyjake.server.commands;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import com.rakeyjake.server.Config;
 import com.rakeyjake.server.Connection;
-import com.rakeyjake.server.Server;
 import com.rakeyjake.server.model.players.Client;
 import com.rakeyjake.server.model.players.PacketType;
 import com.rakeyjake.server.model.players.Player;
 import com.rakeyjake.server.model.players.PlayerHandler;
-import com.rakeyjake.server.model.players.PlayerSave;
 import com.rakeyjake.server.util.Misc;
 
 public class Commands implements PacketType {
@@ -313,33 +308,7 @@ public class Commands implements PacketType {
 			}
 		}
 		
-		// Empties target player's inventory. FULLYWORKING.
-		if (playerCommand.startsWith("invclear")) {
-
-			try {
-				String[] args = playerCommand.split(" ");
-				String otherplayer = args[1];
-				Client c2 = null;
-				for (int i = 0; i < Config.MAX_PLAYERS; i++) {
-					if (PlayerHandler.players[i] != null) {
-						if (PlayerHandler.players[i].playerName
-								.equalsIgnoreCase(otherplayer)) {
-							c2 = (Client) PlayerHandler.players[i];
-							break;
-						}
-					}
-				}
-				if (c2 == null) {
-					c.sendMessage("Player doesn't exist.");
-					return;
-				}
-				c2.getItems().removeAllItems();
-				c2.sendMessage("Your inventory has been cleared by a staff member.");
-				c.sendMessage("You cleared " + c2.playerName + "'s inventory.");
-			} catch (Exception e) {
-				c.sendMessage("Use as ::invclear PLAYERNAME.");
-			}
-		}
+		
 
 		// Gives target player specified item in their inventory. FULLYWORKING.
 		if (playerCommand.startsWith("giveitem")) {
